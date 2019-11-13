@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken');
 
 const secretOrPublicKey = 'abc'; //公钥 可以自己生成
-const expiresIn = 600000000;
+const expiresIn = 10;
 
 const createToken = ({ _id, username }) => {
   const token = jwt.sign({ _id, username }, secretOrPublicKey, { expiresIn });
