@@ -14,6 +14,9 @@ export default new Vuex.Store({
     },
     setUserInfo(state, payload = {}) {
       state.userInfo = payload
+    },
+    removeUserInfo(state) {
+      state.userInfo = {}
     }
   },
   actions: {

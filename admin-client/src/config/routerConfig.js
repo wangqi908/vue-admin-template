@@ -8,6 +8,7 @@ const routerConfig = () => {
     } else {
       document.title = '后台管理系统'
     }
+
     // 判断该路由是否需要登录权限
     if (to.meta.requireAuth) {
       let userInfo = store.state.userInfo
@@ -16,8 +17,9 @@ const routerConfig = () => {
         if (token) next()
         else next({ path: `./login` })
       }
+    } else {
+      next();
     }
-    next();
   })
 }
 export default routerConfig
