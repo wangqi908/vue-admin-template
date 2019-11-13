@@ -19,7 +19,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["addNum","removeUserInfo"]),
+    ...mapMutations(["addNum","removeUserInfo","removeToken"]),
 
     test() {
       this.addNum(1);
@@ -27,6 +27,7 @@ export default {
 
     loginOut(){
       this.removeUserInfo()
+      this.removeToken()
       this.$router.replace("/login");
     },
 

@@ -11,12 +11,9 @@ const routerConfig = () => {
 
     // 判断该路由是否需要登录权限
     if (to.meta.requireAuth) {
-      let userInfo = store.state.userInfo
-      if (userInfo) {
-        let { token } = userInfo
-        if (token) next()
-        else next({ path: `./login` })
-      }
+      let token = store.state.token
+      if (token) next()
+      else next({ path: `./login` })
     } else {
       next();
     }
