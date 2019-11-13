@@ -1,26 +1,82 @@
 <template>
   <div class='login'>
-    LoginLoginLogin
-     <el-button @click="$router.go(-1)">LoginLoginLogin</el-button>
+    <div class="login-input-box">
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="ruleForm.username" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+          <el-button @click="resetForm('ruleForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
 <script>
+import { loginReq } from "@apis";
 export default {
-  components: {},
   data() {
     return {
-
+      ruleForm: {
+        username: "",
+        password: ""
+      },
+      rules: {
+        username: [
+          { required: true, message: "请输入用户名", trigger: "change" }
+        ],
+        password: [{ required: true, message: "请输入密码", trigger: "change" }]
+      }
     };
   },
-  methods: {},
-  created() {},
-  mounted() {},
-  computed: {},
-  watch: {},
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.login();
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+
+    async login() {
+      let { username, password } = this.ruleForm;
+      let sendData = { username, password };
+      const res = await loginReq(sendData);
+      if (res.data.code === 200) {
+        let resData = res.data.data;
+        this.$router.replace('/')
+      }
+    },
+
+  }
 };
 </script>
 
 <style lang='scss'>
-
+.login {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  .login-input-box {
+    width: 400px;
+    height: fit-content;
+    padding: 10px;
+    margin-top: 20%;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: rgba(224, 224, 224, 0.3);
+  }
+}
 </style>

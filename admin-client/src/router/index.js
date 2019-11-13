@@ -20,6 +20,14 @@ const routes = [
     }
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import(/* webpackChunkName: "register" */ '@/views/Register.vue'),
+    meta: {
+      title: '注册'
+    }
+  },
+  {
     path: '/index',
     name: 'index',
     component: () => import(/* webpackChunkName: "index" */ '../views/index/Index.vue'),

@@ -35,7 +35,7 @@ module.exports = {
         alias: {
           '@': path.resolve(__dirname, './src'),
           '@c': path.resolve(__dirname, './src/components'),
-          '@p': path.resolve(__dirname, './src/pages')
+          '@apis': path.resolve(__dirname, './src/apis/index.js')
         } // 别名配置
       }
     })
