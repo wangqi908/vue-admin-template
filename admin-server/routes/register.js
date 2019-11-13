@@ -7,8 +7,16 @@ const UserModel = require('../db/models').UserModel
 // const filter = {password: 0} // 查询时过滤出指定的属性
 
 /* GET users listing. */
-router.post('/', function (req, res) {
+router.post('/', (req, res) => {
   const { username, password } = req.body
+  if (!username) {
+    res.send({ code: 1, msg: '请输入用户名' })
+    return
+  }
+  if (!password) {
+    res.send({ code: 1, msg: '请输入密码' })
+    return
+  }
   // 2. 处理数据
   // 3. 返回响应数据
   // 2.1. 根据username 查询数据库, 看是否已存在user

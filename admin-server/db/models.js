@@ -15,7 +15,11 @@
 const mongoose = require('mongoose')
 
 // 1.2. 连接指定数据库(URL 只有数据库是变化的)
-mongoose.connect('mongodb://localhost:27017/my_admin')
+mongoose.connect('mongodb://localhost:27017/my_admin', { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
+  if (err) {
+    console.log(res)
+  }
+})
 
 // 1.3. 获取连接对象
 const conn = mongoose.connection
