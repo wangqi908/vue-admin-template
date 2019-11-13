@@ -5,7 +5,7 @@ var router = express.Router();
 const md5 = require('blueimp-md5')
 // 引入UserModel
 const UserModel = require('../db/models').UserModel
-const filter = { __v: 0 } // 查询时过滤出指定的属性
+const filter = { __v: 0, password: 0 } // 查询时过滤出指定的属性
 
 const tokenTool = require('../utils/token.js')
 
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
       let { _id, username } = user
       // 3.2. 如果user 有值, 返回user
       const token = tokenTool.createToken({ _id, username })
-      res.send({ code: 200, data: { _id, username, token } })
+      res.send({ code: 200, data: { _id, username, token, info: user } })
     }
   })
 });
