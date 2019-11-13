@@ -10,11 +10,11 @@ const UserModel = require('../db/models').UserModel
 router.post('/', (req, res) => {
   const { username, password } = req.body
   if (!username) {
-    res.send({ code: 1, msg: '请输入用户名' })
+    res.send({ code: 0, msg: '请输入用户名' })
     return
   }
   if (!password) {
-    res.send({ code: 1, msg: '请输入密码' })
+    res.send({ code: 0, msg: '请输入密码' })
     return
   }
   // 2. 处理数据
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   UserModel.findOne({ username }, (err, user) => {
     // 3.1. 如果存在, 返回一个提示响应数据: 此用户已存在
     if (user) {
-      res.send({ code: 1, msg: '此用户已存在' }) // code 是数据是否是正常数据的标识
+      res.send({ code: 0, msg: '此用户已存在' }) // code 是数据是否是正常数据的标识
     } else {
       new UserModel({ username, password: md5(password) }).save((err, user) => {
         // 3.2. 保存成功, 返回成功的响应数据: user
