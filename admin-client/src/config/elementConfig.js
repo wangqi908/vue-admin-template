@@ -1,9 +1,38 @@
 import Vue from 'vue'
 import {
-  Button, Input, InputNumber, Form, FormItem, Message, MessageBox, Loading, Menu, Submenu, MenuItem, MenuItemGroup, Table
+  Button,
+  Input,
+  InputNumber,
+  Form,
+  FormItem,
+  Message,
+  MessageBox,
+  Loading,
+  Menu,
+  Submenu,
+  MenuItem,
+  MenuItemGroup,
+  Table,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem,
 } from 'element-ui';
 const elementConfig = () => {
-  Vue.use(Button).use(Input).use(InputNumber).use(Form).use(FormItem).use(Loading.directive).use(Menu).use(Submenu).use(MenuItem).use(MenuItemGroup).use(Table)
+  Vue
+    .use(Button)
+    .use(Input)
+    .use(InputNumber)
+    .use(Form)
+    .use(FormItem)
+    .use(Loading.directive)
+    .use(Menu)
+    .use(Submenu)
+    .use(MenuItem)
+    .use(MenuItemGroup)
+    .use(Table)
+    .use(Dropdown)
+    .use(DropdownMenu)
+    .use(DropdownItem)
 }
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

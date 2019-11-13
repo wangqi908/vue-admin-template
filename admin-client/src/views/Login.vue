@@ -19,7 +19,7 @@
 
 <script>
 import { mapMutations } from "vuex";
-import { loginReq,userInfoReq } from "@apis";
+import { loginReq, userInfoReq } from "@apis";
 export default {
   data() {
     return {
@@ -36,7 +36,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["setUserInfo","setToken"]),
+    ...mapMutations(["setUserInfo", "setToken"]),
 
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -57,9 +57,9 @@ export default {
       let sendData = { username, password };
       const res = await loginReq(sendData);
       if (res.data.code === 200) {
-        let token = res.data.data.token;
+        let { token, info } = res.data.data;
         this.setToken(token);
-        // this.setUserInfo(resData);
+        this.setUserInfo(info);
         this.$router.replace("/");
       }
     }

@@ -1,109 +1,112 @@
  @import './variables.scss';
  @import './transition.scss';
 
- html,
+ body {
+   margin: 0;
+   padding: 0;
+   font-family: "微软雅黑";
+   overflow: hidden;
+ }
+
  body,
- div,
- span,
- applet,
- object,
- iframe,
+ html {
+   -webkit-text-size-adjust: none;
+   width: 100%;
+   height: 100%;
+ }
+
+ * {
+   text-decoration: none;
+   list-style: none;
+ }
+
+ img {
+   border: 0px;
+ }
+
+ ul,
+ li,
+ dl,
+ dd,
+ dt,
+ p,
+ ol,
  h1,
  h2,
  h3,
  h4,
- h5,
- h6,
- p,
- blockquote,
- pre,
- a,
- abbr,
- acronym,
- address,
- big,
- cite,
- code,
- del,
- dfn,
- em,
- img,
- ins,
- kbd,
- q,
- s,
- samp,
- small,
- strike,
- strong,
- sub,
- sup,
- tt,
- var,
- b,
- u,
- i,
- center,
- dl,
- dt,
- dd,
- ol,
- ul,
- li,
- fieldset,
- form,
- label,
- legend,
- caption,
- article,
- aside,
- canvas,
- details,
- embed,
- figure,
- figcaption,
- footer,
- header,
- hgroup,
- main,
- menu,
- nav,
- output,
- ruby,
- section,
- summary,
- time,
- mark,
- audio,
- video {
-   margin: 0;
+ h5 {
    padding: 0;
-   border: 0;
-   font-size: 100%;
-   font: inherit;
-   vertical-align: baseline;
+   margin: 0;
  }
 
- /* HTML5 display-role reset for older browsers */
- article,
- aside,
- details,
- figcaption,
- figure,
- footer,
- header,
- hgroup,
- main,
- menu,
- nav,
- section {
-   display: block;
+ .wrap {
+   margin: 0 auto;
  }
 
- /* HTML5 hidden-attribute fix for newer browsers */
- *[hidden] {
-   display: none;
+ .fl {
+   float: left;
  }
+
+ .fr {
+   float: right;
+ }
+
+ .index {
+   overflow: hidden;
+ }
+
+ .clr {
+   clear: both;
+   height: 0px;
+   width: 100%;
+   font-size: 1px;
+   line-height: 0px;
+   visibility: hidden;
+   overflow: hidden;
+ }
+
+ .pointer {
+   cursor: pointer;
+ }
+
+ a,
+ input,
+ button {
+   outline: none;
+ }
+
+ ::-moz-focus-inner {
+   border: 0px;
+ }
+
+ /*a:link {color:#0f0;text-decoration:none;} 
+  a:visited {color: #FFFF00; text-decoration:none;} 
+  a:hover {color: #00FF00; text-decoration:underline;} 
+  a:active {color: #0000FF; text-decoration:underline;}*/
+ a {
+   color: #000;
+ }
+
+ .wrapper {
+   clear: both;
+   width: 100%;
+ }
+
+ table {
+   border-collapse: collapse;
+ }
+
+ word-break:break-all
+ /*文字换行*/
+ /*white-space:nowrap 文字不换行*/
+
+ /*默认滚动条样式修改ie9 google Firefox 等高版本浏览器有效*/
+ /*::selection {background: #D03333;color: white;text-shadow: none;}
+  ::-webkit-scrollbar-track-piece{width:10px;background-color:#f2f2f2}
+  ::-webkit-scrollbar{width:10px;height:6px}
+  ::-webkit-scrollbar-thumb{height:50px;background-color:rgba(0,0,0,.3);}
+  ::-webkit-scrollbar-thumb:hover{background:#cc0000}*/
 
  * {
    box-sizing: border-box;

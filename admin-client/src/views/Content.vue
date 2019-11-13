@@ -1,38 +1,38 @@
 <template>
   <div class='app-content'>
-    <my-nav-menu />
-    <div class="main-content">
-      <div class="main-content-router">
-        <transition name="fade-transform" mode="out-in">
-          <router-view />
-        </transition>
+    <my-header />
+    <div class="app-body">
+      <my-nav-menu />
+      <div class="body-content">
+        <div class="body-content-router">
+          <transition name="fade-transform" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { MyNavMenu } from "@c";
+import { MyNavMenu, MyHeader } from "@c";
 export default {
-  components: { MyNavMenu },
-  data() {
-    return {};
-  },
-  methods: {},
-  created() {},
-  mounted() {},
-  computed: {},
-  watch: {}
+  components: { MyNavMenu, MyHeader }
 };
 </script>
 
 <style lang='scss'>
 .app-content {
   display: flex;
+  flex-direction: column;
   background-color: rgba(224, 224, 224, 0.438);
   height: 100%;
   widows: 100%;
-  .main-content {
+  .app-body {
+    display: flex;
+    flex: 1;
+  }
+  .body-content {
     flex: 1;
     overflow: auto;
     display: flex;
@@ -40,7 +40,7 @@ export default {
     height: 100%;
     overflow-x: hidden;
   }
-  .main-content-router {
+  .body-content-router {
     margin: 10px;
     flex: 1;
   }
