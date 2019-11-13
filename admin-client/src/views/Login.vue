@@ -10,7 +10,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-          <el-button @click="resetForm('ruleForm')">重置</el-button>
+          <el-button @click="register">注册</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -45,8 +45,8 @@ export default {
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    register(formName) {
+      this.$router.push("/register");
     },
 
     async login() {
@@ -55,10 +55,9 @@ export default {
       const res = await loginReq(sendData);
       if (res.data.code === 200) {
         let resData = res.data.data;
-        this.$router.replace('/')
+        this.$router.replace("/");
       }
-    },
-
+    }
   }
 };
 </script>

@@ -1,12 +1,13 @@
 <template>
   <div class='index'>
-    <img alt="Vue logo" src="@/assets/logo.png">
-    <el-button @click="$router.push('/login')">ww</el-button>
+    <el-button @click="test">ww</el-button>
     <el-input v-model="input" placeholder="请输入内容"></el-input>
+    {{num}}
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   components: {},
   data() {
@@ -14,10 +15,18 @@ export default {
       input: ""
     };
   },
-  methods: {},
+  methods: {
+    ...mapMutations(["addNum"]),
+
+    test() {
+      this.addNum(1);
+    }
+  },
   created() {},
   mounted() {},
-  computed: {},
+  computed: {
+    ...mapState(["num"])
+  },
   watch: {}
 };
 </script>

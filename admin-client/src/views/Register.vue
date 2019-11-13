@@ -91,7 +91,8 @@ export default {
       const res = await registerReq(sendData);
       if (res.data.code === 200) {
         let resData = res.data.data;
-        console.log(resData);
+        this.$message.success("注册成功请登录");
+        this.$router.replace("/login");
       }
     }
   }
