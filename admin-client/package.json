@@ -11,7 +11,8 @@
     "element-ui": "^2.12.0",
     "vue": "^2.6.10",
     "vue-router": "^3.1.3",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@babel/preset-es2015": "^7.0.0-beta.53",

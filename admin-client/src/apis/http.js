@@ -3,10 +3,15 @@
 函数返回的是promise 对象
 */
 import axios from 'axios'
+import store from '../store'
 axios.defaults.retryDelay = 10000; // 设置超时时间
 // axios.defaults.baseURL = `http://localhost:4000`
 axios.interceptors.request.use(
   config => {
+    const { token } = store.state.userInfo
+    if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
+      config.headers.Authorization = token;
+    }
     return config;
   },
   err => {

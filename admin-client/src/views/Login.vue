@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import { loginReq } from "@apis";
 export default {
   data() {
@@ -35,6 +36,8 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setUserInfo"]),
+
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -55,6 +58,7 @@ export default {
       const res = await loginReq(sendData);
       if (res.data.code === 200) {
         let resData = res.data.data;
+        this.setUserInfo(resData);
         this.$router.replace("/");
       }
     }

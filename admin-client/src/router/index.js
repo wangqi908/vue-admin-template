@@ -1,16 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: Home,
-    redirect: 'index',
-  },
   {
     path: '/login',
     name: 'login',
@@ -28,10 +21,11 @@ const routes = [
     }
   },
   {
-    path: '/index',
+    path: '/',
     name: 'index',
     component: () => import(/* webpackChunkName: "index" */ '../views/index/Index.vue'),
     meta: {
+      requireAuth: true,
       title: '首页'
     }
   },
