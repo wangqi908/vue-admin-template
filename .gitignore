@@ -1,2 +1,4 @@
 /admin-client/node_modules
 /admin-server/node_modules
+/admin-client/package-lock.json
+/admin-server/package-lock.json

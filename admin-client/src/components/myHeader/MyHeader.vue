@@ -1,6 +1,6 @@
 <template>
   <div class="my-header">
-    <h1>
+    <h1 class="flex-center">
       <router-link to="/index">LOGO</router-link>
     </h1>
     <ul class="btn-box">
