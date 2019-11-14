@@ -8,6 +8,7 @@ var userRouter = require('./routes/user');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var testRouter = require('./routes/test');
+var uploadRouter = require('./routes/upload');
 const tokenTool = require('./utils/token.js')
 
 var app = express();
@@ -36,7 +37,7 @@ app.all('*', function (req, res, next) {
 app.use((req, res, next) => {
   let { authorization } = req.headers
   let { pathname } = req._parsedUrl
-  let freeUrls = ['/login', '/', '/register'] //不需要验证token的接口地址
+  let freeUrls = ['/login', '/', '/register','upload'] //不需要验证token的接口地址
   let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
   if (authorization && isVerifyToken) {
     let verifyToken = tokenTool.verifyToken(authorization)
@@ -55,6 +56,7 @@ app.use('/user', userRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/test', testRouter);
+app.use('/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
