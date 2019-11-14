@@ -1,20 +1,21 @@
 <template>
   <div class='index'>
     <el-button @click="test">ww</el-button>
-    <el-input v-model="input" placeholder="请输入内容"></el-input>
     <p>{{num}}</p>
     <el-button @click="testToken">用户信息</el-button>
     <el-button @click="loginOut">退出</el-button>
+    <my-map/>
     <my-echarts/>
+
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import { userInfoReq } from "@apis";
-import { MyEcharts } from "./components";
+import { MyEcharts,MyMap } from "./components";
 export default {
-  components: {MyEcharts},
+  components: {MyEcharts,MyMap},
   data() {
     return {
       input: ""

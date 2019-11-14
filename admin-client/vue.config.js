@@ -54,7 +54,8 @@ module.exports = {
       'vue-router': 'VueRouter',
       'axios': 'axios',
       'element-ui': 'ELEMENT',
-      'echarts': 'echarts'
+      'echarts': 'echarts',
+      'vue-baidu-map': 'VueBaiduMap',
     }
   },
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
