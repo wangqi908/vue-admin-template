@@ -48,9 +48,14 @@ module.exports = {
         }
       },
     })
-    // config.externals = {
-    //   'vue': 'Vue'
-    // }
+    config.externals = {
+      'vue':'Vue',
+      'vuex': 'Vuex',
+      'vue-router': 'VueRouter',
+      'axios': 'axios',
+      'element-ui': 'ELEMENT',
+      'echarts': 'echarts'
+    }
   },
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
 }

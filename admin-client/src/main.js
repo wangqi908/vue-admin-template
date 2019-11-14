@@ -3,9 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import "@/assets/css/index.scss";
-import { elementConfig, routerConfig, axiosConfig } from './config'
+import { routerConfig, axiosConfig } from './config'
 axiosConfig()
-elementConfig()
 routerConfig()
 
 Vue.config.productionTip = false

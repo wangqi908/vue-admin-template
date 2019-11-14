@@ -3,7 +3,6 @@ module.exports = {
     "@vue/app",
   ],
   plugins: [
-    // element官方教程
     [
       "component",
       {
