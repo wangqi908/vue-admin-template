@@ -59,8 +59,12 @@ export default {
       if (res.data.code === 200) {
         let { token, info } = res.data.data;
         this.setToken(token);
-        this.setUserInfo(info);
-        this.$router.replace("/");
+        const userInfoRes = await userInfoReq();
+        if (userInfoRes.data.code === 200) {
+          let userInfo = res.data.data;
+          this.setUserInfo(userInfo);
+          this.$router.replace("/");
+        }
       }
     }
   }
