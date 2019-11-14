@@ -5,14 +5,16 @@
     <p>{{num}}</p>
     <el-button @click="testToken">用户信息</el-button>
     <el-button @click="loginOut">退出</el-button>
+    <my-echarts/>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
 import { userInfoReq } from "@apis";
+import { MyEcharts } from "./components";
 export default {
-  components: {},
+  components: {MyEcharts},
   data() {
     return {
       input: ""

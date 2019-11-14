@@ -37,8 +37,20 @@ module.exports = {
           '@c': path.resolve(__dirname, './src/components'),
           '@apis': path.resolve(__dirname, './src/apis/index.js')
         } // 别名配置
-      }
+      },
+      devServer: {
+        port: 8888,  // 端口
+        open: true, // 自动开启浏览器
+        compress: false, // 开启压缩
+        overlay: {
+          warnings: false,
+          errors: false
+        }
+      },
     })
+    // config.externals = {
+    //   'vue': 'Vue'
+    // }
   },
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
 }
