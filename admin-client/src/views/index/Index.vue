@@ -6,7 +6,6 @@
     <el-button @click="loginOut">退出</el-button>
     <my-map/>
     <my-echarts/>
-
   </div>
 </template>
 
