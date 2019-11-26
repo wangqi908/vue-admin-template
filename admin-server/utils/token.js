@@ -10,6 +10,7 @@ const createToken = ({ _id, username }) => {
 }
 
 const verifyToken = (_token) => {
+  _token = _token.slice(7) //token前因为加了"Bearer ",所有要截取
   let verify = jwt.verify(_token, secretOrPublicKey, (error, decoded) => {
     if (error) {
       return "Token Invalid";

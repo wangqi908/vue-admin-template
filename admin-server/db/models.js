@@ -37,8 +37,36 @@ const userSchema = mongoose.Schema({
   post: { type: String }, // 职位
   info: { type: String }, // 个人或职位简介
   company: { type: String }, // 公司名称
+  createTime: {
+    type: String,
+    default: +new Date()
+  },
+  updateTime: {
+    type: String,
+    default: +new Date()
+  }
 })
 // 2.2. 定义Model(与集合对应, 可以操作集合)
 const UserModel = mongoose.model('user', userSchema)
-// 2.3. 向外暴露Model
+
+// 百度Access相关内容
+const accessSchema = mongoose.Schema({
+  expires_in: { type: Number, required: true }, // 过期时间
+  access_token: { type: String, required: true }, // access_token
+  refresh_token: { type: String, required: true }, // refresh_token
+  session_key: { type: String, required: true }, // session_key
+  createTime: {
+    type: Number,
+    default: +new Date()
+  },
+  updateTime: {
+    type: Number,
+    default: +new Date()
+  }
+})
+
+const AccessSchema = mongoose.model('bdAccess', accessSchema)
+
+// 向外暴露Model
 exports.UserModel = UserModel
+exports.AccessSchema = AccessSchema

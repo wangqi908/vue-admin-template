@@ -3,16 +3,21 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var testRouter = require('./routes/test');
 var uploadRouter = require('./routes/upload');
+var bdAiRouter = require('./routes/bdAi');//百度ai
 const tokenTool = require('./utils/token.js')
 
 var app = express();
 
+// post载荷大小
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -37,9 +42,9 @@ app.all('*', function (req, res, next) {
 app.use((req, res, next) => {
   let { authorization } = req.headers
   let { pathname } = req._parsedUrl
-  let freeUrls = ['/login', '/', '/register','upload'] //不需要验证token的接口地址
+  let freeUrls = ['/login', '/', '/register', '/upload', '/bdAi/ocr'] //不需要验证token的接口地址
   let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
-  if (authorization && isVerifyToken) {
+  if (isVerifyToken) {
     let verifyToken = tokenTool.verifyToken(authorization)
     if (verifyToken === "Token Invalid") {
       res.send({ code: 1, msg: 'Token Invalid' })
@@ -57,6 +62,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/test', testRouter);
 app.use('/upload', uploadRouter);
+app.use('/bdAi', bdAiRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
