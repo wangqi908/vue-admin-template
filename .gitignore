@@ -3,4 +3,5 @@
 /admin-client/package-lock.json
 
 /admin-server/node_modules
+/admin-server/public/files
 /admin-server/package-lock.json
