@@ -1,8 +1,11 @@
 <template>
   <div class=''>
     <div>
-      <input type="file" @change="inputFileChange">
-      <button @click="publish">上传</button>
+      <div class="img-box" v-for="(item, index) in urlList" :key="index">
+        <img class="img" :src="item" alt="" srcset="">
+      </div>
+      <input type="file" @change="inputFileChange" multiple="multiple">
+      <button @click="upload">上传</button>
     </div>
   </div>
 </template>
@@ -12,27 +15,35 @@ import { uploadReq, loginReq } from "@/apis";
 export default {
   components: {},
   data() {
-    return { files: "" };
+    return {
+      fileList: [],
+      url: "",
+      urlList: []
+    };
   },
   methods: {
     inputFileChange(e) {
-      // input的@change事件拿到数据
-      this.files = e.target.files[0];
-    },
-    async publish() {
-      // 把文件放入FormData
-      let fd = new FormData();
-      fd.append("file", this.files);
-      let sendData = {
-        username: "admin2",
-        password: "123"
-      };
-      // const res = await loginReq(sendData);
-      // console.log(res);
-
-      uploadReq(fd).then(res => {
-        console.log(res);
+      let { urlList, fileList } = this;
+      let targetList = e.target.files;
+      targetList.forEach(ele => {
+        fileList.push(ele);
+        const fr = new FileReader();
+        fr.readAsDataURL(ele);
+        fr.onloadend = () => {
+          urlList.push(fr.result);
+        };
       });
+    },
+    async upload() {
+      let { fileList } = this;
+      let fd = new FormData();
+      fileList.forEach(ele => {
+        fd.append("file", ele);
+      });
+      const res = await uploadReq(fd);
+      if (res.data.code !== 200) return;
+      let resData = res.data.data;
+      console.log(resData);
     }
   },
   created() {},
@@ -43,4 +54,8 @@ export default {
 </script>
 
 <style lang='scss'>
+.img {
+  width: 100px;
+  height: 100px;
+}
 </style>
