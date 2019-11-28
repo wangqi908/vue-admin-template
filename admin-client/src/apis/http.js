@@ -3,7 +3,7 @@
 函数返回的是promise 对象
 */
 import axios from 'axios'
-
+import store from '../store'
 
 export default function req(url, data = {}, method = "GET") {
   method = method.toLowerCase();
@@ -19,7 +19,11 @@ export default function req(url, data = {}, method = "GET") {
     return axios.put(url, data)
   } else if (method === 'form-data') {
     let config = {
-      headers: { 'Content-Type': 'multipart/form-data' }
+      headers: { 'Content-Type': 'multipart/form-data' },
+      onUploadProgress: progressEvent => {
+        let progress = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
+        store.commit("setUploadProgress", progress)
+      }
     }
     return axios.post(url, data, config)
   } else {

@@ -59,6 +59,7 @@
 
 <script>
 import { uploadReq } from "@/apis";
+import { mapState } from "vuex";
 export default {
   props: {
     multiple: {
@@ -118,9 +119,15 @@ export default {
       this.$emit("preview", item);
     }
   },
-  created() {
-    console.log(this.multiple);
-  }
+  computed: {
+   ...mapState(["uploadProgress"]),
+
+  },
+  watch: {
+     uploadProgress(val){
+       this.$emit("uploadProgress", val);
+     }
+  },
 };
 </script>
 

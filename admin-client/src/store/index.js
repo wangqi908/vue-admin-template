@@ -9,7 +9,8 @@ export default new Vuex.Store({
     token: "",
     userInfo: {},//用户信息
     isCollapse: false, //是否展开侧边栏
-    clientWidth: 880 //触发伸缩侧边栏宽度
+    clientWidth: 880, //触发伸缩侧边栏宽度
+    uploadProgress: 0 //上传进度
   },
   mutations: {
     addNum(state, payload = 1) {
@@ -27,8 +28,12 @@ export default new Vuex.Store({
     removeUserInfo(state) {
       state.userInfo = {}
     },
-    getCollapse(state, pay = false) {
-      state.isCollapse = pay;
+    getCollapse(state, payload = false) {
+      state.isCollapse = payload;
+    },
+    setUploadProgress(state, payload = "") {
+      state.uploadProgress = 0
+      state.uploadProgress = payload;
     },
   },
   actions: {

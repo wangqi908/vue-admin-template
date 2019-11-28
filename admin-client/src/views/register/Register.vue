@@ -7,6 +7,7 @@
   submit 提交 上传 时的钩子
   success 上传 文件成功 时的钩子
   error 上传 文件失败 时的钩子
+  uploadProgress 上传进度
 
   Slot:
   <el-button @click="upload">上传</el-button>
@@ -15,7 +16,7 @@
   multiple 多选 默认false 布尔值
  -->
   <div class='login'>
-    <my-upload @change="change" @success="success" @preview="preview" ref="upload">
+    <my-upload @change="change" @success="success" @uploadProgress="uploadProgress" @preview="preview" ref="upload">
 
     </my-upload>
 
@@ -45,6 +46,9 @@ export default {
       console.log(v);
     },
     preview(v) {
+      console.log(v);
+    },
+    uploadProgress(v) {
       console.log(v);
     },
     success(resData) {
