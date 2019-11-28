@@ -5,7 +5,7 @@ const express = require('express');
 const multer = require('multer');//文件获取储存的第三方模块
 const fs = require('fs');
 const router = express.Router();
-const upload = multer({ dest: 'public/files/' }).array('file', 10);
+const upload = multer({ dest: 'public/temp_files/' }).array('file', 10);
 const ipWithPort = require('../utils/getIp.js').ipWithPort
 
 router.post('/', upload, function (req, res, next) {
@@ -21,7 +21,7 @@ router.post('/', upload, function (req, res, next) {
       let types = file.originalname.split('.')
       let suffix = types[types.length - 1] //后缀名
       let fileName = new Date().getTime() + i + '.' + suffix //这里修改文件名。
-      let filesPath = 'files/' + fileName;
+      let filesPath = 'temp_files/' + fileName;
       let public = 'public/'
       let targetPath = public + filesPath
       fs.renameSync(tmpPath, targetPath);
