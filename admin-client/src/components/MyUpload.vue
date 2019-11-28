@@ -4,16 +4,18 @@
   change 改变 文件 时的钩子
   clearFiles 清空 文件 时的钩子
   preview 查看文件 时的钩子
+  remove 移除文件 时的钩子
   submit 提交 上传 时的钩子
   success 上传 文件成功 时的钩子
   error 上传 文件失败 时的钩子
+  uploadProgress 上传进度
 
   Slot:
   <el-button @click="upload">上传</el-button>
 
   属性
   multiple 多选 默认false 布尔值
-  multiple 多选 默认false 布尔值
+  auto-upload 自动上传 默认true 布尔值
 
   <my-upload @change="change" @success="success" @preview="preview" ref="upload">
 <el-button @click="clearFiles">清空</el-button>
@@ -53,7 +55,6 @@
     </label>
     <input type="file" @change="inputFileChange" accept="image/*" :multiple="multiple" id="fileInput">
     <div>
-      <!-- <el-button @click="submit">上传</el-button> -->
       <slot></slot>
     </div>
   </div>
@@ -118,7 +119,7 @@ export default {
     remove(index) {
       let { fileList } = this;
       fileList.splice(index, 1);
-      this.$emit("change", fileList);
+      this.$emit("remove", fileList);
     },
     // 清空
     clearFiles() {
@@ -163,7 +164,6 @@ export default {
   .img-box {
     display: flex;
     .img-wrap {
-      border: 1px solid #000;
       margin: 10px;
       position: relative;
     }

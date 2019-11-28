@@ -10,10 +10,10 @@
       <el-form-item label="确认密码" prop="checkPass">
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
-      <!-- <el-form-item label="上传头像">
-        <my-upload @success="success" ref="upload">
+      <el-form-item label="上传头像">
+        <my-upload @remove="remove" @success="success" ref="upload">
         </my-upload>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -54,7 +54,8 @@ export default {
       ruleForm: {
         username: "",
         password: "",
-        checkPass: ""
+        checkPass: "",
+        avatar: ""
       },
       rules: {
         username: [
@@ -90,11 +91,8 @@ export default {
       this.$refs[formName].resetFields();
     },
     async register() {
-      this.$refs.upload.submit();
-      let { username, password } = this.ruleForm;
-      let sendData = { username, password };
-      console.log(sendData);
-      return;
+      let { username, password, avatar } = this.ruleForm;
+      let sendData = { username, password, avatar };
       const res = await registerReq(sendData);
       if (res.data.code === 200) {
         let resData = res.data.data;
@@ -102,6 +100,14 @@ export default {
         this.$router.replace("/login");
       }
     },
+    // 图片删除
+    remove(v) {
+      this.ruleForm.avatar = "";
+    },
+    // 图片上传成功
+    success(v) {
+      this.ruleForm.avatar = v.fileList[0];
+    }
   }
 };
 </script>
