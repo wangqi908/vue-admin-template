@@ -10,6 +10,10 @@
       <el-form-item label="确认密码" prop="checkPass">
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
+      <!-- <el-form-item label="上传头像">
+        <my-upload @success="success" ref="upload">
+        </my-upload>
+      </el-form-item> -->
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -20,7 +24,9 @@
 
 <script>
 import { registerReq } from "@apis";
+import { MyUpload } from "@/components";
 export default {
+  components: { MyUpload },
   data() {
     let passwordReg = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]{8,16}$/;
     let validatePass = (rule, value, callback) => {
@@ -84,15 +90,18 @@ export default {
       this.$refs[formName].resetFields();
     },
     async register() {
+      this.$refs.upload.submit();
       let { username, password } = this.ruleForm;
       let sendData = { username, password };
+      console.log(sendData);
+      return;
       const res = await registerReq(sendData);
       if (res.data.code === 200) {
         let resData = res.data.data;
         this.$message.success("注册成功请登录");
         this.$router.replace("/login");
       }
-    }
+    },
   }
 };
 </script>

@@ -13,6 +13,7 @@
 
   属性
   multiple 多选 默认false 布尔值
+  multiple 多选 默认false 布尔值
 
   <my-upload @change="change" @success="success" @preview="preview" ref="upload">
 <el-button @click="clearFiles">清空</el-button>
@@ -65,6 +66,10 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    autoUpload: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -75,9 +80,9 @@ export default {
   methods: {
     // change上传input
     inputFileChange(e) {
-      let { fileList, multiple } = this;
+      let { fileList, multiple, autoUpload } = this;
       let targetList = e.target.files;
-      targetList.forEach(ele => {
+      targetList.forEach((ele, index) => {
         const fr = new FileReader();
         fr.readAsDataURL(ele);
         fr.onloadend = () => {
@@ -86,6 +91,9 @@ export default {
             url: fr.result
           };
           multiple ? this.fileList.push(obj) : (this.fileList = [obj]);
+          if (index === targetList.length - 1 && autoUpload) {
+            this.submit();
+          }
         };
       });
       this.$emit("change", fileList);
@@ -120,13 +128,13 @@ export default {
     }
   },
   computed: {
-   ...mapState(["uploadProgress"]),
+    ...mapState(["uploadProgress"])
   },
   watch: {
-     uploadProgress(val){
-       this.$emit("uploadProgress", val);
-     }
-  },
+    uploadProgress(val) {
+      this.$emit("uploadProgress", val);
+    }
+  }
 };
 </script>
 

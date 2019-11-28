@@ -14,15 +14,14 @@
 
   属性
   multiple 多选 默认false 布尔值
+  auto-upload 自动上传 默认true 布尔值
  -->
   <div class='login'>
-    <my-upload @change="change" @success="success" @uploadProgress="uploadProgress" @preview="preview" ref="upload">
 
+    <!-- <el-button @click="clearFiles">清空</el-button>
+    <el-button @click="upload">上传</el-button> -->
+    <my-upload @success="success" multiple ref="upload">
     </my-upload>
-
-    <el-button @click="clearFiles">清空</el-button>
-    <el-button @click="upload">上传</el-button>
-
     <!-- <my-form /> -->
   </div>
 </template>
