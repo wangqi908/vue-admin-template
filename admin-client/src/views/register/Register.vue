@@ -1,13 +1,15 @@
 <template>
   <div class='login'>
-    <my-form />
+    <MyUpload />
+    <!-- <my-form /> -->
   </div>
 </template>
 
 <script>
 import { MyForm } from "./components";
+import { MyUpload } from "@/components";
 export default {
-  components: { MyForm }
+  components: { MyForm, MyUpload }
 };
 </script>
 
