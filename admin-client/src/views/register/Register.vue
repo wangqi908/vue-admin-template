@@ -20,7 +20,7 @@
 
     <!-- <el-button @click="clearFiles">清空</el-button>
     <el-button @click="upload">上传</el-button> -->
-    <my-upload @success="success" multiple ref="upload">
+    <my-upload @success="success" ref="upload">
     </my-upload>
     <!-- <my-form /> -->
   </div>

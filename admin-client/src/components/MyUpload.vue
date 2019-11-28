@@ -45,7 +45,8 @@
         </div>
       </div>
     </div>
-    <label for="fileInput">
+    <!-- 多选时增加按钮一直显示,单选时只要图片出现,增加按钮就隐藏 -->
+    <label for="fileInput" v-if="multiple||!fileList.length">
       <div class="add-btn flex-center">
         <i class="el-icon-plus"></i>
       </div>
@@ -140,7 +141,6 @@ export default {
 
 <style lang='scss'>
 .my-upload {
-  border: 1px solid #000;
   color: #ccc;
   display: flex;
   height: fit-content;
