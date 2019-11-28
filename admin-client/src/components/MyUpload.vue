@@ -121,7 +121,6 @@ export default {
   },
   computed: {
    ...mapState(["uploadProgress"]),
-
   },
   watch: {
      uploadProgress(val){
