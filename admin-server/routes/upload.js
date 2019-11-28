@@ -1,8 +1,11 @@
-let express = require('express');
-let multer = require('multer');//文件获取储存的第三方模块
+/* 
+上传模块
+*/
+const express = require('express');
+const multer = require('multer');//文件获取储存的第三方模块
 const fs = require('fs');
-let router = express.Router();
-let upload = multer({ dest: 'public/files/' }).array('file', 10);
+const router = express.Router();
+const upload = multer({ dest: 'public/files/' }).array('file', 10);
 
 router.post('/', upload, function (req, res, next) {
   let files = req.files;

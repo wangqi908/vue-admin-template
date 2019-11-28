@@ -1,3 +1,6 @@
+/* 
+百度智能模块
+*/
 const express = require('express');
 const router = express.Router();
 const ocrReq = require('../utils/bdOcr.js').ocrReq //调用百度文字识别接口

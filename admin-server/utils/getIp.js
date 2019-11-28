@@ -1,5 +1,10 @@
+/* 
+获取ip地址
+返回文件路径用
+*/
 const os = require('os')
 const config = require('../config/index.js');
+// ip地址
 const getIPAddress = () => {
   let interfaces = os.networkInterfaces();
   for (let devName in interfaces) {
@@ -12,6 +17,8 @@ const getIPAddress = () => {
     }
   }
 }
+
+// 带端口路径
 const ipWithPort = getIPAddress() + ":" + config.PORT + "/"
 
 exports.getIPAddress = getIPAddress;

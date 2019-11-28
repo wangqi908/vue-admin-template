@@ -1,5 +1,8 @@
-var express = require('express');
-var router = express.Router();
+/* 
+注册模块
+*/
+const express = require('express');
+const router = express.Router();
 // 引入md5 加密函数库
 const md5 = require('blueimp-md5')
 // 引入UserModel

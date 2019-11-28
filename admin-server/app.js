@@ -1,19 +1,19 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
-var loginRouter = require('./routes/login');
-var registerRouter = require('./routes/register');
-var testRouter = require('./routes/test');
-var uploadRouter = require('./routes/upload');
-var bdAiRouter = require('./routes/bdAi');//百度ai
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/register');
+const testRouter = require('./routes/test');
+const uploadRouter = require('./routes/upload');
+const bdAiRouter = require('./routes/bdAi');//百度ai
 const tokenTool = require('./utils/token.js')
 
-var app = express();
+const app = express();
 
 // post载荷大小
 app.use(bodyParser.json({ limit: '50mb' }));
