@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '@/views/login/Login.vue'),
     meta: {
       title: '登录'
     }
@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/register',
     name: 'register',
-    component: () => import(/* webpackChunkName: "register" */ '@/views/Register.vue'),
+    component: () => import(/* webpackChunkName: "register" */ '@/views/register/Register.vue'),
     meta: {
       title: '注册'
     }

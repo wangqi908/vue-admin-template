@@ -1,19 +1,17 @@
 <template>
-  <div class='login'>
-    <div class="login-input-box">
-      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="ruleForm.username" autocomplete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-          <el-button @click="register">注册</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
+  <div class="login-input-box">
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="ruleForm.username" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
+        <el-button @click="register">注册</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
@@ -72,19 +70,13 @@ export default {
 </script>
 
 <style lang='scss'>
-.login {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  .login-input-box {
-    width: 400px;
-    height: fit-content;
-    padding: 10px;
-    margin-top: 20%;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    background-color: rgba(224, 224, 224, 0.3);
-  }
+.login-input-box {
+  width: 400px;
+  height: fit-content;
+  padding: 10px;
+  margin-top: 20%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: rgba(224, 224, 224, 0.3);
 }
 </style>
