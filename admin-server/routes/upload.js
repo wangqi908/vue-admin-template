@@ -15,12 +15,12 @@ router.post('/', upload, function (req, res, next) {
       let file = files[i];
       let tmpPath = file.path;
       let types = file.originalname.split('.')
-      let suffix = types[types.length - 1]
-      let fileName = new Date().getTime() + i + '.' + suffix
+      let suffix = types[types.length - 1] //后缀名
+      let fileName = new Date().getTime() + i + '.' + suffix //这里修改文件名。
       let filesPath = 'files/' + fileName;
       let public = 'public/'
       let targetPath = public + filesPath
-      fs.renameSync(tmpPath, targetPath);//这里修改文件名。
+      fs.renameSync(tmpPath, targetPath);
       fileInfos.push(filesPath)
     }
     res.send(fileInfos);

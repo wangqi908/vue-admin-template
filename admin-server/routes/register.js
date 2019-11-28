@@ -8,7 +8,7 @@ const UserModel = require('../db/models').UserModel
 
 /* GET users listing. */
 router.post('/', (req, res) => {
-  const { username, password } = req.body
+  const { username, password, avatar } = req.body
   if (!username) {
     res.send({ code: 0, msg: '请输入用户名' })
     return
@@ -25,7 +25,7 @@ router.post('/', (req, res) => {
     if (user) {
       res.send({ code: 0, msg: '此用户已存在' }) // code 是数据是否是正常数据的标识
     } else {
-      new UserModel({ username, password: md5(password) }).save((err, user) => {
+      new UserModel({ username, password: md5(password), avatar }).save((err, user) => {
         // 3.2. 保存成功, 返回成功的响应数据: user
         res.send({ code: 200, data: { _id: user._id, username } }) // 返回的数据中不要携带pwd
       })

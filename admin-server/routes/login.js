@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+let express = require('express');
+let router = express.Router();
 
 // 引入md5 加密函数库
 const md5 = require('blueimp-md5')

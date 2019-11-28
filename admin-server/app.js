@@ -42,19 +42,18 @@ app.all('*', function (req, res, next) {
 app.use((req, res, next) => {
   let { authorization } = req.headers
   let { pathname } = req._parsedUrl
-  // let freeUrls = ['/login', '/', '/register', '/upload', '/bdAi/ocr'] //不需要验证token的接口地址
-  // let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
-  // if (isVerifyToken) {
-  //   let verifyToken = tokenTool.verifyToken(authorization)
-  //   if (verifyToken === "Token Invalid") {
-  //     res.send({ code: 1, msg: 'Token Invalid' })
-  //   } else {
-  //     next();
-  //   }
-  // } else {
-  //   next();
-  // }
-  next();
+  let freeUrls = ['/login', '/', '/register', '/upload', '/bdAi/ocr'] //不需要验证token的接口地址
+  let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
+  if (isVerifyToken) {
+    let verifyToken = tokenTool.verifyToken(authorization)
+    if (verifyToken === "Token Invalid") {
+      res.send({ code: 1, msg: 'Token Invalid' })
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 app.use('/', indexRouter);
