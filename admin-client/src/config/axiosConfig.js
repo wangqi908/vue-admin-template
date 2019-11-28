@@ -10,7 +10,6 @@ const axiosConfig = () => {
   axios.interceptors.request.use(
     config => {
       const token = store.state.token
-      console.log(token)
       if (token) { // 判断是否存在token，如果存在的话，则每个http header都加上token
         config.headers.Authorization = token;
       }
