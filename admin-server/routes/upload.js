@@ -6,6 +6,7 @@ const multer = require('multer');//文件获取储存的第三方模块
 const fs = require('fs');
 const router = express.Router();
 const upload = multer({ dest: 'public/files/' }).array('file', 10);
+const ipWithPort = require('../utils/getIp.js').ipWithPort
 
 router.post('/', upload, function (req, res, next) {
   let files = req.files;
@@ -13,7 +14,7 @@ router.post('/', upload, function (req, res, next) {
     res.send({ code: 0, msg: "上传文件不能为空！" });
     return
   } else {
-    let fileInfos = [];
+    let fileList = [];
     for (let i in files) {
       let file = files[i];
       let tmpPath = file.path;
@@ -24,9 +25,13 @@ router.post('/', upload, function (req, res, next) {
       let public = 'public/'
       let targetPath = public + filesPath
       fs.renameSync(tmpPath, targetPath);
-      fileInfos.push(filesPath)
+      fileList.push(filesPath)
     }
-    res.send(fileInfos);
+    let data = {
+      http: ipWithPort,
+      fileList
+    }
+    res.send({ code: 200, data });
   }
 });
 module.exports = router;
