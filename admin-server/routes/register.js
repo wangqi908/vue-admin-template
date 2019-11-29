@@ -13,9 +13,6 @@ const remove = require('../utils/remove').remove //保存到永久文件夹
 /* GET users listing. */
 router.post('/', (req, res) => {
   const { username, password, avatar } = req.body
-
-
-
   if (!username) {
     res.send({ code: 0, msg: '请输入用户名' })
     return
