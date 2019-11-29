@@ -1,4 +1,3 @@
-
 /* 
 设置模糊查询条件
 data对象 查询参数
@@ -31,22 +30,42 @@ const findCount = (Model, data) => {
   })
 }
 
+// 设置过滤掉的熟悉
+// let filterArr = ['createTime', 'updateTime', 'password', '__v']
+const setFilter = (filter) => {
+  let obj = {}
+  filter.forEach(ele => {
+    obj[ele] = 0
+  })
+  return obj
+}
+
 /* 
 设置分页
 Model 集合的Model
 data  查询参数
 pageData pageSize每页返回数量 pageNum页数
+filterArr 设置过滤掉的熟悉 ['createTime', 'updateTime', 'password', '__v']
 */
-const setPage = (Model, data, pageData) => {
+const setPage = (Model, data, pageData, filterArr = []) => {
+
+  let filter = setFilter(filterArr)
+
   let { pageNum, pageSize } = pageData
 
   //查询条件
   let where = setQuery(data)
 
   return new Promise((resolve, reject) => {
-    Model.find(where, (userErr, userList) => {
+
+    Model.find(where, filter, async (userErr, userList) => {
       if (userErr) reject(userErr)
-      resolve(userList)
+      const count = await findCount(Model, data)
+      let sendData = {
+        count,
+        list: userList
+      }
+      resolve(sendData)
     }).skip(pageNum * pageSize).limit(pageSize)
   })
 }

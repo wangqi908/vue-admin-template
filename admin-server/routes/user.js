@@ -31,21 +31,16 @@ router.get('/info', (req, res, next) => {
 router.post('/page', async (req, res) => {
   const { pageNum, pageSize, data } = req.body
 
-  const count = await findCount(UserModel, data)
   try {
     let pageData = {
       pageNum, pageSize
     }
-    const list = await setPage(UserModel, data, pageData)
-    let sendData = {
-      count,
-      list
-    }
-    res.send({ code: 200, data: sendData });
+    let filterArr = ['createTime', 'updateTime', 'password', '__v']
+    const pageRes = await setPage(UserModel, data, pageData, filterArr)
+    res.send({ code: 200, data: pageRes });
   } catch (err) {
     res.send({ code: 0, err });
   }
-
 
 });
 
