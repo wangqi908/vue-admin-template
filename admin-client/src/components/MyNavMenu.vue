@@ -1,4 +1,7 @@
 <template>
+<!-- 
+  侧边栏菜单
+ -->
   <div class='meun-main' :class="[isCollapse?'aside-unactive':'aside-active']">
     <i :class="['el-icon-right','flex-center','meun-icon',isCollapse?'isActive':'']" @click="toggleShowMeun"></i>
     <el-menu :collapse="isCollapse" :default-active="activePath" @select="handleSelect" :collapse-transition="false"

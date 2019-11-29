@@ -34,7 +34,7 @@ router.post('/page', async (req, res) => {
     let pageData = {
       pageNum, pageSize
     }
-    let filterArr = ['createTime', 'updateTime', 'password', '__v'] //过滤返回的熟悉
+    let filterArr = ['password', '__v'] //过滤返回的熟悉
     // 分页
     const pageRes = await setPage(UserModel, data, pageData, filterArr)
     res.send({ code: 200, data: pageRes });
@@ -43,6 +43,5 @@ router.post('/page', async (req, res) => {
   }
 
 });
-
 
 module.exports = router;
