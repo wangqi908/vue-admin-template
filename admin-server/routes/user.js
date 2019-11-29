@@ -6,6 +6,8 @@ const router = express.Router();
 const tokenTool = require('../utils/token.js')
 const ipWithPort = require('../utils/getIp.js').ipWithPort
 const UserModel = require('../db/models').UserModel
+const findCount = require('../utils/page.js').findCount
+const setPage = require('../utils/page.js').setPage
 const filter = { password: 0, __v: 0 } // 查询时过滤出指定的属性
 
 router.get('/info', (req, res, next) => {
@@ -25,5 +27,27 @@ router.get('/info', (req, res, next) => {
     }
   })
 });
+
+router.post('/page', async (req, res) => {
+  const { pageNum, pageSize, data } = req.body
+
+  const count = await findCount(UserModel, data)
+  try {
+    let pageData = {
+      pageNum, pageSize
+    }
+    const list = await setPage(UserModel, data, pageData)
+    let sendData = {
+      count,
+      list
+    }
+    res.send({ code: 200, data: sendData });
+  } catch (err) {
+    res.send({ code: 0, err });
+  }
+
+
+});
+
 
 module.exports = router;
