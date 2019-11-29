@@ -6,7 +6,6 @@ const router = express.Router();
 const tokenTool = require('../utils/token.js')
 const ipWithPort = require('../utils/getIp.js').ipWithPort
 const UserModel = require('../db/models').UserModel
-const findCount = require('../utils/page.js').findCount
 const setPage = require('../utils/page.js').setPage
 const filter = { password: 0, __v: 0 } // 查询时过滤出指定的属性
 
@@ -35,7 +34,8 @@ router.post('/page', async (req, res) => {
     let pageData = {
       pageNum, pageSize
     }
-    let filterArr = ['createTime', 'updateTime', 'password', '__v']
+    let filterArr = ['createTime', 'updateTime', 'password', '__v'] //过滤返回的熟悉
+    // 分页
     const pageRes = await setPage(UserModel, data, pageData, filterArr)
     res.send({ code: 200, data: pageRes });
   } catch (err) {

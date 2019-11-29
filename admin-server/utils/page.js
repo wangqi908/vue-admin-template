@@ -1,8 +1,11 @@
+const ipWithPort = require('../utils/getIp.js').ipWithPort
 /* 
 设置模糊查询条件
 data对象 查询参数
 */
 const setQuery = (data) => {
+  // 如果不传data或者为空 则不查询
+  if (JSON.stringify(data) === "{}" || !data) return null
   let arr = []
   for (const key in data) {
     const element = data[key];
@@ -48,22 +51,21 @@ pageData pageSize每页返回数量 pageNum页数
 filterArr 设置过滤掉的熟悉 ['createTime', 'updateTime', 'password', '__v']
 */
 const setPage = (Model, data, pageData, filterArr = []) => {
-
   let filter = setFilter(filterArr)
-
   let { pageNum, pageSize } = pageData
-
   //查询条件
   let where = setQuery(data)
-
   return new Promise((resolve, reject) => {
-
-    Model.find(where, filter, async (userErr, userList) => {
-      if (userErr) reject(userErr)
+    Model.find(where, filter, async (err, res) => {
+      if (err) reject(err)
       const count = await findCount(Model, data)
+      let list = JSON.parse(JSON.stringify(res))
+      list.forEach(ele => {
+        ele.http = ipWithPort
+      })
       let sendData = {
         count,
-        list: userList
+        list
       }
       resolve(sendData)
     }).skip(pageNum * pageSize).limit(pageSize)
