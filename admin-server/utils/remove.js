@@ -11,7 +11,10 @@ const remove = avatar => {
     let newPath = path.resolve('./public/files/', name)
 
     fs.rename(oldPath, newPath, (err) => {
-      if (err) reject(err)
+      if (err) {
+        reject(err)
+        return
+      }
       let targetPath = 'files/' + name
       resolve(targetPath)
     })
