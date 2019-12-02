@@ -1,4 +1,6 @@
+// 编辑
 const UserModel = require('../../db/models').UserModel
+
 const edit = (req, res) => {
   let { id } = req.body
   UserModel.updateOne({ _id: id }, req.body, (err, doc) => {

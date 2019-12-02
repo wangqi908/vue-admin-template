@@ -8,7 +8,7 @@ const router = express.Router();
 const upload = multer({ dest: 'public/temp_files/' }).array('file', 10);
 const ipWithPort = require('../utils/getIp.js').ipWithPort
 
-router.post('/', upload, function (req, res, next) {
+router.post('/', upload, (req, res, next) => {
   let files = req.files;
   if (files.length === 0) {
     res.send({ code: 0, msg: "上传文件不能为空！" });
