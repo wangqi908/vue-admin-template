@@ -2,6 +2,7 @@
 const UserModel = require('../../db/models').UserModel
 const unlinkFile = require('../../utils/unlinkFile').unlinkFile
 const remove = require('../../utils/remove').remove //保存到永久文件夹
+const md5 = require('blueimp-md5')
 
 const edit = (req, res) => {
   let { id } = req.body
@@ -9,6 +10,10 @@ const edit = (req, res) => {
   UserModel.find({ _id: id }, async (err, doc) => {
     if (err) {
       res.send({ code: 0, data: err })
+      return
+    }
+    if (!doc.length) {
+      res.send({ code: 0, msg: '未找到用户' })
       return
     }
     let userInfo = doc[0]
@@ -22,6 +27,10 @@ const edit = (req, res) => {
     if (newInfo.avatar) {
       const newAvatarPath = await remove(newInfo.avatar)
       newInfo.avatar = newAvatarPath
+    }
+    // 如果修改密码
+    if (newInfo.password) {
+      newInfo.password = md5(newInfo.password)
     }
     // 修改账户
     UserModel.updateOne({ _id: id }, newInfo, (err, doc) => {
