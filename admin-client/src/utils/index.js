@@ -112,7 +112,7 @@ jsonToExcel(params);
 // }
 
 // 重置对象里的键为空
-export const searchReset = (searchData = {}) => {
+export const elementReset = (searchData = {}) => {
   let type = o => {
     var s = Object.prototype.toString.call(o);
     return s.match(/\[object (.*?)\]/)[1].toLowerCase();

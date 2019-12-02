@@ -39,16 +39,16 @@
     }
  -->
   <div class='my-upload'>
-    <div class="img-box" v-if="fileList.length">
-      <div class="img-wrap" v-for="(item, index) in fileList" :key="index">
+    <div class="img-box" v-if="myFileList.length">
+      <div class="img-wrap" v-for="(item, index) in myFileList" :key="index">
         <img class="img" :src="item.url" @click="preview(item, index)">
-        <div class="remove" @click="remove(index)">
+        <div class="remove" @click="remove(index)" v-if="!disabled">
           X
         </div>
       </div>
     </div>
     <!-- 多选时增加按钮一直显示,单选时只要图片出现,增加按钮就隐藏 -->
-    <label for="fileInput" v-if="multiple||!fileList.length">
+    <label for="fileInput" v-if="multiple||!myFileList.length">
       <div class="add-btn flex-center">
         <i class="el-icon-plus"></i>
       </div>
@@ -72,17 +72,25 @@ export default {
     autoUpload: {
       type: Boolean,
       default: true
+    },
+    disabled: {
+      type: Boolean,
+      default: true
+    },
+    fileList: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
     return {
-      fileList: []
+      myFileList: this.fileList
     };
   },
   methods: {
     // change上传input
     inputFileChange(e) {
-      let { fileList, multiple, autoUpload } = this;
+      let { myFileList, multiple, autoUpload } = this;
       let targetList = e.target.files;
       targetList.forEach((ele, index) => {
         const fr = new FileReader();
@@ -92,19 +100,19 @@ export default {
             file: ele,
             url: fr.result
           };
-          multiple ? this.fileList.push(obj) : (this.fileList = [obj]);
+          multiple ? this.myFileList.push(obj) : (this.myFileList = [obj]);
           if (index === targetList.length - 1 && autoUpload) {
             this.submit();
           }
         };
       });
-      this.$emit("change", fileList);
+      this.$emit("change", myFileList);
     },
     // 提交上传请求
     async submit() {
-      let { fileList } = this;
+      let { myFileList } = this;
       let fd = new FormData();
-      fileList.forEach(ele => {
+      myFileList.forEach(ele => {
         fd.append("file", ele.file);
       });
       const res = await uploadReq(fd);
@@ -117,13 +125,13 @@ export default {
     },
     // 移除文件
     remove(index) {
-      let { fileList } = this;
-      fileList.splice(index, 1);
-      this.$emit("remove", fileList);
+      let { myFileList } = this;
+      myFileList.splice(index, 1);
+      this.$emit("remove", myFileList);
     },
     // 清空
     clearFiles() {
-      this.fileList = [];
+      this.myFileList = [];
     },
     preview(item) {
       this.$emit("preview", item);
@@ -135,6 +143,12 @@ export default {
   watch: {
     uploadProgress(val) {
       this.$emit("uploadProgress", val);
+    },
+    myFileList(val) {
+      this.$emit("update:fileList", val);
+    },
+    fileList(val) {
+      this.myFileList = val;
     }
   }
 };

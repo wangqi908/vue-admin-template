@@ -1,1 +1,1 @@
-export { default as MyEdit } from './MyEdit.vue'
+export { default as MyInfoDialog } from './MyInfoDialog.vue'

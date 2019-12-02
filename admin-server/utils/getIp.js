@@ -19,7 +19,7 @@ const getIPAddress = () => {
 }
 
 // 带端口路径
-const ipWithPort = getIPAddress() + ":" + config.PORT + "/"
+const ipWithPort = 'http://' + getIPAddress() + ":" + config.PORT + "/"
 
 exports.getIPAddress = getIPAddress;
 exports.ipWithPort = ipWithPort;

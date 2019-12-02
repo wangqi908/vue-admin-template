@@ -7,3 +7,7 @@ export const uploadReq = params => req('/upload', params, "form-data") //文件�
 // 用户模块
 export const userInfoReq = params => req('/user/info', params, "get") //获取用户信息
 export const userPageReq = params => req('/user/page', params, 'post') //用户分页
+export const userViewReq = params => req('/user/view', params, 'post') //用户详情
+export const userAddReq = params => req('/user/add', params, 'post') //用户添加
+export const userEditReq = params => req('/user/edit', params, 'post') //用户编辑
+export const userRemoveReq = params => req('/user/remove', params, 'post') //用户删除
