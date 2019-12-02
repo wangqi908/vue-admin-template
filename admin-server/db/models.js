@@ -34,11 +34,8 @@ const userSchema = mongoose.Schema({
   username: { type: String, required: true }, // 用户名
   password: { type: String, required: true }, // 密码
   avatar: { type: String }, // 头像
+  remark: { type: String }, // 备注
   createTime: {
-    type: String,
-    default: +new Date()
-  },
-  updateTime: {
     type: String,
     default: +new Date()
   }
