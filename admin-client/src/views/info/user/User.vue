@@ -34,7 +34,7 @@
 
 <script>
 import { formatTime, jsonToExcel } from "@/utils";
-import { userPageReq } from "@/apis";
+import { userPageReq, userListReq } from "@/apis";
 import { MyInfoDialog, MyRemoveDialog } from "./components";
 export default {
   components: { MyInfoDialog, MyRemoveDialog },
@@ -50,36 +50,38 @@ export default {
       visible: false, //操作信息对话框
       visible_remove: false, //删除对话框
       activeId: "", //当前id
-      type: "", //当前弹框类型
-      list: [
-        {
-          name: "韩版设计时尚风衣大",
-          number: "MPM00112",
-          salePrice: "￥999.00",
-          stockNum: 3423
-        },
-        {
-          name: "韩版设计时尚风衣大11",
-          number: "MPM00112",
-          salePrice: "￥999.00",
-          stockNum: 3423
-        }
-      ]
+      type: "" //当前弹框类型
     };
   },
   methods: {
-    excel() {
-      let { list } = this;
-      const header = ["商品名称", "商品货号", "售价", "库存"];
-      const keys = ["name", "number", "salePrice", "stockNum"];
-      const excelName = "商品管理列表";
-      let params = {
-        list,
-        header,
-        keys,
-        excelName
-      };
-      jsonToExcel(params);
+    async excel() {
+      const res = await userListReq();
+      if (res.data.code === 200) {
+        let resData = res.data.data;
+        if (resData.length === 0) {
+          this.$message.warning("当前暂无数据");
+          return;
+        }
+        let list = [];
+        resData.forEach(ele => {
+          list.push({
+            id: ele._id,
+            username: ele.username,
+            createTime: formatTime(ele.createTime, "all"),
+            remark: ele.remark
+          });
+        });
+        const header = ["id", "用户名", "注册时间", "备注"];
+        const keys = ["id", "username", "createTime", "remark"];
+        const excelName = "用户注册表";
+        const params = {
+          list,
+          header,
+          keys,
+          excelName
+        };
+        jsonToExcel(params);
+      }
     },
     // 多选
     handleSelectionChange(val) {
