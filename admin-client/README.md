@@ -4,6 +4,9 @@
 ```
 npm install
 ```
+vue2excel
+npm install xlsx file-saver -S
+npm install script-loader -S -D
 
 ### Compiles and hot-reloads for development
 ```

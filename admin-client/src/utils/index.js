@@ -99,17 +99,32 @@ let params = {
 };
 jsonToExcel(params);
 */
-// export const jsonToExcel = (params) => {
-//   let { list, header, keys, excelName } = params;
-//   let formatJson = (keys, jsonData) => {
-//     return jsonData.map(v => keys.map(j => v[j]));
-//   }
-//   require.ensure([], () => {
-//     const { export_json_to_excel } = require("@/vendor/Export2Excel");
-//     const data = formatJson(keys, list);
-//     export_json_to_excel(header, data, excelName);
-//   });
-// }
+export const jsonToExcel = (params) => {
+  let { list, header, keys, excelName } = params;
+  let formatJson = (keys, jsonData) => {
+    return jsonData.map(v => keys.map(j => v[j]));
+  }
+
+  import("@/vendor/Export2Excel.js").then(excel => {
+    if (list) {
+      const data = formatJson(keys, list);
+      excel.export_json_to_excel({
+        // 调用excel方法生成表格
+        header,
+        data,
+        filename: excelName
+      });
+    } else {
+      alert("暂无无数据");
+    }
+  });
+
+  // require.ensure([], () => {
+  //   const { export_json_to_excel } = require("@/vendor/Export2Excel");
+  //   const data = formatJson(keys, list);
+  //   export_json_to_excel(header, data, excelName);
+  // });
+}
 
 // 重置对象里的键为空
 export const elementReset = (searchData = {}) => {

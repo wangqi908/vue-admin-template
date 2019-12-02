@@ -5,6 +5,7 @@ import store from './store'
 import BaiduMap from 'vue-baidu-map'
 import "@/assets/css/index.scss";
 import { routerConfig, axiosConfig } from './config'
+
 axiosConfig()
 routerConfig()
 Vue.use(BaiduMap, {
