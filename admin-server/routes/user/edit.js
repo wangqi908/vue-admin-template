@@ -1,5 +1,11 @@
-const edit = (req, res) => { // 查找群详细信息
-  res.send({ code: 200 })
+const UserModel = require('../../db/models').UserModel
+const edit = (req, res) => {
+  let { id } = req.body
+  UserModel.updateOne({ _id: id }, req.body, (err, doc) => {
+    if (err) res.send({ code: 0, data: err })
+    res.send({ code: 200, data: doc })
+  })
+
 };
 
 module.exports = {
