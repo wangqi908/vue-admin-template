@@ -5,7 +5,9 @@
         <el-button type="text" size="small" @click="handleInfo(null,'add')">添加用户</el-button>
         <el-button type="text" size="small" @click="remove">删除用户</el-button>
       </div>
-      <el-table :data="tableData" style="width: 100%">
+      <el-table :data="tableData" style="width: 100%" @selection-change="handleSelectionChange">
+        <el-table-column type="selection" width="55">
+        </el-table-column>
         <el-table-column prop="_id" label="ID" width="100" show-overflow-tooltip></el-table-column>
         <el-table-column prop="username" label="姓名"></el-table-column>
         <el-table-column label="注册时间" show-overflow-tooltip>
@@ -22,16 +24,20 @@
         <el-pagination layout="prev, pager, next" :total="total" @current-change="handleCurrentChange"></el-pagination>
       </div>
     </div>
+    <!-- 操作信息对话框 -->
     <my-info-dialog v-if="visible" :visible.sync="visible" :_id="activeId" :type="type" @before-close="handleClose" />
+    <!-- 删除对话框 -->
+    <my-remove-dialog v-if="visible_remove" :visible.sync="visible_remove" :ids="ids"
+      @before-close="handleClose" />
   </div>
 </template>
 
 <script>
 import { formatTime } from "@/utils";
 import { userPageReq } from "@/apis";
-import { MyInfoDialog } from "./components";
+import { MyInfoDialog, MyRemoveDialog } from "./components";
 export default {
-  components: { MyInfoDialog },
+  components: { MyInfoDialog, MyRemoveDialog },
   data() {
     return {
       username: "",
@@ -39,12 +45,19 @@ export default {
       pageSize: 6, //每页条数
       pageNum: 0, //当前页
       tableData: [],
-      visible: false,
+      multipleSelection: [], //多选
+      ids: [], //多选id
+      visible: false, //操作信息对话框
+      visible_remove: false, //删除对话框
       activeId: "", //当前id
       type: "" //当前弹框类型
     };
   },
   methods: {
+    // 多选
+    handleSelectionChange(val) {
+      this.multipleSelection = val;
+    },
     // 点击分页
     handleCurrentChange(v) {
       this.pageNum = v - 1;
@@ -80,9 +93,16 @@ export default {
     handleClose() {
       this.getTableData();
     },
-    
+
     remove() {
-      console.log(111);
+      let { multipleSelection } = this;
+      if (multipleSelection.length === 0) {
+        this.$message.warning("请先选择要删除的用户");
+        return;
+      }
+      let ids = multipleSelection.map(ele => ele._id);
+      this.ids = ids;
+      this.visible_remove = true;
     }
   },
   created() {
