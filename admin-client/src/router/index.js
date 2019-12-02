@@ -62,6 +62,15 @@ const routes = [
           title: '用户管理'
         }
       },
+      {
+        path: 'info/uploadData',
+        name: 'uploadData',
+        component: () => import(/* webpackChunkName: "uploadData" */ '../views/info/uploadData/UploadData.vue'),
+        meta: {
+          requireAuth: true,
+          title: '数据上传'
+        }
+      },
     ]
   }
 ]

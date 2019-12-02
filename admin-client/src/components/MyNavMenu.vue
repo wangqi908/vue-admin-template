@@ -1,5 +1,5 @@
 <template>
-<!-- 
+  <!-- 
   侧边栏菜单
  -->
   <div class='meun-main' :class="[isCollapse?'aside-unactive':'aside-active']">
@@ -53,6 +53,10 @@ export default {
             {
               name: "用户管理",
               path: "/info/user"
+            },
+            {
+              name: "数据上传",
+              path: "/info/uploadData"
             }
           ]
         }
