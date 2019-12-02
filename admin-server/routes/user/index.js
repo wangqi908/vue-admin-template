@@ -9,9 +9,14 @@ const edit = require('./edit.js').edit
 const remove = require('./remove.js').remove
 const info = require('./info.js').info
 const page = require('./page.js').page
+const list = require('./list.js').list
 
 router.get('/info', (req, res) => {
   info(req, res)
+});
+
+router.post('/list', async (req, res) => {
+  list(req, res)
 });
 
 router.post('/page', async (req, res) => {
