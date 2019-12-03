@@ -38,7 +38,7 @@ const routes = [
     path: '/',
     name: 'content',
     redirect: 'index',
-    component: () => import(/* webpackChunkName: "content" */ '../views/Content.vue'),
+    component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
     meta: {
       requireAuth: true,
       title: '首页'
@@ -47,7 +47,7 @@ const routes = [
       {
         path: 'index',
         name: 'index',
-        component: () => import(/* webpackChunkName: "index" */ '../views/index/Index.vue'),
+        component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
         meta: {
           requireAuth: true,
           title: '首页'
@@ -56,7 +56,7 @@ const routes = [
       {
         path: 'info/user',
         name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '../views/info/user/User.vue'),
+        component: () => import(/* webpackChunkName: "user" */ '@/views/info/user/User.vue'),
         meta: {
           requireAuth: true,
           title: '用户管理'
@@ -65,7 +65,8 @@ const routes = [
       {
         path: 'info/uploadData',
         name: 'uploadData',
-        component: () => import(/* webpackChunkName: "uploadData" */ '../views/info/uploadData/UploadData.vue'),
+        // component: resolve=>(require(["@/views/info/uploadData/UploadData.vue"],resolve)),
+        component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
         meta: {
           requireAuth: true,
           title: '数据上传'

@@ -51,7 +51,7 @@ module.exports = {
     config.externals = {
       'vue':'Vue',
       'vuex': 'Vuex',
-      'xlsx': 'xlsx',
+      'XLSX': 'xlsx',
       'vue-router': 'VueRouter',
       'axios': 'axios',
       'element-ui': 'ELEMENT',
