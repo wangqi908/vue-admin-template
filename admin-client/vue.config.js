@@ -48,8 +48,9 @@ module.exports = {
         }
       },
     })
+
     config.externals = {
-      'vue':'Vue',
+      'vue': 'Vue',
       'vuex': 'Vuex',
       'XLSX': 'xlsx',
       'vue-router': 'VueRouter',
@@ -58,6 +59,10 @@ module.exports = {
       'echarts': 'echarts',
       'vue-baidu-map': 'VueBaiduMap',
     }
+  },
+  chainWebpack: (config) => {
+    config.plugins.delete('preload')
+    config.plugins.delete('prefetch')
   },
   productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
 }
