@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import XLSX from "xlsx";
 export default {
   data() {
     return {
@@ -40,11 +39,11 @@ export default {
       fileReader.onload = ev => {
         try {
           const data = ev.target.result;
-          const workbook = XLSX.read(data, {
+          const workbook = this.$XLSX.read(data, {
             type: "binary"
           });
           const wsname = workbook.SheetNames[0]; //取第一张表
-          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容
+          const ws = this.$XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容
           let outputs = []; //清空接收数据
           ws.forEach((ele, index) => {
             let obj = {

@@ -52,7 +52,6 @@ module.exports = {
     config.externals = {
       'vue': 'Vue',
       'vuex': 'Vuex',
-      'XLSX': 'xlsx',
       'vue-router': 'VueRouter',
       'axios': 'axios',
       'element-ui': 'ELEMENT',
@@ -60,7 +59,9 @@ module.exports = {
       'vue-baidu-map': 'VueBaiduMap',
     }
   },
+
   chainWebpack: (config) => {
+    // vue-cli3 路由懒加载
     config.plugins.delete('preload')
     config.plugins.delete('prefetch')
   },
