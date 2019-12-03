@@ -1,55 +1,46 @@
+'use strict'
 const path = require('path')
 
-module.exports = {
-  publicPath: './', // 基本路径
-  outputDir: 'app', // 输出文件目录
-  assetsDir: 'static', //放置生成的静态资源(s、css、img、fonts)的(相对于 outputDir 的)目录(默认'')
-  configureWebpack: (config) => {
-    // 为生产环境修改配置...
-    config.mode = 'production'
-    // 将每个依赖包打包成单独的js文件
-    let optimization = {
-      runtimeChunk: 'single',
-      splitChunks: {
-        chunks: 'all',
-        maxInitialRequests: Infinity,
-        minSize: 20000,
-        cacheGroups: {
-          vendor: {
-            test: /[\\/]node_modules[\\/]/,
-            name(module) {
-              // get the name. E.g. node_modules/packageName/not/this/part.js
-              // or node_modules/packageName
-              const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
-              // npm package names are URL-safe, but some servers don't like @ symbols
-              return `npm.${packageName.replace('@', '')}`
-            }
-          }
-        }
-      }
-    }
-    Object.assign(config, {
-      optimization,
-      // 开发生产共同配置
-      resolve: {
-        alias: {
-          '@': path.resolve(__dirname, './src'),
-          '@c': path.resolve(__dirname, './src/components'),
-          '@apis': path.resolve(__dirname, './src/apis/index.js')
-        } // 别名配置
-      },
-      devServer: {
-        port: 8888,  // 端口
-        open: true, // 自动开启浏览器
-        compress: false, // 开启压缩
-        overlay: {
-          warnings: false,
-          errors: false
-        }
-      },
-    })
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
 
-    config.externals = {
+const name = 'vue Element Admin' // page title
+
+// If your port is set to 80,
+// use administrator privileges to execute the command line.
+// For example, Mac: sudo npm run
+// You can change the port by the following method:
+// port = 9527 npm run dev OR npm run dev --port = 9527
+const port = process.env.port || process.env.npm_config_port || 9527 // dev port
+
+// All configuration item explanations can be find in https://cli.vuejs.org/config/
+module.exports = {
+
+  publicPath: './',
+  outputDir: 'app',
+  assetsDir: 'static',
+  lintOnSave: process.env.NODE_ENV === 'development',
+  productionSourceMap: false,
+  devServer: {
+    port: port,
+    open: true,
+    overlay: {
+      warnings: false,
+      errors: true
+    },
+  },
+  configureWebpack: {
+
+    resolve: {
+      alias: {
+        '@': resolve('src'),
+        '@c': path.resolve(__dirname, './src/components'),
+        '@apis': path.resolve(__dirname, './src/apis/index.js')
+      }
+    },
+
+    externals: {
       'vue': 'Vue',
       'vuex': 'Vuex',
       'vue-router': 'VueRouter',
@@ -57,13 +48,84 @@ module.exports = {
       'element-ui': 'ELEMENT',
       'echarts': 'echarts',
       'vue-baidu-map': 'VueBaiduMap',
-    }
-  },
+    },
 
-  chainWebpack: (config) => {
-    // vue-cli3 路由懒加载
-    config.plugins.delete('preload')
-    config.plugins.delete('prefetch')
   },
-  productionSourceMap: false, // 生产环境是否生成 sourceMap 文件
+  chainWebpack(config) {
+    config.plugins.delete('preload') // TODO: need test
+    config.plugins.delete('prefetch') // TODO: need test
+   
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('src/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('src/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]'
+      })
+      .end()
+
+    // set preserveWhitespace
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .loader('vue-loader')
+      .tap(options => {
+        options.compilerOptions.preserveWhitespace = true
+        return options
+      })
+      .end()
+
+    config
+      // https://webpack.js.org/configuration/devtool/#development
+      .when(process.env.NODE_ENV === 'development',
+        config => config.devtool('cheap-source-map')
+      )
+
+    config
+      .when(process.env.NODE_ENV !== 'development',
+        config => {
+          config
+            .plugin('ScriptExtHtmlWebpackPlugin')
+            .after('html')
+            .use('script-ext-html-webpack-plugin', [{
+              // `runtime` must same as runtimeChunk name. default is `runtime`
+              inline: /runtime\..*\.js$/
+            }])
+            .end()
+          config
+            .optimization.splitChunks({
+              chunks: 'all',
+              cacheGroups: {
+                libs: {
+                  name: 'chunk-libs',
+                  test: /[\\/]node_modules[\\/]/,
+                  priority: 10,
+                  chunks: 'initial' // only package third parties that are initially dependent
+                },
+                elementUI: {
+                  name: 'chunk-elementUI', // split elementUI into a single package
+                  priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+                  test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+                },
+                commons: {
+                  name: 'chunk-commons',
+                  test: resolve('src/components'), // can customize your rules
+                  minChunks: 3, //  minimum common number
+                  priority: 5,
+                  reuseExistingChunk: true
+                }
+              }
+            })
+          config.optimization.runtimeChunk('single')
+        }
+      )
+  }
 }

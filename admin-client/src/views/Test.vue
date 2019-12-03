@@ -1,90 +1,52 @@
 <template>
-  <div class="upload_excel">
-    <span>上传Excel</span>
-    <input type="file" ref="upload" @change="readExcel" accept=".xls,.xlsx" class="outputlist_upload">
+  <div class=''>
+    <button @click="handleDownload">下载</button>
   </div>
 </template>
 
 <script>
-import XLSX from "xlsx";
 export default {
-  methods: {
-    readExcel(e) {
-      const files = e.target.files;
-      if (files.length <= 0) {
-        return false;
-      } else if (!/\.(xls|xlsx)$/.test(files[0].name.toLowerCase())) {
-        this.$Message.error("上传格式不正确，请上传xls或者xlsx格式");
-        return false;
-      }
-
-      const fileReader = new FileReader();
-      fileReader.onload = ev => {
-        try {
-          const data = ev.target.result;
-          const workbook = XLSX.read(data, {
-            type: "binary"
-          });
-          const wsname = workbook.SheetNames[0]; //取第一张表
-          const ws = XLSX.utils.sheet_to_json(workbook.Sheets[wsname]); //生成json表格内容
-          let outputs = []; //清空接收数据
-          ws.forEach((ele, index) => {
-            let obj = {
-              id: ele["id"],
-              username: ele["用户名"],
-              createTime: ele["注册时间"],
-              remark: ele["备注"]
-            };
-            for (const key in obj) {
-              const element = obj[key];
-              if (!element) {
-                obj[key] = "";
-              }
-            }
-            let isObjValueAllEmpty = Object.values(obj).every(v => v === ""); //判断对象的值全为空
-            if (!isObjValueAllEmpty) outputs.push(obj);
-          });
-          console.log(outputs);
-          this.$emit("read-success", outputs);
-          this.$refs.upload.value = "";
-        } catch (e) {
-          console.log(e);
-          return false;
+  components: {},
+  data() {
+    return {
+      list: [
+        {
+          id: "1",
+          title: "1",
+          author: "1",
+          pageviews: "1",
+          display_time: "1"
         }
-      };
-      fileReader.readAsBinaryString(files[0]);
+      ]
+    };
+  },
+  methods: {
+    handleDownload() {
+    import('@/vendor/Export2Excel').then(excel => {
+        const tHeader = ['Id', 'Title', 'Author', 'Readings', 'Date']
+        const filterVal = ['id', 'title', 'author', 'pageviews', 'display_time']
+        const list = this.list
+        const data = this.formatJson(filterVal, list)
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: this.filename,
+          autoWidth: this.autoWidth,
+          bookType: this.bookType
+        })
+        this.downloadLoading = false
+      })
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v => filterVal.map(j => v[j]));
     }
-  }
+  },
+  created() {},
+  mounted() {},
+  computed: {},
+  watch: {}
 };
 </script>
 
-<style >
-.upload_excel {
-  position: relative;
-  display: inline-block;
-  background: #f5a623;
-  border: 1px solid #f5a623;
-  border-radius: 4px;
-  padding: 8px 12px;
-  overflow: hidden;
-  color: #fff;
-  font-size: 14px;
-  margin: 10px;
-}
-
-input {
-  position: absolute;
-  font-size: 100px;
-  right: 0;
-  top: 0;
-  opacity: 0;
-}
-.upload_excel:hover {
-  background: #f7c16a;
-  border-color: #f5cb87;
-  color: #fff;
-}
-.upload_excel input:hover {
-  cursor: pointer;
-}
+<style lang='scss'>
 </style>

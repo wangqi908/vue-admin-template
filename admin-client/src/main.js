@@ -5,8 +5,8 @@ import store from './store'
 import BaiduMap from 'vue-baidu-map'
 import "@/assets/css/index.scss";
 import { routerConfig, axiosConfig } from './config'
-import XLSX from 'xlsx'
-Vue.prototype.$XLSX = XLSX
+// import XLSX from 'xlsx'
+// Vue.prototype.$XLSX = XLSX
 
 axiosConfig()
 routerConfig()

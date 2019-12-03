@@ -1,3 +1,5 @@
 export { default as MyNavMenu } from './MyNavMenu.vue'
 export { default as MyHeader } from './myHeader/MyHeader.vue'
 export { default as MyUpload } from './MyUpload.vue'
+export { default as MyStep } from './myStep/MyStep.vue'
+export { default as MySteps } from './myStep/MySteps.vue'
