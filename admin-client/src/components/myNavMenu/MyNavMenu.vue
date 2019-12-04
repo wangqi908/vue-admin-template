@@ -7,7 +7,8 @@
 
     <!-- 抽屉菜单 -->
     <div v-else>
-      <el-drawer :visible.sync="isShowDrawer" :show-close="false" custom-class="drawer-box" :direction="direction" size="200px">
+      <el-drawer :visible.sync="isShowDrawer" :show-close="false" custom-class="drawer-box" :direction="direction"
+        size="200px">
         <Menu />
       </el-drawer>
     </div>
@@ -18,6 +19,7 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
+import { throttle } from "@/utils";
 import Menu from "./Menu.vue";
 export default {
   components: { Menu },
@@ -32,7 +34,8 @@ export default {
   methods: {
     ...mapMutations(["getCollapse", "setShowAside"]),
     initCollapse() {
-      window.addEventListener("resize", this.handleResize);
+      // 节流
+      window.addEventListener("resize", throttle(this.handleResize, 500));
       let res = this.fullWidth <= this.clientWidth;
       let showAsideWidthRes = this.fullWidth <= this.showAsideWidth;
       this.getCollapse(res);
@@ -43,7 +46,8 @@ export default {
     }
   },
   created() {
-    this.initCollapse();
+    // throttle(this.initCollapse(), 1000);
+    this.initCollapse()
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.handleResize);
@@ -91,8 +95,8 @@ export default {
   }
 }
 
- .el-drawer__container .drawer-box {
-    height: 100%;
-    overflow: auto;
-  }
+.el-drawer__container .drawer-box {
+  height: 100%;
+  overflow: auto;
+}
 </style>
