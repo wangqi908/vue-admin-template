@@ -3,10 +3,13 @@
 </template>
 
 <script>
+import echarts from '@/lib/echarts'
+
 export default {
   methods: {
     initData() {
-      let myChart = echarts.init(document.getElementById("main"));
+      let myChart = echarts.init(document.getElementById("main"), 'macarons');
+      // let myChart = this.$echarts.init(document.getElementById("main"), 'macarons');
       // 指定图表的配置项和数据
       let option = {
         tooltip: {
