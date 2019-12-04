@@ -46,6 +46,24 @@ export default {
           children: null
         },
         {
+          name: "echarts",
+          icon: "el-icon-s-home",
+          path: "/echarts",
+          children: null
+        },
+        {
+          name: "echartsBar",
+          icon: "el-icon-s-home",
+          path: "/echartsBar",
+          children: null
+        },
+        {
+          name: "map",
+          icon: "el-icon-s-home",
+          path: "/map",
+          children: null
+        },
+        {
           name: "信息",
           icon: "el-icon-menu",
           path: "/info",

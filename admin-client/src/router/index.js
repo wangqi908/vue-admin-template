@@ -54,6 +54,33 @@ const routes = [
         }
       },
       {
+        path: 'echarts',
+        name: 'echarts',
+        component: () => import(/* webpackChunkName: "echarts" */ '../views/echarts.vue'),
+        meta: {
+          requireAuth: true,
+          title: 'echarts'
+        }
+      },
+      {
+        path: 'echartsBar',
+        name: 'echartsBar',
+        component: () => import(/* webpackChunkName: "echartsBar" */ '../views/echartsBar.vue'),
+        meta: {
+          requireAuth: true,
+          title: 'echartsBar'
+        }
+      },
+      {
+        path: 'map',
+        name: 'map',
+        component: () => import(/* webpackChunkName: "map" */ '../views/map.vue'),
+        meta: {
+          requireAuth: true,
+          title: 'map'
+        }
+      },
+      {
         path: 'info/user',
         name: 'user',
         component: () => import(/* webpackChunkName: "user" */ '../views/info/user/User.vue'),

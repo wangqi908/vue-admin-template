@@ -5,8 +5,7 @@ import store from './store'
 import BaiduMap from 'vue-baidu-map'
 import "@/assets/css/index.scss";
 import { routerConfig, axiosConfig } from './config'
-// import echarts from 'echarts'
-// Vue.prototype.$echarts = echarts
+
 axiosConfig()
 routerConfig()
 Vue.use(BaiduMap, {

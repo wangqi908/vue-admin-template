@@ -31,7 +31,7 @@ module.exports = {
   },
   configureWebpack: config => {
 
-    config.resolve= {
+    config.resolve = {
       // 设置别名
       alias: {
         '@': resolve('src'),
@@ -41,39 +41,26 @@ module.exports = {
     }
 
     // 公用代码提取，使用cdn加载
-    // if(isProduction) {
-      // 用cdn方式引入
-      config.externals = {
-        'vue': 'Vue',
-        'vuex': 'Vuex',
-        'vue-router': 'VueRouter',
-        'axios': 'axios',
-        'element-ui': 'ELEMENT',
-      }
-    // }
-
-    // externals: {
-    //   'vue': 'Vue',
-    //   'vuex': 'Vuex',
-    //   'vue-router': 'VueRouter',
-    //   'axios': 'axios',
-    //   'element-ui': 'ELEMENT',
-    // },
+    // 用cdn方式引入
+    config.externals = {
+      'vue': 'Vue',
+      'vuex': 'Vuex',
+      'vue-router': 'VueRouter',
+      'axios': 'axios',
+      'element-ui': 'ELEMENT',
+    }
 
   },
   chainWebpack: config => {
     config.plugins.delete('preload')  // 移除 prefetch 插件
     config.plugins.delete('prefetch')  // 移除 preload 插件
 
-    // 生产环境配置
-    // if (isProduction) {
-      // 生产环境注入cdn
-      config.plugin('html')
-        .tap(args => {
-          args[0].cdn = cdn;
-          return args;
-        });
-    // }
+    // 生产环境注入cdn
+    config.plugin('html')
+      .tap(args => {
+        args[0].cdn = cdn;
+        return args;
+      });
 
   }
 }
