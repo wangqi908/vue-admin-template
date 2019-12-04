@@ -8,7 +8,50 @@ export default new Vuex.Store({
     token: "",
     userInfo: {},//用户信息
     isCollapse: false, //是否展开侧边栏
-    clientWidth: 880, //触发伸缩侧边栏宽度
+    isShowAside: false, //是否隐藏侧边栏
+    navList: [
+      {
+        name: "首页",
+        icon: "el-icon-s-home",
+        path: "/index",
+        children: null
+      },
+      {
+        name: "echarts",
+        icon: "el-icon-s-home",
+        path: "/echarts",
+        children: null
+      },
+      {
+        name: "echartsBar",
+        icon: "el-icon-s-home",
+        path: "/echartsBar",
+        children: null
+      },
+      {
+        name: "map",
+        icon: "el-icon-s-home",
+        path: "/map",
+        children: null
+      },
+      {
+        name: "信息",
+        icon: "el-icon-menu",
+        path: "/info",
+        children: [
+          {
+            name: "用户管理",
+            path: "/info/user"
+          },
+          {
+            name: "数据上传",
+            path: "/info/uploadData"
+          }
+        ]
+      }
+    ],
+    clientWidth: 1280, //触发伸缩侧边栏宽度
+    showAsideWidth: 580, //隐藏显示侧边栏宽度
     uploadProgress: 0 //上传进度
   },
   mutations: {
@@ -31,6 +74,10 @@ export default new Vuex.Store({
     // 折叠菜单
     getCollapse(state, payload = false) {
       state.isCollapse = payload;
+    },
+    // 隐藏菜单
+    setShowAside(state, payload = false) {
+      state.isShowAside = payload;
     },
     // 上传进度
     setUploadProgress(state, payload = "") {
