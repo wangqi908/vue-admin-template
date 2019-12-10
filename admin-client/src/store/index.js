@@ -85,5 +85,13 @@ export default new Vuex.Store({
       state.uploadProgress = payload;
     },
   },
-  plugins: [createPersistedState()]
+  plugins: [createPersistedState({
+    reducer(val) {
+      return {
+        // 只储存state中的user
+        token: val.token,
+        userInfo: val.userInfo,
+      }
+  }
+  })]
 })

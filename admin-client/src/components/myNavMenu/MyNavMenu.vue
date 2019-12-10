@@ -46,7 +46,6 @@ export default {
     }
   },
   created() {
-    // throttle(this.initCollapse(), 1000);
     this.initCollapse()
   },
   beforeDestroy() {
