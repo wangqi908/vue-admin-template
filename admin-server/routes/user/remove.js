@@ -1,4 +1,4 @@
-// 编辑
+// 移除
 const UserModel = require('../../db/models').UserModel
 const unlinkFile = require('../../utils/unlinkFile').unlinkFile
 

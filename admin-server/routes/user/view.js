@@ -1,4 +1,4 @@
-// 编辑
+// 详情
 const UserModel = require('../../db/models').UserModel
 const ipWithPort = require('../../utils/getIp.js').ipWithPort
 const filter = { __v: 0, password: 0 } // 查询时过滤出指定的属性

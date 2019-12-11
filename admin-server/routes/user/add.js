@@ -1,4 +1,4 @@
-// 编辑
+// 添加
 const UserModel = require('../../db/models').UserModel
 const remove = require('../../utils/remove').remove //保存到永久文件夹
 const md5 = require('blueimp-md5')

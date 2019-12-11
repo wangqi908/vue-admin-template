@@ -1,4 +1,4 @@
-// 编辑
+// 添加
 const RoleSchema = require('../../db/models').RoleSchema
 
 const add = (req, res) => {

@@ -1,4 +1,4 @@
-// 编辑
+// 删除
 const RoleSchema = require('../../db/models').RoleSchema
 
 const remove = (req, res) => {

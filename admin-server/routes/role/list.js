@@ -1,4 +1,4 @@
-// 编辑
+// list
 const UserModel = require('../../db/models').UserModel
 const filter = { __v: 0, password: 0 } // 查询时过滤出指定的属性
 

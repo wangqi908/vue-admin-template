@@ -1,4 +1,4 @@
-// 编辑
+// 详情
 const RoleSchema = require('../../db/models').RoleSchema
 const filter = { __v: 0 } // 查询时过滤出指定的属性
 
