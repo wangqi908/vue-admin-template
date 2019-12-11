@@ -3,22 +3,22 @@
 
     <el-menu :collapse="isCollapse" :default-active="activePath" @select="handleSelect" :collapse-transition="false"
       :unique-opened="true">
-      <div v-for="item in navList" :key="item.name">
+      <div v-for="item in menuList" :key="item.meta.title">
 
-        <el-menu-item :index="item.path" v-if="!item.children">
+        <el-menu-item :index="item.meta.url" v-if="!item.children">
           <i class="el-icon-s-home"></i>
-          <span slot="title">{{item.name}}</span>
+          <span slot="title">{{item.meta.title}}</span>
         </el-menu-item>
 
-        <el-submenu :index="item.path" v-if="item.children">
+        <el-submenu :index="item.meta.url" v-if="item.children">
           <template slot="title">
-            <i :class="[item.icon]"></i>
-            <span slot="title" v-show="!isCollapse">{{item.name}}</span>
+            <i :class="[item.meta.icon]"></i>
+            <span slot="title" v-show="!isCollapse">{{item.meta.title}}</span>
           </template>
 
-          <div v-for="subItem in item.children" :key="subItem.name">
-            <el-menu-item :index="subItem.path">
-              <span slot="title">{{subItem.name}}</span>
+          <div v-for="subItem in item.children" :key="subItem.meta.title">
+            <el-menu-item :index="subItem.meta.url">
+              <span slot="title">{{subItem.meta.title}}</span>
             </el-menu-item>
           </div>
 
@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(["isCollapse", "navList"])
+    ...mapState(["isCollapse", "menuList"])
   }
 };
 </script>

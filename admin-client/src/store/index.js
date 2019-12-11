@@ -9,47 +9,6 @@ export default new Vuex.Store({
     userInfo: {},//用户信息
     isCollapse: false, //是否展开侧边栏
     isShowAside: false, //是否隐藏侧边栏
-    navList: [
-      {
-        name: "首页",
-        icon: "el-icon-s-home",
-        path: "/index",
-        children: null
-      },
-      {
-        name: "echarts",
-        icon: "el-icon-s-home",
-        path: "/echarts",
-        children: null
-      },
-      {
-        name: "echartsBar",
-        icon: "el-icon-s-home",
-        path: "/echartsBar",
-        children: null
-      },
-      {
-        name: "map",
-        icon: "el-icon-s-home",
-        path: "/map",
-        children: null
-      },
-      {
-        name: "信息",
-        icon: "el-icon-menu",
-        path: "/info",
-        children: [
-          {
-            name: "用户管理",
-            path: "/info/user"
-          },
-          {
-            name: "数据上传",
-            path: "/info/uploadData"
-          }
-        ]
-      }
-    ],
     defaultRoutes: [
       {
         path: '/login',
@@ -75,7 +34,102 @@ export default new Vuex.Store({
           title: '注册'
         }
       }
-    ],
+    ],//初始化菜单
+    authRoutes: [
+      {
+        path: '/',
+        name: 'content',
+        redirect: 'index',
+        component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
+        meta: {
+          requireAuth: true,
+          title: '首页',
+          isMenu: true
+        },
+        children: [
+          {
+            path: 'index',
+            name: 'index',
+            component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+            meta: {
+              requireAuth: true,
+              title: '首页',
+              url: '/index',
+              isMenu: true, //是否是菜单
+            }
+          },
+          {
+            path: 'echarts',
+            name: 'echarts',
+            component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue'),
+            meta: {
+              requireAuth: true,
+              title: 'echarts',
+              url: '/echarts',
+              isMenu: true
+            }
+          },
+          {
+            path: 'echartsBar',
+            name: 'echartsBar',
+            component: () => import(/* webpackChunkName: "echartsBar" */ '@/views/echartsBar.vue'),
+            meta: {
+              requireAuth: true,
+              title: 'echartsBar',
+              url: '/echartsBar',
+              isMenu: true
+            }
+          },
+          {
+            path: 'map',
+            name: 'map',
+            component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
+            meta: {
+              requireAuth: true,
+              title: 'map',
+              url: '/map',
+              isMenu: true
+            }
+          },
+          {
+            path: 'info',
+            name: 'info',
+            component: () => import(/* webpackChunkName: "user" */ '@/views/info/Info.vue'),
+            meta: {
+              requireAuth: true,
+              title: '信息',
+              url: '/info',
+              icon: 'el-icon-s-home',
+              isMenu: true
+            },
+            children: [
+              {
+                path: 'user',
+                name: 'user',
+                component: () => import(/* webpackChunkName: "user" */ '@/views/info/user/User.vue'),
+                meta: {
+                  requireAuth: true,
+                  title: '用户管理',
+                  url: '/info/user',
+                  isMenu: true
+                }
+              },
+              {
+                path: 'uploadData',
+                name: 'uploadData',
+                component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
+                meta: {
+                  requireAuth: true,
+                  title: '数据上传',
+                  url: '/info/uploadData',
+                  isMenu: true
+                }
+              },
+            ]
+          },
+        ]
+      }
+    ],//配置权限菜单
     menuList: [],//存放菜单数据
     clientWidth: 1280, //触发伸缩侧边栏宽度
     showAsideWidth: 580, //隐藏显示侧边栏宽度

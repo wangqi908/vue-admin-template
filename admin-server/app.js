@@ -42,7 +42,7 @@ app.all('*', function (req, res, next) {
 app.use((req, res, next) => {
   let { authorization } = req.headers
   let { pathname } = req._parsedUrl
-  let freeUrls = ['/login', '/', '/register', '/upload', '/bdAi/ocr'] //不需要验证token的接口地址
+  let freeUrls = ['/login', '/', '/register', '/upload','/test', '/bdAi/ocr'] //不需要验证token的接口地址
   let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
   if (isVerifyToken) {
     let verifyToken = tokenTool.verifyToken(authorization)

@@ -58,9 +58,17 @@ const accessSchema = mongoose.Schema({
     default: +new Date()
   }
 })
-
 const AccessSchema = mongoose.model('bdAccess', accessSchema)
+
+// 权限相关内容
+const roleSchema = mongoose.Schema({
+  name: { type: Number, required: true },
+  p_id: { type: String, required: true },
+  role_name: { type: String, required: true }
+})
+const RoleSchema = mongoose.model('role', roleSchema)
 
 // 向外暴露Model
 exports.UserModel = UserModel
 exports.AccessSchema = AccessSchema
+exports.RoleSchema = RoleSchema

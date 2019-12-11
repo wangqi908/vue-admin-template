@@ -1,16 +1,23 @@
 var express = require('express');
 var router = express.Router();
-const unlinkFile = require('../utils/unlinkFile').unlinkFile
+const RoleSchema = require('../db/models').RoleSchema
 
-/* GET home page. */
-router.post('/', async (req, res) => {
+router.post('/', (req, res) => {
 
-  let { filePath } = req.body
+  RoleSchema.find((err, doc) => {
+    if (err) {
+      res.send({ code: 0, data: err })
+      return
+    }
+    if (!doc.length) {
+      res.send({ code: 0, msg: '未找到' })
+      return
+    }
+    console.log(doc)
+    res.send({ code: 200, data: doc })
 
-  const aa = await unlinkFile(filePath)
-  console.log(aa)
+  })
 
-  res.send({ code: 200, data: { msg: 'ok' } })
 
 });
 
