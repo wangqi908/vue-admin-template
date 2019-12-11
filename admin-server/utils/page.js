@@ -50,7 +50,7 @@ data  查询参数
 pageData pageSize每页返回数量 pageNum页数
 filterArr 设置过滤掉的熟悉 ['createTime', 'updateTime', 'password', '__v']
 */
-const setPage = (Model, data, pageData, filterArr = []) => {
+const setPage = (Model, data, pageData, filterArr = [], ipWithPort) => {
   let filter = setFilter(filterArr)
   let { pageNum, pageSize } = pageData
   //查询条件
@@ -60,9 +60,11 @@ const setPage = (Model, data, pageData, filterArr = []) => {
       if (err) reject(err)
       const count = await findCount(Model, data)
       let list = JSON.parse(JSON.stringify(res))
-      list.forEach(ele => {
-        ele.http = ipWithPort
-      })
+      if (ipWithPort) {
+        list.forEach(ele => {
+          ele.http = ipWithPort
+        })
+      }
       let sendData = {
         count,
         list
