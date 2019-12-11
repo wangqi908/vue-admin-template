@@ -125,6 +125,17 @@ export default new Vuex.Store({
                   isMenu: true
                 }
               },
+              {
+                path: 'role',
+                name: 'role',
+                component: () => import(/* webpackChunkName: "role" */ '@/views/info/role/Role.vue'),
+                meta: {
+                  requireAuth: true,
+                  title: '角色管理',
+                  url: '/info/role',
+                  isMenu: true
+                }
+              },
             ]
           },
         ]

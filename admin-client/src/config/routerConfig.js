@@ -3,7 +3,7 @@ import store from '../store';
 const routerConfig = () => {
 
   let userInfo = {
-    roles: ['content', 'index', 'echarts', 'echartsBar', 'info', 'map', 'user', 'uploadData']
+    roles: ['content', 'index', 'echarts', 'echartsBar', 'info', 'map', 'user', 'uploadData', 'role']
   }
 
 

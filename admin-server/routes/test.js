@@ -1,10 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const RoleSchema = require('../db/models').RoleSchema
+const PermissionSchema = require('../db/models').PermissionSchema
 
 router.post('/', (req, res) => {
 
-  RoleSchema.find((err, doc) => {
+  PermissionSchema.find((err, doc) => {
     if (err) {
       res.send({ code: 0, data: err })
       return
@@ -13,10 +13,9 @@ router.post('/', (req, res) => {
       res.send({ code: 0, msg: '未找到' })
       return
     }
-    console.log(doc)
     res.send({ code: 200, data: doc })
 
-  })
+  }).sort({index:1})
 
 
 });

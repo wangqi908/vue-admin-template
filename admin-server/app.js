@@ -10,6 +10,7 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const testRouter = require('./routes/test');
 const uploadRouter = require('./routes/upload');
+const permissionRouter = require('./routes/permission');
 const bdAiRouter = require('./routes/bdAi');//百度ai
 const tokenTool = require('./utils/token.js')
 
@@ -63,6 +64,7 @@ app.use('/register', registerRouter);
 app.use('/test', testRouter);
 app.use('/upload', uploadRouter);
 app.use('/bdAi', bdAiRouter);
+app.use('/permission', permissionRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -61,14 +61,15 @@ const accessSchema = mongoose.Schema({
 const AccessSchema = mongoose.model('bdAccess', accessSchema)
 
 // 权限相关内容
-const roleSchema = mongoose.Schema({
-  name: { type: Number, required: true },
+const permissionSchema = mongoose.Schema({
+  name: { type: String, required: true },
   p_id: { type: String, required: true },
-  role_name: { type: String, required: true }
+  role_name: { type: String, required: true },
+  index: { type: Number, required: true }
 })
-const RoleSchema = mongoose.model('role', roleSchema)
+const PermissionSchema = mongoose.model('permission', permissionSchema)
 
 // 向外暴露Model
 exports.UserModel = UserModel
 exports.AccessSchema = AccessSchema
-exports.RoleSchema = RoleSchema
+exports.PermissionSchema = PermissionSchema
