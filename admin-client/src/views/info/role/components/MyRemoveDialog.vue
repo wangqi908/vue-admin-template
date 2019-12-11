@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { userRemoveReq } from "@apis";
+import { roleRemoveReq } from "@apis";
 export default {
   props: ["visible", "ids"],
   data() {
@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     async comfrim() {
-      const res = await userRemoveReq({ ids: this.ids });
+      const res = await roleRemoveReq({ ids: this.ids });
       if (res.data.code === 200) {
         let resData = res.data.data;
         this.$message.success("删除成功");

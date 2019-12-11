@@ -10,7 +10,8 @@
       </el-form-item>
 
       <el-form-item label="权限树">
-        <el-tree ref="tree" :data="tree" default-expand-all show-checkbox node-key="_id" :props="defaultProps">
+        <el-tree ref="tree" :data="tree" default-expand-all show-checkbox node-key="_id" :props="defaultProps"
+          :default-checked-keys="roleIds">
         </el-tree>
       </el-form-item>
     </el-form>
@@ -22,7 +23,7 @@
 </template>
 
 <script>
-import { permissionTreeReq, roleAddReq } from "@apis";
+import { permissionTreeReq, roleAddReq, roleViewReq, roleEditReq } from "@apis";
 import { elementReset } from "@/utils";
 export default {
   props: ["visible", "_id", "type"],
@@ -46,7 +47,8 @@ export default {
           }
         ]
       },
-      tree: [],
+      tree: [], //权限树
+      roleIds: [], //权限ids
       defaultProps: {
         children: "children",
         label: "name"
@@ -71,13 +73,16 @@ export default {
 
     async edit() {
       let { ruleForm } = this;
-      // const res = await userEditReq(ruleForm);
-      // if (res.data.code === 200) {
-      //   let resData = res.data.data;
-      //   this.$message.success("修改成功");
-      //   this.$emit("before-close");
-      //   this.myVisible = false;
-      // }
+      let sendData = {
+        ...ruleForm,
+        ids: this.$refs.tree.getCheckedKeys()
+      };
+      const res = await roleEditReq(sendData);
+      if (res.data.code === 200) {
+        this.$message.success("修改成功");
+        this.$emit("before-close");
+        this.myVisible = false;
+      }
     },
 
     async add() {
@@ -95,15 +100,16 @@ export default {
       }
     },
 
+    // 获取信息
     async getInfo() {
-      let { _id } = this;
-      // const res = await userViewReq({ _id });
-    },
-
-    // 获取权限树
-    async getTree() {
-      const res = await permissionTreeReq();
-      this.tree = res.data.data;
+      let { _id, type, tree } = this;
+      const res = await roleViewReq({ _id });
+      if (res.data.code === 200) {
+        let resData = res.data.data;
+        this.ruleForm = resData;
+        let ids = resData.ids;
+        this.roleIds = ids;
+      }
     },
 
     // 初始化view
@@ -140,9 +146,11 @@ export default {
       this.$emit("update:visible", v);
     }
   },
-  created() {
+  async created() {
+    // 获取权限树
+    const res = await permissionTreeReq();
+    this.tree = res.data.data;
     this.initView();
-    this.getTree();
   }
 };
 </script>
