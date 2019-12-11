@@ -7,16 +7,11 @@ const view = require('./view.js').view
 const add = require('./add.js').add
 const edit = require('./edit.js').edit
 const remove = require('./remove.js').remove
-const info = require('./info.js').info
 const page = require('./page.js').page
 const list = require('./list.js').list
 
 router.get('/', (req, res) => {
   res.send({ code: 200, msg: 'ok' })
-});
-
-router.get('/info', (req, res) => {
-  info(req, res)
 });
 
 router.post('/list', async (req, res) => {
