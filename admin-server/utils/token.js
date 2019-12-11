@@ -1,7 +1,7 @@
 // 引入token
 const jwt = require('jsonwebtoken');
 const secretOrPublicKey = 'abc'; //公钥 可以自己生成
-const expiresIn = 60 * 60; //时间
+const expiresIn = 60 * 60 * 10; //时间
 
 // 创建token
 const createToken = ({ _id, username }) => {
