@@ -146,6 +146,31 @@ export default {
         }
         this.ruleForm = resData;
       }
+    },
+
+    initView() {
+      if (this._id) {
+        this.getInfo();
+      } else {
+        elementReset(this.ruleForm);
+        elementReset(this.fileList);
+      }
+      let type = this.type;
+      this.disabled = type === "view";
+      switch (type) {
+        case "view":
+          this.title = "查看";
+          break;
+        case "edit":
+          this.title = "修改";
+          break;
+        case "add":
+          this.title = "添加";
+          break;
+        default:
+          "";
+          break;
+      }
     }
   },
   watch: {
@@ -157,28 +182,7 @@ export default {
     }
   },
   created() {
-    if (this._id) {
-      this.getInfo();
-    } else {
-      elementReset(this.ruleForm);
-      elementReset(this.fileList);
-    }
-    let type = this.type;
-    this.disabled = type === "view";
-    switch (type) {
-      case "view":
-        this.title = "查看用户";
-        break;
-      case "edit":
-        this.title = "修改用户";
-        break;
-      case "add":
-        this.title = "添加用户";
-        break;
-      default:
-        "";
-        break;
-    }
+    this.initView();
   }
 };
 </script>

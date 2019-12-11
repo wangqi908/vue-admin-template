@@ -12,3 +12,6 @@ export const userViewReq = params => req('/user/view', params, 'post') //用户�
 export const userAddReq = params => req('/user/add', params, 'post') //用户添加
 export const userEditReq = params => req('/user/edit', params, 'post') //用户编辑
 export const userRemoveReq = params => req('/user/remove', params, 'post') //用户删除
+
+// 权限模块
+export const permissionTreeReq = params => req('/permission/tree') //权限tree
