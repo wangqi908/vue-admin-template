@@ -50,6 +50,33 @@ export default new Vuex.Store({
         ]
       }
     ],
+    defaultRoutes: [
+      {
+        path: '/login',
+        name: 'login',
+        component: () => import(/* webpackChunkName: "login" */ '@/views/login/Login.vue'),
+        meta: {
+          title: '登录'
+        }
+      },
+      {
+        path: '/test',
+        name: 'test',
+        component: () => import(/* webpackChunkName: "test" */ '@/views/Test.vue'),
+        meta: {
+          title: 'test'
+        }
+      },
+      {
+        path: '/register',
+        name: 'register',
+        component: () => import(/* webpackChunkName: "register" */ '@/views/register/Register.vue'),
+        meta: {
+          title: '注册'
+        }
+      }
+    ],
+    menuList: [],//存放菜单数据
     clientWidth: 1280, //触发伸缩侧边栏宽度
     showAsideWidth: 580, //隐藏显示侧边栏宽度
     uploadProgress: 0 //上传进度
@@ -84,6 +111,10 @@ export default new Vuex.Store({
       state.uploadProgress = 0
       state.uploadProgress = payload;
     },
+    // 动态设置菜单
+    setMenuList(state, payload = []) {
+      state.menuList = payload
+    }
   },
   plugins: [createPersistedState({
     reducer(val) {
@@ -92,6 +123,6 @@ export default new Vuex.Store({
         token: val.token,
         userInfo: val.userInfo,
       }
-  }
+    }
   })]
 })
