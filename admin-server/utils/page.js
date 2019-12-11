@@ -70,7 +70,7 @@ const setPage = (Model, data, pageData, filterArr = [], ipWithPort) => {
         list
       }
       resolve(sendData)
-    }).skip(pageNum * pageSize).limit(pageSize)
+    }).skip(pageNum * pageSize).limit(pageSize).sort({ _id: -1 })
   })
 }
 

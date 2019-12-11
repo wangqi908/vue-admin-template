@@ -142,6 +142,7 @@ export default new Vuex.Store({
       }
     ],//配置权限菜单
     menuList: [],//存放菜单数据
+    pageSize: 5,//分页每页显示条目个数
     clientWidth: 1280, //触发伸缩侧边栏宽度
     showAsideWidth: 580, //隐藏显示侧边栏宽度
     uploadProgress: 0 //上传进度

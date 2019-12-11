@@ -22,7 +22,8 @@
         </el-table-column>
       </el-table>
       <div class="pagination-box">
-        <el-pagination layout="prev, pager, next" :total="total" @current-change="handleCurrentChange"></el-pagination>
+        <el-pagination layout="prev, pager, next" :total="total" :page-size="pageSize"
+          @current-change="handleCurrentChange"></el-pagination>
       </div>
     </div>
     <!-- 操作信息对话框 -->
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
 import { formatTime, jsonToExcel } from "@/utils";
 import { userPageReq, userListReq } from "@/apis";
 import { MyInfoDialog, MyRemoveDialog } from "./components";
@@ -42,7 +44,6 @@ export default {
     return {
       username: "",
       total: 0, //总数
-      pageSize: 6, //每页条数
       pageNum: 0, //当前页
       tableData: [],
       multipleSelection: [], //多选
@@ -141,6 +142,9 @@ export default {
     timeFilter(val) {
       return formatTime(val, "all");
     }
+  },
+  computed: {
+    ...mapState(["pageSize"])
   }
 };
 </script>

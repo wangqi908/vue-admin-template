@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { permissionTreeReq } from "@apis";
+import { permissionTreeReq, roleAddReq } from "@apis";
 import { elementReset } from "@/utils";
 export default {
   props: ["visible", "_id", "type"],
@@ -84,19 +84,15 @@ export default {
       let { ruleForm } = this;
       let sendData = {
         ...ruleForm,
-        ids:this.$refs.tree.getCheckedKeys()
+        ids: this.$refs.tree.getCheckedKeys()
+      };
+      const res = await roleAddReq(sendData);
+      if (res.data.code === 200) {
+        let resData = res.data.data;
+        this.$message.success("添加成功");
+        this.$emit("before-close");
+        this.myVisible = false;
       }
-      console.log(JSON.stringify(sendData));
-
-      // const res = await userAddReq(ruleForm);
-      // if (res.data.code === 200) {
-      //   let resData = res.data.data;
-      //   this.$message.success("添加成功");
-      //   this.$emit("before-close");
-      //   this.myVisible = false;
-      // }
-
-    
     },
 
     async getInfo() {

@@ -8,7 +8,7 @@ const page = async (req, res) => { // 查找群详细信息
     let pageData = {
       pageNum, pageSize
     }
-    let filterArr = ['password', '__v'] //过滤返回的熟悉
+    let filterArr = ['password', '__v']
     // 分页
     const pageRes = await setPage(UserModel, data, pageData, filterArr, ipWithPort = true)
     res.send({ code: 200, data: pageRes });

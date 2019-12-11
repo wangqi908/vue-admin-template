@@ -13,5 +13,11 @@ export const userAddReq = params => req('/user/add', params, 'post') //用户添
 export const userEditReq = params => req('/user/edit', params, 'post') //用户编辑
 export const userRemoveReq = params => req('/user/remove', params, 'post') //用户删除
 
-// 权限模块
+// 角色-权限模块
 export const permissionTreeReq = params => req('/permission/tree') //权限tree
+export const roleListReq = params => req('/role/list', params, 'post') //list
+export const rolePageReq = params => req('/role/page', params, 'post') //分页
+export const roleViewReq = params => req('/role/view', params, 'post') //详情
+export const roleAddReq = params => req('/role/add', params, 'post') //添加
+export const roleEditReq = params => req('/role/edit', params, 'post') //编辑
+export const roleRemoveReq = params => req('/role/remove', params, 'post') //删除

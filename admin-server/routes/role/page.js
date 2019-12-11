@@ -7,7 +7,7 @@ const page = async (req, res) => { // 查找群详细信息
     let pageData = {
       pageNum, pageSize
     }
-    let filterArr = ['__v', 'http'] //过滤返回的熟悉
+    let filterArr = ['__v', 'http']
     // 分页
     const pageRes = await setPage(RoleSchema, data, pageData, filterArr)
     res.send({ code: 200, data: pageRes });
