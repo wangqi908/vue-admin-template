@@ -25,7 +25,7 @@ const getPermissionTreeByPermissionIds = ids => {
       let allPermissions = permissionList.filter(ele => permissionIds.indexOf(ele._id + "") > -1)
       let tree = filterArray(JSON.parse(JSON.stringify(allPermissions)))
       resolve(tree)
-    })
+    }).sort({ index: 1 })
   })
 
 }

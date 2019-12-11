@@ -10,8 +10,8 @@
       </el-form-item>
 
       <el-form-item label="权限树">
-        <el-tree ref="tree" :data="tree" default-expand-all show-checkbox node-key="_id" :props="defaultProps"
-          :default-checked-keys="roleIds">
+        <el-tree ref="tree" :data="tree" default-expand-all :show-checkbox="type!=='view'" node-key="_id"
+          :props="defaultProps" :default-checked-keys="roleIds">
         </el-tree>
       </el-form-item>
     </el-form>
@@ -109,6 +109,7 @@ export default {
         this.ruleForm = resData;
         let ids = resData.ids;
         this.roleIds = ids;
+        if (type === "view") this.tree = resData.tree;
       }
     },
 
@@ -147,9 +148,12 @@ export default {
     }
   },
   async created() {
-    // 获取权限树
-    const res = await permissionTreeReq();
-    this.tree = res.data.data;
+    if (this.type !== "view") {
+      // 获取权限树
+      const res = await permissionTreeReq();
+      this.tree = res.data.data;
+    }
+
     this.initView();
   }
 };
