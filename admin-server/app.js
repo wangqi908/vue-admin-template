@@ -6,6 +6,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const userRouter = require('./routes/user');
+const roleRouter = require('./routes/role');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const testRouter = require('./routes/test');
@@ -59,6 +60,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/role', roleRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/test', testRouter);

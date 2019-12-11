@@ -69,7 +69,19 @@ const permissionSchema = mongoose.Schema({
 })
 const PermissionSchema = mongoose.model('permission', permissionSchema)
 
+// 角色相关内容
+const roleSchema = mongoose.Schema({
+  name: { type: String, required: true },//角色名
+  remark: { type: String }, // 备注
+  ids: {
+    type: Array,
+    default: []
+  }, // 权限id数组
+})
+const RoleSchema = mongoose.model('role', roleSchema)
+
 // 向外暴露Model
 exports.UserModel = UserModel
 exports.AccessSchema = AccessSchema
 exports.PermissionSchema = PermissionSchema
+exports.RoleSchema = RoleSchema
