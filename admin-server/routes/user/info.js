@@ -13,10 +13,15 @@ const info = (req, res) => { // 查找群详细信息
     if (userInfo) {
       let data = JSON.parse(JSON.stringify(userInfo))
       data.http = ipWithPort
-      let roleId = userInfo.roleId
-      if (roleId) {
-        const roleInfo = await getRoleInfo(roleId)
-        data.role = roleInfo
+      let roleIds = userInfo.roleIds
+      if (roleIds) {
+        let roles = []
+        for (let index = 0; index < roleIds.length; index++) {
+          const element = roleIds[index];
+          const roleInfo = await getRoleInfo(element)
+          roles.push(roleInfo)
+        }
+        data.roles = roles
       }
       res.send({ code: 200, data })
     } else {
