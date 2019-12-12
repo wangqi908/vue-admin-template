@@ -8,6 +8,8 @@ vue2excel
 npm install xlsx file-saver -S
 npm install script-loader -S -D
 
+175.24.138.208
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve

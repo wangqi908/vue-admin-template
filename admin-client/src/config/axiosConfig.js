@@ -5,8 +5,8 @@ import store from '../store'
 
 const axiosConfig = () => {
   axios.defaults.retryDelay = 10000; // 设置超时时间
-  axios.defaults.baseURL = `http://localhost:3000`
-  // axios.defaults.baseURL = `http://localhost:4000`
+  axios.defaults.baseURL = `http://localhost:3000` //本地
+  // axios.defaults.baseURL = `http://175.24.138.208:3000` //生产
   axios.interceptors.request.use(
     config => {
       const token = store.state.token
@@ -30,11 +30,9 @@ const axiosConfig = () => {
         let { msg } = response.data
         Vue.prototype.$message.warning(msg);
       }
-
       return response;
     },
     error => {
-
       return Promise.reject(error);
     });
 }
