@@ -18,6 +18,8 @@
         </my-upload>
       </el-form-item>
     </el-form>
+    <!-- 角色表 -->
+    <my-role-table v-model="ruleForm.roleIds" />
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
       <el-button @click="myVisible=false">取消</el-button>
@@ -29,8 +31,9 @@
 import { registerReq, userViewReq, userEditReq, userAddReq } from "@apis";
 import { elementReset } from "@/utils";
 import { MyUpload } from "@/components";
+import MyRoleTable from "./MyRoleTable.vue";
 export default {
-  components: { MyUpload },
+  components: { MyUpload, MyRoleTable },
   props: ["visible", "_id", "type"],
   data() {
     let passwordReg = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]{8,16}$/;
@@ -65,7 +68,8 @@ export default {
         password: "",
         checkPass: "",
         remark: "",
-        avatar: ""
+        avatar: "",
+        roleIds: []
       },
       rules: {
         username: [
@@ -97,6 +101,7 @@ export default {
         }
       });
     },
+
     handleComfrim() {
       let { type } = this;
       type === "add" ? this.add() : this.edit();
@@ -104,6 +109,8 @@ export default {
 
     async edit() {
       let { ruleForm } = this;
+      console.log(ruleForm);
+      return;
       const res = await userEditReq(ruleForm);
       if (res.data.code === 200) {
         let resData = res.data.data;
@@ -115,6 +122,8 @@ export default {
 
     async add() {
       let { ruleForm } = this;
+      console.log(ruleForm);
+      return;
       const res = await userAddReq(ruleForm);
       if (res.data.code === 200) {
         let resData = res.data.data;
@@ -123,14 +132,17 @@ export default {
         this.myVisible = false;
       }
     },
+
     // 图片删除
     remove(v) {
       this.ruleForm.avatar = "";
     },
+
     // 图片上传成功
     success(v) {
       this.ruleForm.avatar = v.fileList[0];
     },
+
     async getInfo() {
       let { _id } = this;
       const res = await userViewReq({ _id });

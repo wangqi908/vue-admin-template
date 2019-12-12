@@ -82,7 +82,9 @@ const roleSchema = mongoose.Schema({
 const RoleSchema = mongoose.model('role', roleSchema)
 
 // 向外暴露Model
-exports.UserModel = UserModel
-exports.AccessSchema = AccessSchema
-exports.PermissionSchema = PermissionSchema
-exports.RoleSchema = RoleSchema
+module.exports = {
+  UserModel,
+  AccessSchema,
+  PermissionSchema,
+  RoleSchema,
+}
