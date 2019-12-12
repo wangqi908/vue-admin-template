@@ -21,5 +21,7 @@ const verifyToken = (_token) => {
   return verify;
 };
 
-exports.createToken = createToken;
-exports.verifyToken = verifyToken;
+module.exports = {
+  createToken,
+  verifyToken
+};

@@ -74,5 +74,7 @@ const setPage = (Model, data, pageData, filterArr = [], ipWithPort) => {
   })
 }
 
-exports.findCount = findCount;
-exports.setPage = setPage;
+module.exports = {
+  findCount,
+  setPage
+};

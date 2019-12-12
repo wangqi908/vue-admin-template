@@ -134,4 +134,6 @@ const ocrReq = (image = "") => {
   })
 }
 
-exports.ocrReq = ocrReq;
+module.exports = {
+  ocrReq
+};

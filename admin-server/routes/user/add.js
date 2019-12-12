@@ -4,7 +4,7 @@ const remove = require('../../utils/remove').remove //保存到永久文件夹
 const md5 = require('blueimp-md5')
 
 const add = (req, res) => {
-  const { username, password, avatar, remark } = req.body
+  const { username, password, avatar, remark, roleId } = req.body
   if (!username) {
     res.send({ code: 0, msg: '请输入用户名' })
     return
@@ -23,7 +23,8 @@ const add = (req, res) => {
     } else {
       try {
         const newAvatarPath = await remove(avatar) //头像新路径
-        let Model = new UserModel({ username, password: md5(password), avatar: newAvatarPath, remark: remark || "" })
+        let userData = { username, password: md5(password), avatar: newAvatarPath, remark, roleId }
+        let Model = new UserModel(userData)
         Model.save((err, user) => {
           // 3.2. 保存成功, 返回成功的响应数据: user
           res.send({ code: 200, data: { _id: user._id, username } }) // 返回的数据中不要携带pwd

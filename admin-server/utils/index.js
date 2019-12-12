@@ -1,5 +1,7 @@
 
 const PermissionSchema = require('../db/models').PermissionSchema
+const RoleSchema = require('../db/models').RoleSchema
+const filter = { __v: 0 } // 查询时过滤出指定的属性
 
 // 权限list转成tree
 const filterArray = (data, p_id) => {
@@ -44,6 +46,32 @@ const getPermissionTreeByPermissionIds = ids => {
 
 }
 
-exports.filterArray = filterArray
-exports.getPermissionTreeByPermissionIds = getPermissionTreeByPermissionIds
+// 返回角色权限
+const getRoleInfo = _id => {
+  return new Promise((resolve, reject) => {
+    RoleSchema.findOne({ _id }, filter, async (err, role) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      if (!role) {
+        reject('无此信息')
+        return
+      }
+      const tree = await getPermissionTreeByPermissionIds(role.ids)
+      let _role = JSON.parse(JSON.stringify(role))
+      let data = {
+        ..._role,
+        tree
+      }
+      resolve(data)
+    })
+  })
 
+}
+
+module.exports = {
+  filterArray,
+  getPermissionTreeByPermissionIds,
+  getRoleInfo
+};

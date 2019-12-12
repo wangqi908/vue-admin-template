@@ -21,4 +21,6 @@ const remove = avatar => {
   })
 }
 
-exports.remove = remove;
+module.exports = {
+  remove
+};
