@@ -86,7 +86,7 @@ export default new Vuex.Store({
             component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
             meta: {
               requireAuth: true,
-              title: 'map',
+              title: '地图',
               url: '/map',
               isMenu: true
             }
@@ -115,17 +115,6 @@ export default new Vuex.Store({
                 }
               },
               {
-                path: 'uploadData',
-                name: 'uploadData',
-                component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
-                meta: {
-                  requireAuth: true,
-                  title: '数据上传',
-                  url: '/info/uploadData',
-                  isMenu: true
-                }
-              },
-              {
                 path: 'role',
                 name: 'role',
                 component: () => import(/* webpackChunkName: "role" */ '@/views/info/role/Role.vue'),
@@ -133,6 +122,17 @@ export default new Vuex.Store({
                   requireAuth: true,
                   title: '角色管理',
                   url: '/info/role',
+                  isMenu: true
+                }
+              },
+              {
+                path: 'uploadData',
+                name: 'uploadData',
+                component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
+                meta: {
+                  requireAuth: true,
+                  title: '数据上传',
+                  url: '/info/uploadData',
                   isMenu: true
                 }
               },

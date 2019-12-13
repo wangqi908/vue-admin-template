@@ -21,7 +21,7 @@ const filterArray = (data, p_id) => {
 }
 
 // 通过权限ids拿到权限树
-const getPermissionTreeByPermissionIds = ids => {
+const getPermissionByPermissionIds = (ids, type = 'tree') => {
   return new Promise((resolve, reject) => {
     PermissionSchema.find((err, permissionList) => {
       if (err) {
@@ -40,7 +40,7 @@ const getPermissionTreeByPermissionIds = ids => {
       })
       let allPermissions = permissionList.filter(ele => permissionIds.indexOf(ele._id + "") > -1)
       let tree = filterArray(JSON.parse(JSON.stringify(allPermissions)))
-      resolve(tree)
+      type === 'tree' ? resolve(tree) : resolve(allPermissions)
     }).sort({ index: 1 })
   })
 
@@ -58,11 +58,13 @@ const getRoleInfo = _id => {
         reject('无此信息')
         return
       }
-      const tree = await getPermissionTreeByPermissionIds(role.ids)
+      const tree = await getPermissionByPermissionIds(role.ids)
+      const list = await getPermissionByPermissionIds(role.ids,'list')
       let _role = JSON.parse(JSON.stringify(role))
       let data = {
         ..._role,
-        tree
+        tree,
+        list
       }
       resolve(data)
     })
@@ -72,6 +74,6 @@ const getRoleInfo = _id => {
 
 module.exports = {
   filterArray,
-  getPermissionTreeByPermissionIds,
+  getPermissionByPermissionIds,
   getRoleInfo
 };

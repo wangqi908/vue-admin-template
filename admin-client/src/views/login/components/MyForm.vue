@@ -18,6 +18,7 @@
 <script>
 import { mapMutations } from "vuex";
 import { loginReq, userInfoReq } from "@apis";
+import { permissionConfig } from '@/config'
 export default {
   data() {
     return {
@@ -61,6 +62,7 @@ export default {
         if (userInfoRes.data.code === 200) {
           let userInfo = res.data.data;
           this.setUserInfo(userInfo);
+          permissionConfig()
           this.$router.replace("/");
         }
       }

@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
         for (let index = 0; index < roleIds.length; index++) {
           const element = roleIds[index];
           const roleInfo = await getRoleInfo(element)
-          roles.push(roleInfo)
+          roles.push(roleInfo.list)
         }
       }
       // 3.2. 如果user 有值, 返回user

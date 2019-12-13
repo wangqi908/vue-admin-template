@@ -40,6 +40,8 @@ export default {
       this.removeUserInfo();
       this.removeToken();
       this.$router.replace("/login");
+      // todo
+      location.reload() // 为了重新实例化vue-router对象 避免bug
       this.$message({
         message: "退出成功",
         type: "success"
