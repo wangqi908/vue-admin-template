@@ -15,7 +15,10 @@ Vue.use(BaiduMap, {
 Vue.config.productionTip = false
 
 window.addEventListener("load", () => {
-  if (store.state.userInfo.roles) permissionConfig()
+
+  if (store.state.userInfo.roles) {
+    permissionConfig()
+  }
 })
 
 new Vue({

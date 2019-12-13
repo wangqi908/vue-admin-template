@@ -6,17 +6,15 @@ const permissionConfig = () => {
   let authRoutes = store.state.authRoutes //配置权限菜单
   let userInfo = store.state.userInfo //用户信息
 
-  let rolesNameArr = ['content']
-  if(userInfo.roles){
-    
-  userInfo.roles.forEach(ele => {
-    ele.forEach(i => {
-
-      if (rolesNameArr.indexOf(i.role_name) == -1) {
-        rolesNameArr.push(i.role_name)
-      }
+  let rolesNameArr = ['content', 'index']
+  if (userInfo.roles) {
+    userInfo.roles.forEach(ele => {
+      ele.forEach(i => {
+        if (rolesNameArr.indexOf(i.role_name) == -1) {
+          rolesNameArr.push(i.role_name)
+        }
+      })
     })
-  })
   }
 
   // 根据权限筛选路由
@@ -38,7 +36,6 @@ const permissionConfig = () => {
       return ele.meta && ele.meta.isMenu
     })
   }
-
   let authRoutesByRoles = filterRoutes(authRoutes)//根据权限得到的路由
   // 动态添加路由
   router.addRoutes(authRoutesByRoles)

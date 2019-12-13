@@ -33,6 +33,29 @@ export default new Vuex.Store({
         meta: {
           title: '注册'
         }
+      },
+      {
+        path: '/',
+        name: 'content',
+        redirect: 'index',
+        component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
+        meta: {
+          requireAuth: true,
+          title: '首页',
+          isMenu: true
+        },
+        children: [
+          {
+            path: 'index',
+            name: 'index',
+            component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+            meta: {
+              requireAuth: true,
+              title: '首页',
+              url: '/index',
+              isMenu: true, //是否是菜单
+            }
+          }]
       }
     ],//初始化菜单
     authRoutes: [
@@ -180,6 +203,39 @@ export default new Vuex.Store({
     // 动态设置菜单
     setMenuList(state, payload = []) {
       state.menuList = payload
+    },
+    popList(state) {
+      let list = state.defaultRoutes
+      list.pop()
+      state.defaultRoutes = list
+    },
+    pushList(state) {
+      let list = state.defaultRoutes
+      list.push(
+        {
+          path: '/',
+          name: 'content',
+          redirect: 'index',
+          component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
+          meta: {
+            requireAuth: true,
+            title: '首页',
+            isMenu: true
+          },
+          children: [
+            {
+              path: 'index',
+              name: 'index',
+              component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+              meta: {
+                requireAuth: true,
+                title: '首页',
+                url: '/index',
+                isMenu: true, //是否是菜单
+              }
+            }]
+        })
+      state.defaultRoutes = list
     }
   },
   plugins: [createPersistedState({

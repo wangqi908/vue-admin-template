@@ -25,14 +25,17 @@
 <script>
 import { mapState, mapMutations } from "vuex";
 import { resetRouter } from "../../router";
-// import router from "@/router";
-// import store from "@/store";
 export default {
   data() {
     return {};
   },
   methods: {
-    ...mapMutations(["removeUserInfo", "removeToken", "getCollapse"]),
+    ...mapMutations([
+      "removeUserInfo",
+      "removeToken",
+      "getCollapse",
+      "pushList"
+    ]),
 
     toggleShowMeun() {
       let isCollapse = !this.isCollapse;
@@ -43,7 +46,8 @@ export default {
       this.removeUserInfo();
       this.removeToken();
       this.$router.replace("/login");
-      resetRouter();// 为了重新实例化vue-router对象 避免bug
+      resetRouter(); // 为了重新实例化vue-router对象 避免bug
+      // this.pushList();
       this.$message({
         message: "退出成功",
         type: "success"
