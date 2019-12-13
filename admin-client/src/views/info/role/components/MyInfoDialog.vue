@@ -15,7 +15,7 @@
         </el-tree>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer">
+    <div slot="footer" class="dialog-footer"  v-if="type!=='view'">
       <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
       <el-button @click="myVisible=false">取消</el-button>
     </div>

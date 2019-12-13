@@ -19,8 +19,10 @@
       </el-form-item>
     </el-form>
     <!-- 角色表 -->
-    <my-role-table v-model="ruleForm.roleIds" />
-    <div slot="footer" class="dialog-footer">
+    <my-role-table v-model="ruleForm.roleIds" :list="roleList" v-if="roleList.length!=0||type==='view'" :type="type"
+      :roles="ruleForm.roles" />
+
+    <div slot="footer" class="dialog-footer" v-if="type!=='view'">
       <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
       <el-button @click="myVisible=false">取消</el-button>
     </div>
@@ -28,7 +30,13 @@
 </template>
 
 <script>
-import { registerReq, userViewReq, userEditReq, userAddReq } from "@apis";
+import {
+  registerReq,
+  userViewReq,
+  userEditReq,
+  userAddReq,
+  roleListReq
+} from "@apis";
 import { elementReset } from "@/utils";
 import { MyUpload } from "@/components";
 import MyRoleTable from "./MyRoleTable.vue";
@@ -63,6 +71,7 @@ export default {
       disabled: true,
       title: "",
       fileList: [],
+      roleList: [], //角色
       ruleForm: {
         username: "",
         password: "",
@@ -109,8 +118,6 @@ export default {
 
     async edit() {
       let { ruleForm } = this;
-      console.log(ruleForm);
-      return;
       const res = await userEditReq(ruleForm);
       if (res.data.code === 200) {
         let resData = res.data.data;
@@ -122,8 +129,6 @@ export default {
 
     async add() {
       let { ruleForm } = this;
-      console.log(ruleForm);
-      return;
       const res = await userAddReq(ruleForm);
       if (res.data.code === 200) {
         let resData = res.data.data;
@@ -157,6 +162,7 @@ export default {
           ];
         }
         this.ruleForm = resData;
+        this.getRoleList();
       }
     },
 
@@ -166,6 +172,7 @@ export default {
       } else {
         elementReset(this.ruleForm);
         elementReset(this.fileList);
+        this.getRoleList();
       }
       let type = this.type;
       this.disabled = type === "view";
@@ -182,6 +189,15 @@ export default {
         default:
           "";
           break;
+      }
+    },
+
+    // 获取角色
+    async getRoleList() {
+      if (this.type === "view") return;
+      const res = await roleListReq({});
+      if (res.data.code === 200) {
+        this.roleList = res.data.data;
       }
     }
   },
