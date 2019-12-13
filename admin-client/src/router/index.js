@@ -16,4 +16,13 @@ const router = new VueRouter({
   routes: store.state.defaultRoutes
 })
 
+export function resetRouter () {
+  const newRouter =  new VueRouter({
+    // mode: 'history',
+    base: process.env.BASE_URL,
+    routes: store.state.defaultRoutes
+  })
+  router.matcher = newRouter.matcher // the relevant part
+}
+
 export default router
