@@ -2,7 +2,6 @@ import router from '../router'
 import store from '../store';
 const permissionConfig = () => {
   
-  const Layout = () => import(/* webpackChunkName: "Layout" */ '@/components/layout/Index.vue')
   let defaultRoutes = store.state.defaultRoutes //初始化的路由
   let rolesNameArr = []
   let { userInfo,  authRoutes } = store.state
@@ -42,7 +41,6 @@ const permissionConfig = () => {
   router.addRoutes(authRoutesByRoles)
 
   store.commit('setMenuList', filterMenu(allRoutes))
-  store.commit('setAuthRouteList', authRoutesByRoles)
 
 }
 

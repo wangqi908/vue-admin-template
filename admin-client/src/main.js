@@ -13,12 +13,9 @@ Vue.use(BaiduMap, {
 })
 Vue.config.productionTip = false
 
-window.addEventListener("load", () => {
-  let { userInfo, authRouteList, menuList } = store.state
-  if (userInfo.roles) {
-    permissionConfig()
-  }
-})
+// 刷新时重置路由
+let { userInfo } = store.state
+if (userInfo.roles) permissionConfig()
 
 new Vue({
   router,

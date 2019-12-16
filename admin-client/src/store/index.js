@@ -35,14 +35,14 @@ export default new Vuex.Store({
           title: '注册'
         }
       },
-      // {
-      //   path: '*',
-      //   name: '404',
-      //   component: () => import(/* webpackChunkName: "ErrPage" */ '@/views/ErrPage.vue'),
-      //   meta: {
-      //     title: '404'
-      //   }
-      // },
+      {
+        path: '*',
+        name: '404',
+        component: () => import(/* webpackChunkName: "ErrPage" */ '@/views/ErrPage.vue'),
+        meta: {
+          title: '404'
+        }
+      },
 
       {
         path: '/',
@@ -199,11 +199,6 @@ export default new Vuex.Store({
     setUploadProgress(state, payload = "") {
       state.uploadProgress = 0
       state.uploadProgress = payload;
-    },
-    // 动态设置菜单
-    setAuthRouteList(state, payload = []) {
-      // console.log(payload)
-      state.authRouteList = payload
     },
     // 动态设置菜单
     setMenuList(state, payload = []) {
