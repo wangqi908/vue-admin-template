@@ -8,15 +8,14 @@ import { routerConfig, axiosConfig, permissionConfig } from '@/config'
 
 axiosConfig()
 routerConfig()
-// permissionConfig()
 Vue.use(BaiduMap, {
   ak: 'QyBoyPZx0VZfYo7WuZjhCQpBc7IO2fLr'
 })
 Vue.config.productionTip = false
 
 window.addEventListener("load", () => {
-
-  if (store.state.userInfo.roles) {
+  let { userInfo, authRouteList, menuList } = store.state
+  if (userInfo.roles && authRouteList.length != 0 && menuList.length != 0) {
     permissionConfig()
   }
 })

@@ -4,7 +4,6 @@ const path = require('path')
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
-const isProduction = process.env.NODE_ENV === 'production';
 const cdn = {
   css: ['https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css'],
   js: [

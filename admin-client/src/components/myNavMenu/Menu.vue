@@ -3,14 +3,14 @@
 
     <el-menu :collapse="isCollapse" :default-active="activePath" @select="handleSelect" :collapse-transition="false"
       :unique-opened="true">
-      <div v-for="item in menuList" :key="item.meta.title">
+      <div v-for="item in menuList" :key="item.meta.name">
 
-        <el-menu-item :index="item.meta.url" v-if="!item.children">
+        <el-menu-item :index="item.meta.url" v-if="!item.meta.hasSubMenu">
           <i class="el-icon-s-home"></i>
           <span slot="title">{{item.meta.title}}</span>
         </el-menu-item>
 
-        <el-submenu :index="item.meta.url" v-if="item.children">
+        <el-submenu :index="item.meta.url" v-else>
           <template slot="title">
             <i :class="[item.meta.icon]"></i>
             <span slot="title" v-show="!isCollapse">{{item.meta.title}}</span>

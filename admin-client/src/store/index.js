@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate' //vuex数据持久化
+const Layout = () => import(/* webpackChunkName: "Layout" */ '@/components/layout/Index.vue')
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -34,137 +35,136 @@ export default new Vuex.Store({
           title: '注册'
         }
       },
+      // {
+      //   path: '*',
+      //   name: '404',
+      //   component: () => import(/* webpackChunkName: "ErrPage" */ '@/views/ErrPage.vue'),
+      //   meta: {
+      //     title: '404'
+      //   }
+      // },
+
       {
         path: '/',
-        name: 'content',
-        redirect: 'index',
-        component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
+        component: Layout,
         meta: {
-          requireAuth: true,
+          name: 'index',
+          isMenu: true, //是否是菜单
           title: '首页',
-          isMenu: true
+          url: '/'
         },
-        children: [
-          {
-            path: 'index',
-            name: 'index',
-            component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
-            meta: {
-              requireAuth: true,
-              title: '首页',
-              url: '/index',
-              isMenu: true, //是否是菜单
-            }
-          }]
-      }
+        children: [{
+          path: '',
+          name: 'index',
+          component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+          meta: {
+            requireAuth: true,
+            url: '/'
+          },
+        }]
+      },
+      
     ],//初始化菜单
     authRoutes: [
       {
-        path: '/',
-        name: 'content',
-        redirect: 'index',
-        component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
+        path: '/echarts',
+        component: Layout,
+        meta: {
+          name: 'echarts',
+          title: 'echarts',
+          url: '/echarts',
+          isMenu: true,
+        },
+        children: [{
+          path: '',
+          name:'echarts',
+          component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue')
+        }]
+      },
+      {
+        path: '/echartsBar',
+        component: Layout,
+        meta: {
+          name: 'echartsBar',
+          title: 'echartsBar',
+          url: '/echartsBar',
+          isMenu: true,
+        },
+        children: [{
+          path: '',
+          name: 'echartsBar',
+          component: () => import(/* webpackChunkName: "echartsBar" */ '@/views/echartsBar.vue'),
+        }]
+      },
+      {
+        path: '/map',
+        component: Layout,
+        meta: {
+          name: 'map',
+          title: '地图',
+          url: '/map',
+          isMenu: true,
+        },
+        children: [{
+          path: '',
+          name: 'map',
+          component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
+        }]
+      },
+      {
+        path: '/info',
+        component: Layout,
+        name: 'info',
         meta: {
           requireAuth: true,
-          title: '首页',
-          isMenu: true
+          name: 'info',
+          title: '信息管理',
+          url: '/info',
+          isMenu: true,
+          hasSubMenu: true,
         },
         children: [
           {
-            path: 'index',
-            name: 'index',
-            component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
+            path: 'user',
+            name: 'user',
+            component: () => import(/* webpackChunkName: "user" */ '@/views/info/user/User.vue'),
             meta: {
               requireAuth: true,
-              title: '首页',
-              url: '/index',
-              isMenu: true, //是否是菜单
+              name: 'user',
+              title: '用户管理',
+              url: '/info/user',
+              isMenu: true,
             }
           },
           {
-            path: 'echarts',
-            name: 'echarts',
-            component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue'),
+            path: 'role',
+            name: 'role',
+            component: () => import(/* webpackChunkName: "role" */ '@/views/info/role/Role.vue'),
             meta: {
               requireAuth: true,
-              title: 'echarts',
-              url: '/echarts',
-              isMenu: true
+              name: 'role',
+              title: '角色管理',
+              url: '/info/role',
+              isMenu: true,
             }
           },
           {
-            path: 'echartsBar',
-            name: 'echartsBar',
-            component: () => import(/* webpackChunkName: "echartsBar" */ '@/views/echartsBar.vue'),
+            path: 'uploadData',
+            name: 'uploadData',
+            component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
             meta: {
               requireAuth: true,
-              title: 'echartsBar',
-              url: '/echartsBar',
-              isMenu: true
+              name: 'uploadData',
+              title: '数据上传',
+              url: '/info/uploadData',
+              isMenu: true,
             }
-          },
-          {
-            path: 'map',
-            name: 'map',
-            component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
-            meta: {
-              requireAuth: true,
-              title: '地图',
-              url: '/map',
-              isMenu: true
-            }
-          },
-          {
-            path: 'info',
-            name: 'info',
-            component: () => import(/* webpackChunkName: "user" */ '@/views/info/Info.vue'),
-            meta: {
-              requireAuth: true,
-              title: '信息',
-              url: '/info',
-              icon: 'el-icon-s-home',
-              isMenu: true
-            },
-            children: [
-              {
-                path: 'user',
-                name: 'user',
-                component: () => import(/* webpackChunkName: "user" */ '@/views/info/user/User.vue'),
-                meta: {
-                  requireAuth: true,
-                  title: '用户管理',
-                  url: '/info/user',
-                  isMenu: true
-                }
-              },
-              {
-                path: 'role',
-                name: 'role',
-                component: () => import(/* webpackChunkName: "role" */ '@/views/info/role/Role.vue'),
-                meta: {
-                  requireAuth: true,
-                  title: '角色管理',
-                  url: '/info/role',
-                  isMenu: true
-                }
-              },
-              {
-                path: 'uploadData',
-                name: 'uploadData',
-                component: () => import(/* webpackChunkName: "uploadData" */ '@/views/info/uploadData/UploadData.vue'),
-                meta: {
-                  requireAuth: true,
-                  title: '数据上传',
-                  url: '/info/uploadData',
-                  isMenu: true
-                }
-              },
-            ]
           },
         ]
-      }
+      },
     ],//配置权限菜单
     menuList: [],//存放菜单数据
+    authRouteList: [],//存放动态路由数据
     pageSize: 5,//分页每页显示条目个数
     clientWidth: 1280, //触发伸缩侧边栏宽度
     showAsideWidth: 580, //隐藏显示侧边栏宽度
@@ -201,41 +201,13 @@ export default new Vuex.Store({
       state.uploadProgress = payload;
     },
     // 动态设置菜单
+    setAuthRouteList(state, payload = []) {
+      // console.log(payload)
+      state.authRouteList = payload
+    },
+    // 动态设置菜单
     setMenuList(state, payload = []) {
       state.menuList = payload
-    },
-    popList(state) {
-      let list = state.defaultRoutes
-      list.pop()
-      state.defaultRoutes = list
-    },
-    pushList(state) {
-      let list = state.defaultRoutes
-      list.push(
-        {
-          path: '/',
-          name: 'content',
-          redirect: 'index',
-          component: () => import(/* webpackChunkName: "content" */ '@/views/Content.vue'),
-          meta: {
-            requireAuth: true,
-            title: '首页',
-            isMenu: true
-          },
-          children: [
-            {
-              path: 'index',
-              name: 'index',
-              component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
-              meta: {
-                requireAuth: true,
-                title: '首页',
-                url: '/index',
-                isMenu: true, //是否是菜单
-              }
-            }]
-        })
-      state.defaultRoutes = list
     }
   },
   plugins: [createPersistedState({
@@ -244,6 +216,8 @@ export default new Vuex.Store({
         // 只储存state中的user
         token: val.token,
         userInfo: val.userInfo,
+        authRouteList: val.authRouteList,
+        menuList: val.menuList,
       }
     }
   })]
