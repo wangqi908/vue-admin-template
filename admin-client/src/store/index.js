@@ -215,9 +215,7 @@ export default new Vuex.Store({
       return {
         // 只储存state中的user
         token: val.token,
-        userInfo: val.userInfo,
-        authRouteList: val.authRouteList,
-        menuList: val.menuList,
+        userInfo: val.userInfo
       }
     }
   })]

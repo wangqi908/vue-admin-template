@@ -24,5 +24,28 @@ export default {
 };
 </script>
 
-<style>
+<style lang='scss'>
+.app-content {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(224, 224, 224, 0.438);
+  height: 100%;
+  widows: 100%;
+  .app-body {
+    display: flex;
+    flex: 1;
+  }
+  .body-content {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  .body-content-router {
+    margin: 10px;
+    flex: 1;
+  }
+}
 </style>

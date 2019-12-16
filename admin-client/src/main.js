@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 
 window.addEventListener("load", () => {
   let { userInfo, authRouteList, menuList } = store.state
-  if (userInfo.roles && authRouteList.length != 0 && menuList.length != 0) {
+  if (userInfo.roles) {
     permissionConfig()
   }
 })
