@@ -1,11 +1,12 @@
 import router from '../router'
 import store from '../store';
+import { deepCopy } from '@/utils';
 const permissionConfig = () => {
-  
+
   let defaultRoutes = store.state.defaultRoutes //初始化的路由
   let rolesNameArr = []
-  let { userInfo,  authRoutes } = store.state
- 
+  let { userInfo } = store.state
+  let authRoutes = deepCopy(store.state.authRoutes)
 
   if (userInfo.roles) {
     userInfo.roles.forEach(ele => {
@@ -19,7 +20,10 @@ const permissionConfig = () => {
   const filterRoutes = (authRoutes = []) => {
     let arr = []
     authRoutes.forEach(ele => {
-      if (ele.children && ele.meta.hasSubMenu) ele.children = filterRoutes(ele.children)
+      if (ele.children && ele.meta.hasSubMenu) {
+        // ele.children = filterRoutes(ele.children)
+        ele.children = filterRoutes(ele.children)
+      }
       rolesNameArr.forEach(item => {
         if (ele.meta.name === item) arr.push(ele)
       })
@@ -36,8 +40,10 @@ const permissionConfig = () => {
   }
 
   let authRoutesByRoles = filterRoutes(authRoutes)//根据权限得到的路由
+
+
   // 动态添加路由
-  let allRoutes = [...defaultRoutes, ...authRoutesByRoles]//全部路由树
+  let allRoutes = deepCopy([...defaultRoutes, ...authRoutesByRoles])//全部路由树
   router.addRoutes(authRoutesByRoles)
 
   store.commit('setMenuList', filterMenu(allRoutes))
