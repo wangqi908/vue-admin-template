@@ -10,7 +10,7 @@ const list = (req, res) => {
     } else {
       res.send({ code: 200, data })
     }
-  })
+  }).sort({ _id: -1 })
 };
 
 module.exports = {
