@@ -19,7 +19,7 @@ const info = (req, res) => { // 查找群详细信息
         for (let index = 0; index < roleIds.length; index++) {
           const element = roleIds[index];
           const roleInfo = await getRoleInfo(element)
-          roles.push(roleInfo)
+          roles.push(roleInfo.list)
         }
         data.roles = roles
       }

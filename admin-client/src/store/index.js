@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate' //vuex数据持久化
+import { userInfoReq } from "@apis";
+import { resetRouter } from "@/router";
+import { permissionConfig } from "@/config";
 const Layout = () => import(/* webpackChunkName: "Layout" */ '@/components/layout/Index.vue')
 Vue.use(Vuex)
 
@@ -63,7 +66,7 @@ export default new Vuex.Store({
           },
         }]
       },
-      
+
     ],//初始化菜单
     authRoutes: [
       {
@@ -77,7 +80,7 @@ export default new Vuex.Store({
         },
         children: [{
           path: '',
-          name:'echarts',
+          name: 'echarts',
           component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue')
         }]
       },
@@ -202,6 +205,19 @@ export default new Vuex.Store({
     // 动态设置菜单
     setMenuList(state, payload = []) {
       state.menuList = payload
+    }
+  },
+  actions: {
+    // 修改权限或角色时,同步修改路由,菜单跟着联动
+    async resetRouterOnViewAsync({ commit }) {
+      const res = await userInfoReq()
+      if (res.data.code === 200) {
+        let userInfo = res.data.data
+        console.log('getUserInfoAsync', userInfo)
+        commit('setUserInfo', userInfo)
+        resetRouter()
+        permissionConfig()
+      }
     }
   },
   plugins: [createPersistedState({

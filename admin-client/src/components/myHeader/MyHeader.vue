@@ -24,11 +24,8 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import { resetRouter } from "../../router";
+import { resetRouter } from "@/router";
 export default {
-  data() {
-    return {};
-  },
   methods: {
     ...mapMutations([
       "removeUserInfo",
@@ -47,7 +44,6 @@ export default {
       this.removeToken();
       this.$router.replace("/login");
       resetRouter(); // 为了重新实例化vue-router对象 避免bug
-      // this.pushList();
       this.$message({
         message: "退出成功",
         type: "success"

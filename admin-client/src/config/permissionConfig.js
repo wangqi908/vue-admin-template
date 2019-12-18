@@ -7,7 +7,6 @@ const permissionConfig = () => {
   let rolesNameArr = []
   let { userInfo } = store.state
   let authRoutes = deepCopy(store.state.authRoutes)
-
   if (userInfo.roles) {
     userInfo.roles.forEach(ele => {
       ele.forEach(i => {

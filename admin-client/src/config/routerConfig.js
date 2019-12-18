@@ -9,8 +9,6 @@ const routerConfig = () => {
       document.title = '后台管理系统'
     }
     // 判断该路由是否需要登录权限
-    
-
     if (to.meta.requireAuth) {
       let token = store.state.token
       if (token) next()

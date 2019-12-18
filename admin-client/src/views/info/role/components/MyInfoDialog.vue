@@ -15,7 +15,7 @@
         </el-tree>
       </el-form-item>
     </el-form>
-    <div slot="footer" class="dialog-footer"  v-if="type!=='view'">
+    <div slot="footer" class="dialog-footer" v-if="type!=='view'">
       <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
       <el-button @click="myVisible=false">取消</el-button>
     </div>
@@ -25,6 +25,7 @@
 <script>
 import { permissionTreeReq, roleAddReq, roleViewReq, roleEditReq } from "@apis";
 import { elementReset } from "@/utils";
+import { mapActions } from "vuex";
 export default {
   props: ["visible", "_id", "type"],
   data() {
@@ -56,6 +57,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["resetRouterOnViewAsync"]),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -82,6 +84,7 @@ export default {
         this.$message.success("修改成功");
         this.$emit("before-close");
         this.myVisible = false;
+        this.resetRouterOnViewAsync();
       }
     },
 
