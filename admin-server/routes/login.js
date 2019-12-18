@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
       }
       // 3.2. 如果user 有值, 返回user
       const token = tokenTool.createToken({ _id, username })
-      res.send({ code: 200, data: { _id, username, token, roles } })
+      res.send({ code: 200, data: { _id, username, token, roles,roleIds } })
     }
   })
 });

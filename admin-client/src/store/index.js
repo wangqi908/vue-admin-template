@@ -213,7 +213,7 @@ export default new Vuex.Store({
       const res = await userInfoReq()
       if (res.data.code === 200) {
         let userInfo = res.data.data
-        console.log('getUserInfoAsync', userInfo)
+        // console.log('resetRouterOnViewAsync', userInfo)
         commit('setUserInfo', userInfo)
         resetRouter()
         permissionConfig()

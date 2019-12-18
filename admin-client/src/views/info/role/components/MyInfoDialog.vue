@@ -25,7 +25,7 @@
 <script>
 import { permissionTreeReq, roleAddReq, roleViewReq, roleEditReq } from "@apis";
 import { elementReset } from "@/utils";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   props: ["visible", "_id", "type"],
   data() {
@@ -74,17 +74,24 @@ export default {
     },
 
     async edit() {
-      let { ruleForm } = this;
+      let { ruleForm, _id, userInfo } = this;
       let sendData = {
         ...ruleForm,
         ids: this.$refs.tree.getCheckedKeys()
       };
       const res = await roleEditReq(sendData);
+
       if (res.data.code === 200) {
         this.$message.success("修改成功");
         this.$emit("before-close");
         this.myVisible = false;
-        this.resetRouterOnViewAsync();
+        /* 
+        判断当前用户是否拥有此角色,
+        有就调用resetRouterOnViewAsync同步路由
+        */
+        let roleIds = userInfo.roleIds;
+        let hasRoleId = roleIds.indexOf(_id) !== -1;
+        if (hasRoleId) this.resetRouterOnViewAsync();
       }
     },
 
@@ -158,6 +165,9 @@ export default {
     }
 
     this.initView();
+  },
+  computed: {
+    ...mapState(["userInfo"])
   }
 };
 </script>
