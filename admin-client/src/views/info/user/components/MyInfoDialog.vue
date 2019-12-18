@@ -40,6 +40,7 @@ import {
 import { elementReset } from "@/utils";
 import { MyUpload } from "@/components";
 import MyRoleTable from "./MyRoleTable.vue";
+import { mapActions, mapState } from "vuex";
 export default {
   components: { MyUpload, MyRoleTable },
   props: ["visible", "_id", "type"],
@@ -100,6 +101,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["resetRouterOnViewAsync"]),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -117,13 +119,21 @@ export default {
     },
 
     async edit() {
-      let { ruleForm } = this;
+      let { ruleForm, userInfo } = this;
+
       const res = await userEditReq(ruleForm);
       if (res.data.code === 200) {
         let resData = res.data.data;
         this.$message.success("修改成功");
         this.$emit("before-close");
         this.myVisible = false;
+
+        /* 
+        判断当前用户是否是操作_id
+        是就调用resetRouterOnViewAsync同步路由
+        */
+        let isCurrentUser = ruleForm._id === userInfo._id;
+        if (isCurrentUser) this.resetRouterOnViewAsync();
       }
     },
 
@@ -211,6 +221,9 @@ export default {
   },
   created() {
     this.initView();
+  },
+  computed: {
+    ...mapState(["userInfo"])
   }
 };
 </script>
