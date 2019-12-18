@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 import store from '../store'
 
 Vue.use(VueRouter)
-// if (store.state.userInfo._id) store.commit('popList')
 
 // 多次点击相同路径报错处理
 const originalPush = VueRouter.prototype.push

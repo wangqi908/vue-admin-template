@@ -167,6 +167,7 @@ export default new Vuex.Store({
       },
     ],//配置权限菜单
     menuList: [],//存放菜单数据
+    rolesNames: [],//权限名称
     pageSize: 5,//分页每页显示条目个数
     clientWidth: 1280, //触发伸缩侧边栏宽度
     showAsideWidth: 580, //隐藏显示侧边栏宽度
@@ -205,6 +206,10 @@ export default new Vuex.Store({
     // 动态设置菜单
     setMenuList(state, payload = []) {
       state.menuList = payload
+    },
+    // 动态设置菜单
+    setRolesNames(state, payload = []) {
+      state.rolesNames = payload
     }
   },
   actions: {
@@ -223,7 +228,7 @@ export default new Vuex.Store({
   plugins: [createPersistedState({
     reducer(val) {
       return {
-        // 只储存state中的user
+        // 储存state
         token: val.token,
         userInfo: val.userInfo
       }
