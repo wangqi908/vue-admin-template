@@ -1,58 +1,22 @@
 <template>
   <div class="my-header">
     <div class="header-left flex-center">
-      <i :class="['el-icon-right','flex-center','meun-icon',isCollapse?'isActive':'']" @click="toggleShowMeun"></i>
+      <my-menu-trigger />
       <h1 class="flex-center">
         <router-link to="/index">LOGO</router-link>
       </h1>
     </div>
     <ul class="btn-box">
-      <li class="item">
-        <el-dropdown>
-          <span class="el-dropdown-link ">
-            <i class="el-icon-user"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>{{userInfo.username}}</el-dropdown-item>
-            <el-dropdown-item divided @click.native="signOut">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </li>
+      <my-screenfull />
+      <my-sign-out />
     </ul>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
-import { resetRouter } from "@/router";
+import { MyScreenfull, MySignOut, MyMenuTrigger } from "./index.js";
 export default {
-  methods: {
-    ...mapMutations([
-      "removeUserInfo",
-      "removeToken",
-      "getCollapse",
-      "pushList"
-    ]),
-
-    toggleShowMeun() {
-      let isCollapse = !this.isCollapse;
-      this.getCollapse(isCollapse);
-    },
-    // 退出
-    signOut() {
-      this.removeUserInfo();
-      this.removeToken();
-      this.$router.replace("/login");
-      resetRouter(); // 为了重新实例化vue-router对象 避免bug
-      this.$message({
-        message: "退出成功",
-        type: "success"
-      });
-    }
-  },
-  computed: {
-    ...mapState(["isCollapse", "userInfo"])
-  }
+  components: { MyScreenfull, MySignOut, MyMenuTrigger }
 };
 </script>
 
