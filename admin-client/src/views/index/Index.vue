@@ -1,24 +1,34 @@
 <template>
   <div class='index'>
-    <el-button @click="testToken">用户信息</el-button>
+    <el-input v-model="value" />
+    <el-button @click="copy">复制</el-button>
     <my-role-element />
     <!-- <my-map />
     <my-echarts /> -->
+
   </div>
 </template>
 
 <script>
-import { userInfoReq } from "@apis";
 import { MyRoleElement } from "./components";
+import { copyToClipboard } from "@/utils";
 export default {
   components: { MyRoleElement },
   data() {
     return {
+      value: ""
     };
   },
   methods: {
-    async testToken() {
-      const res = await userInfoReq();
+    copy() {
+      copyToClipboard(this.value).then(res => {
+        if (res) {
+          this.$message({
+            message: "已成功复制到剪切板",
+            type: "success"
+          });
+        }
+      });
     }
   }
 };

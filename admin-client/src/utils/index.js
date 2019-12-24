@@ -186,3 +186,21 @@ export const deepCopy = source => {
   }
   return target
 }
+
+// 复制到粘贴板
+export const copyToClipboard = val => {
+  return new Promise((resolve, reject) => {
+    let input = document.createElement("input");
+    input.value = val;
+    document.body.appendChild(input);
+    input.select(); // 选择对象;
+    let res = document.execCommand("Copy"); // 执行浏览器复制命令
+    if (res) resolve(res)
+    else reject(res)
+    input.remove();
+  })
+
+
+
+
+}
