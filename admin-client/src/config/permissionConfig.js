@@ -4,7 +4,7 @@ import { deepCopy } from '@/utils';
 const permissionConfig = () => {
 
   let defaultRoutes = store.state.defaultRoutes //初始化的路由
-  let rolesNames = ['tools','editor','clipboard'] //权限名称
+  let rolesNames = ['tools','editor','clipboard','permission'] //权限名称
   let { userInfo } = store.state
   let authRoutes = deepCopy(store.state.authRoutes)
   if (userInfo.roles) {

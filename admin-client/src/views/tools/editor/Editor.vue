@@ -12,14 +12,6 @@ export default {
     return {
       value: ""
     };
-  },
-  methods: {},
-  created() {},
-  mounted() {},
-  computed: {},
-  watch: {}
+  }
 };
 </script>
-
-<style lang='scss'>
-</style>

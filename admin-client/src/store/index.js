@@ -128,6 +128,18 @@ export default new Vuex.Store({
         },
         children: [
           {
+            path: 'permission',
+            name: 'permission',
+            component: () => import(/* webpackChunkName: "permission" */ '@/views/tools/permission/Permission.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'permission',
+              title: '权限测试',
+              url: '/tools/permission',
+              isMenu: true,
+            }
+          },
+          {
             path: 'editor',
             name: 'editor',
             component: () => import(/* webpackChunkName: "editor" */ '@/views/tools/editor/Editor.vue'),
