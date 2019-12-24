@@ -115,6 +115,45 @@ export default new Vuex.Store({
         }]
       },
       {
+        path: '/tools',
+        component: Layout,
+        name: 'tools',
+        meta: {
+          requireAuth: true,
+          name: 'tools',
+          title: '工具',
+          url: '/tools',
+          isMenu: true,
+          hasSubMenu: true,
+        },
+        children: [
+          {
+            path: 'editor',
+            name: 'editor',
+            component: () => import(/* webpackChunkName: "editor" */ '@/views/tools/editor/Editor.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'editor',
+              title: '富文本编辑器',
+              url: '/tools/editor',
+              isMenu: true,
+            }
+          },
+          {
+            path: 'clipboard',
+            name: 'clipboard',
+            component: () => import(/* webpackChunkName: "clipboard" */ '@/views/tools/clipboard/Clipboard.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'clipboard',
+              title: '粘贴板',
+              url: '/tools/clipboard',
+              isMenu: true,
+            }
+          },
+        ]
+      },
+      {
         path: '/info',
         component: Layout,
         name: 'info',

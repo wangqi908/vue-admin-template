@@ -3,7 +3,7 @@
     <div class="header-left flex-center">
       <my-menu-trigger />
       <h1 class="flex-center">
-        <router-link to="/index">LOGO</router-link>
+        <router-link to="/">LOGO</router-link>
       </h1>
     </div>
     <ul class="btn-box">

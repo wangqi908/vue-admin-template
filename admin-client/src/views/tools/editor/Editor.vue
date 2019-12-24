@@ -1,14 +1,17 @@
 <template>
   <div class=''>
-    编辑器
+    <my-editor v-model="value" />
   </div>
 </template>
 
 <script>
+import { MyEditor } from "@/components";
 export default {
-  components: {},
+  components: { MyEditor },
   data() {
-    return {};
+    return {
+      value: ""
+    };
   },
   methods: {},
   created() {},

@@ -7,7 +7,6 @@
     <!-- <my-role-element /> -->
     <!-- <my-map />
     <my-echarts /> -->
-    <MyEditor v-model="value" />
   </div>
 </template>
 
@@ -17,22 +16,5 @@ import { MyEditor } from "@/components";
 import { copyToClipboard } from "@/utils";
 export default {
   components: { MyRoleElement, MyEditor },
-  data() {
-    return {
-      value: "测试"
-    };
-  },
-  methods: {
-    // copy() {
-    //   copyToClipboard(this.value).then(res => {
-    //     if (res) {
-    //       this.$message({
-    //         message: "已成功复制到剪切板",
-    //         type: "success"
-    //       });
-    //     }
-    //   });
-    // }
-  }
 };
 </script>
