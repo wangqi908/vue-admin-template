@@ -1,9 +1,9 @@
 <template>
 
     <div class='app-content'>
-    <my-header />
+    <!-- <my-header /> -->
     <div class="app-body">
-      <my-nav-menu />
+      <!-- <my-nav-menu /> -->
       <div class="body-content">
         <div class="body-content-router">
           <transition name="fade-transform" mode="out-in">

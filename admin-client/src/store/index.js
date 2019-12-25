@@ -175,6 +175,18 @@ export default new Vuex.Store({
               isMenu: true,
             }
           },
+          {
+            path: 'uploadAvatar',
+            name: 'uploadAvatar',
+            component: () => import(/* webpackChunkName: "uploadAvatar" */ '@/views/tools/uploadAvatar/UploadAvatar.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'uploadAvatar',
+              title: '头像上传',
+              url: '/tools/uploadAvatar',
+              isMenu: true,
+            }
+          },
         ]
       },
       {
