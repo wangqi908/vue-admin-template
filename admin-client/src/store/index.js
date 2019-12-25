@@ -163,6 +163,18 @@ export default new Vuex.Store({
               isMenu: true,
             }
           },
+          {
+            path: 'sticky',
+            name: 'sticky',
+            component: () => import(/* webpackChunkName: "sticky" */ '@/views/tools/sticky/Sticky.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'sticky',
+              title: '悬浮固定',
+              url: '/tools/sticky',
+              isMenu: true,
+            }
+          },
         ]
       },
       {
