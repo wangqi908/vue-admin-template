@@ -23,7 +23,6 @@ import { throttle } from "@/utils";
 import Menu from "./Menu.vue";
 export default {
   components: { Menu },
-
   data() {
     return {
       direction: "ltr",
@@ -93,7 +92,6 @@ export default {
     background-color: #fff;
   }
 }
-
 .el-drawer__container .drawer-box {
   height: 100%;
   overflow: auto;

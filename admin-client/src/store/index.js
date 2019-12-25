@@ -54,7 +54,8 @@ export default new Vuex.Store({
           name: 'index',
           isMenu: true, //是否是菜单
           title: '首页',
-          url: '/'
+          url: '/',
+          icon: "el-icon-files"
         },
         children: [{
           path: '',
@@ -77,6 +78,7 @@ export default new Vuex.Store({
           title: 'echarts',
           url: '/echarts',
           isMenu: true,
+          icon: "el-icon-files"
         },
         children: [{
           path: '',
@@ -92,6 +94,7 @@ export default new Vuex.Store({
           title: 'echartsBar',
           url: '/echartsBar',
           isMenu: true,
+          icon: "el-icon-files"
         },
         children: [{
           path: '',
@@ -107,6 +110,7 @@ export default new Vuex.Store({
           title: '地图',
           url: '/map',
           isMenu: true,
+          icon: "el-icon-files"
         },
         children: [{
           path: '',
@@ -125,6 +129,7 @@ export default new Vuex.Store({
           url: '/tools',
           isMenu: true,
           hasSubMenu: true,
+          icon: "el-icon-files"
         },
         children: [
           {
@@ -137,6 +142,7 @@ export default new Vuex.Store({
               title: '权限测试',
               url: '/tools/permission',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -149,6 +155,7 @@ export default new Vuex.Store({
               title: '富文本编辑器',
               url: '/tools/editor',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -161,6 +168,7 @@ export default new Vuex.Store({
               title: '粘贴板',
               url: '/tools/clipboard',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -173,6 +181,7 @@ export default new Vuex.Store({
               title: '悬浮固定',
               url: '/tools/sticky',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -185,6 +194,7 @@ export default new Vuex.Store({
               title: '头像上传',
               url: '/tools/uploadAvatar',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
         ]
@@ -200,6 +210,7 @@ export default new Vuex.Store({
           url: '/info',
           isMenu: true,
           hasSubMenu: true,
+          icon: "el-icon-files"
         },
         children: [
           {
@@ -212,6 +223,7 @@ export default new Vuex.Store({
               title: '用户管理',
               url: '/info/user',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -224,6 +236,7 @@ export default new Vuex.Store({
               title: '角色管理',
               url: '/info/role',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
           {
@@ -236,8 +249,69 @@ export default new Vuex.Store({
               title: '数据上传',
               url: '/info/uploadData',
               isMenu: true,
+              icon: "el-icon-files"
             }
           },
+        ]
+      },
+      {
+        path: '/nested',
+        component: Layout,
+        name: 'nested',
+        meta: {
+          requireAuth: true,
+          name: 'nested',
+          title: '菜单嵌套',
+          url: '/nested',
+          isMenu: true,
+          hasSubMenu: true,
+          icon: "el-icon-files"
+        },
+        children: [
+          {
+            path: 'menu1',
+            name: 'menu1',
+            component: () => import(/* webpackChunkName: "menu1" */ '@/views/nested/Menu1.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'menu1',
+              title: '一级菜单',
+              url: '/nested/menu1',
+              isMenu: true,
+              hasSubMenu: true,
+              icon: "el-icon-files"
+            },
+            children: [
+              {
+                path: 'menu1-1',
+                name: 'menu1-1',
+                component: () => import(/* webpackChunkName: "menu1-1" */ '@/views/nested/Menu1-1.vue'),
+                meta: {
+                  requireAuth: true,
+                  name: 'menu1-1',
+                  title: '二级菜单1-1',
+                  url: '/nested/menu1/menu1-1',
+                  isMenu: true,
+                  icon: "el-icon-files"
+                }
+              },
+              {
+                path: 'menu1-2',
+                name: 'menu1-2',
+                component: () => import(/* webpackChunkName: "menu1-2" */ '@/views/nested/Menu1-2.vue'),
+                meta: {
+                  requireAuth: true,
+                  name: 'menu1-2',
+                  title: '二级菜单1-2',
+                  url: '/nested/menu1/menu1-2',
+                  isMenu: true,
+                  icon: "el-icon-files"
+                }
+              },
+
+            ]
+          },
+
         ]
       },
     ],//配置权限菜单

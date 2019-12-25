@@ -1,6 +1,7 @@
 <template>
   <div class=''>
-    sss
+    menu1
+    <router-view></router-view>
   </div>
 </template>
 
