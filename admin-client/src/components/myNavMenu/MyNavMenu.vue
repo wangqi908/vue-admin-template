@@ -9,7 +9,7 @@
     <div v-else>
       <el-drawer :visible.sync="isShowDrawer" :show-close="false" custom-class="drawer-box" :direction="direction"
         size="200px">
-        <Menu />
+        <Menu v-model="isShowDrawer" />
       </el-drawer>
     </div>
 

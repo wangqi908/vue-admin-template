@@ -23,10 +23,17 @@ export default {
   components: {
     subMenu
   },
+  props: {
+    value: {
+      type: [String, Boolean],
+      default: ""
+    }
+  },
   data() {
     return {
       list: [], //当行菜单数据源
-      activePath: ""
+      activePath: "",
+      myValue: this.value
     };
   },
   methods: {
@@ -36,6 +43,7 @@ export default {
       this.getCollapse(isCollapse);
     },
     handleSelect(path, keyPath) {
+      if (this.myValue) this.myValue = false;
       this.$router.push(path);
       this.activePath = path;
     }
@@ -49,6 +57,12 @@ export default {
     $route(to, from) {
       let path = this.$route.meta.modulePath;
       this.activePath = path ? path : to.path; //让侧边菜单高亮
+    },
+    value(newValue) {
+      this.myValue = newValue;
+    },
+    myValue(newValue) {
+      this.$emit("input", newValue);
     }
   },
   computed: {
