@@ -9,7 +9,7 @@
             <span slot="title">{{item.name}}</span>
           </el-menu-item>
         </router-link>
-        <subMenu v-else :data="item" :key="item.url"></subMenu>
+        <SubMenu v-else :data="item" :key="item.url" />
       </template>
     </el-menu>
   </div>
@@ -17,11 +17,11 @@
 
 <script>
 import { mapState, mapMutations } from "vuex";
-import subMenu from "./SubMenu.vue";
+import SubMenu from "./SubMenu.vue";
 export default {
   name: "menuList",
   components: {
-    subMenu
+    SubMenu
   },
   props: {
     value: {

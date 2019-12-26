@@ -296,6 +296,17 @@ export default new Vuex.Store({
                 }
               },
               {
+                path: 'menu1-1/info',
+                name: 'menu1-1-info',
+                component: () => import(/* webpackChunkName: "menu1-1-Info" */ '@/views/nested/Info.vue'),
+                meta: {
+                  requireAuth: true,
+                  name: 'menu1-1-info',
+                  title: '二级菜单1-1-详情',
+                  url: '/nested/menu1/menu1-1/info',
+                }
+              },
+              {
                 path: 'menu1-2',
                 name: 'menu1-2',
                 component: () => import(/* webpackChunkName: "menu1-2" */ '@/views/nested/Menu1-2.vue'),

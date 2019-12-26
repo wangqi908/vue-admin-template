@@ -1,6 +1,8 @@
 <template>
   <div class=''>
-    <router-view></router-view>
+    <h4>
+      menu1-1-详情
+    </h4>
   </div>
 </template>
 

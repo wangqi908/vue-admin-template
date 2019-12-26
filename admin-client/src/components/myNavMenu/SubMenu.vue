@@ -6,7 +6,7 @@
     </template>
     <template v-for="item in props.data.children">
       <router-link :to="item.url" :key="item.url" v-if="item.children.length===0">
-        <el-menu-item class="subitem" :index="item.url">
+        <el-menu-item class="subitem" :index="item.url" v-if="item.isMenu">
           <i :class="item.icon"></i>
           <span slot="title">{{item.name}}</span>
         </el-menu-item>
