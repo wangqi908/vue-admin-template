@@ -3,7 +3,7 @@
     <div :class="['item','flex-center',acitveName===item.name?'active':'']" v-for="(item, index) in list" :key="index"
       @click="go(item)">
       <span>{{item.routerName}}</span>
-      <div class="del flex-center" v-if="list.length>1" @click.stop="del(item,index)">x</div>
+      <div class="del add-transition flex-center" v-if="list.length>1" @click.stop="del(item,index)">x</div>
     </div>
   </div>
 </template>
@@ -14,11 +14,7 @@ export default {
   data() {
     return {
       acitveName: "",
-      list: [
-        { name: "echartsBar", routerName: "echartsBar" },
-        { name: "echarts", routerName: "echarts" },
-        { name: "index", routerName: "首页" }
-      ]
+      list: []
     };
   },
   methods: {
@@ -87,7 +83,8 @@ export default {
     margin-left: 6px;
     border-radius: 50%;
     &:hover {
-      background-color: rgb(163, 163, 163);
+      background-color: rgb(214, 214, 214);
+      color: #fff;
     }
   }
 }
