@@ -1,6 +1,6 @@
 <template>
   <div class='router-history'>
-    <div :class="['item','flex-center',acitveName===item.name?'active':'']" v-for="(item, index) in list" :key="index"
+    <div :class="['item','flex-center','add-transition',acitveName===item.name?'active':'']" v-for="(item, index) in list" :key="index"
       @click="go(item)">
       <span>{{item.routerName}}</span>
       <div class="del add-transition flex-center" v-if="list.length>1" @click.stop="del(item,index)">x</div>
