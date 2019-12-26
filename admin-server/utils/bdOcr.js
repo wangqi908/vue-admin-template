@@ -115,8 +115,9 @@ const ocrReq = (image = "") => {
 
     let req = https.request(options, res => {
       res.setEncoding('utf8');
-      res.on('data', function (chunk) {
-        chunk = JSON.parse(chunk)
+      res.on('data', chunk => {
+        // console.log(chunk)
+        // let res = JSON.parse(chunk)
         resolve(chunk)
       });
     });
