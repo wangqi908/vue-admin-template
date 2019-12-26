@@ -13,7 +13,7 @@
 /*1. 连接数据库*/
 // 1.1. 引入mongoose
 const mongoose = require('mongoose')
-
+mongoose.set('useFindAndModify', false)
 // 1.2. 连接指定数据库(URL 只有数据库是变化的)
 mongoose.connect('mongodb://localhost:27017/my_admin', { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
   if (err) {
