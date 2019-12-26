@@ -48,5 +48,8 @@ export default {
     margin: 10px;
     flex: 1;
   }
+  .router-history{
+    margin-bottom: 10px;
+  }
 }
 </style>

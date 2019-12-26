@@ -69,6 +69,7 @@ export default {
     margin: 2px 6px;
     border-radius: 2px;
     border: 1px solid #ccc;
+    user-select: none;
     &:hover {
       cursor: pointer;
     }
