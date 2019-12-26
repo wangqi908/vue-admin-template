@@ -8,11 +8,15 @@ const routerConfig = () => {
     next()
     let historyList = store.state.historyList
     let title = to.meta.title || to.meta.routerName
-    historyList.push({
-      name: to.name,
-      routerName: title,
-    })
-    store.commit('setHistoryList', historyList)
+    let name = to.name
+    let withoutRouters = ['login', 'register']
+    if (withoutRouters.indexOf(name) === -1) {
+      historyList.push({
+        name,
+        routerName: title,
+      })
+      store.commit('setHistoryList', historyList)
+    }
 
     if (title) {
       document.title = title
