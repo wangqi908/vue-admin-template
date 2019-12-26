@@ -4,6 +4,7 @@ import createPersistedState from 'vuex-persistedstate' //vuex数据持久化
 import { userInfoReq } from "@apis";
 import { resetRouter } from "@/router";
 import { permissionConfig } from "@/config";
+import { duplicateRemoval } from '@/utils';
 const Layout = () => import(/* webpackChunkName: "Layout" */ '@/components/layout/Index.vue')
 Vue.use(Vuex)
 
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   state: {
     token: "",
     userInfo: {},//用户信息
+    historyList: [],//路由历史
     isCollapse: false, //是否展开侧边栏
     isShowAside: false, //是否隐藏侧边栏
     defaultRoutes: [
@@ -63,7 +65,8 @@ export default new Vuex.Store({
           component: () => import(/* webpackChunkName: "index" */ '@/views/index/Index.vue'),
           meta: {
             requireAuth: true,
-            url: '/'
+            url: '/',
+            routerName: '首页'
           },
         }]
       },
@@ -76,13 +79,16 @@ export default new Vuex.Store({
         meta: {
           name: 'echarts',
           title: 'echarts',
-          url: '/echarts',
+          url: '/echarts/',
           isMenu: true,
           icon: "el-icon-files"
         },
         children: [{
           path: '',
           name: 'echarts',
+          meta:{
+            routerName: 'echarts'
+          },
           component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue')
         }]
       },
@@ -91,14 +97,17 @@ export default new Vuex.Store({
         component: Layout,
         meta: {
           name: 'echartsBar',
+          url: '/echartsBar/',
           title: 'echartsBar',
-          url: '/echartsBar',
           isMenu: true,
           icon: "el-icon-files"
         },
         children: [{
           path: '',
           name: 'echartsBar',
+          meta:{
+            routerName: 'echartsBar'
+          },
           component: () => import(/* webpackChunkName: "echartsBar" */ '@/views/echartsBar.vue'),
         }]
       },
@@ -108,13 +117,16 @@ export default new Vuex.Store({
         meta: {
           name: 'map',
           title: '地图',
-          url: '/map',
+          url: '/map/',
           isMenu: true,
           icon: "el-icon-files"
         },
         children: [{
           path: '',
           name: 'map',
+          meta:{
+            routerName: '地图'
+          },
           component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
         }]
       },
@@ -374,6 +386,10 @@ export default new Vuex.Store({
     // 动态设置菜单
     setRolesNames(state, payload = []) {
       state.rolesNames = payload
+    },
+    // 设置路由历史
+    setHistoryList(state, payload = []) {
+      state.historyList = duplicateRemoval(payload, 'name')
     }
   },
   actions: {

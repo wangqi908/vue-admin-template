@@ -14,7 +14,8 @@ export default {
 
   methods: {
     check(){
-      this.$router.push({ name: 'menu1-1-info', params: { id: '123' }})
+      // this.$router.push({ name: 'menu1-1-info', params: { id: '123' }})
+      this.$router.push({ name: 'menu1-1-info'})
     },
   },
 };

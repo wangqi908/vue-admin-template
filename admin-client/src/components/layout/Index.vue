@@ -6,6 +6,7 @@
       <my-nav-menu />
       <div class="body-content">
         <div class="body-content-router">
+          <my-router-history />
           <transition name="fade-transform" mode="out-in">
             <app-main />
           </transition>
@@ -18,9 +19,9 @@
 
 <script>
 import AppMain from "./AppMain.vue";
-import { MyNavMenu, MyHeader } from "@c";
+import { MyNavMenu, MyHeader, MyRouterHistory } from "@c";
 export default {
-  components: { AppMain, MyNavMenu, MyHeader }
+  components: { AppMain, MyNavMenu, MyHeader, MyRouterHistory }
 };
 </script>
 

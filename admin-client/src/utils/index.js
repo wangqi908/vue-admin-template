@@ -23,6 +23,7 @@ export const formatTime = (date, type) => {
 //数组对象根据id去重
 export const duplicateRemoval = (property, id = "id") => {
   let hash = {};
+  if (property.length === 0) return [];
   return (property = property.reduce((preVal, curVal) => {
     hash[curVal[id]] ?
       "" :
