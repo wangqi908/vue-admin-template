@@ -197,6 +197,19 @@ export default new Vuex.Store({
             }
           },
           {
+            path: 'languages',
+            name: 'languages',
+            component: () => import(/* webpackChunkName: "languages" */ '@/views/tools/languages/Languages.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'languages',
+              title: '国际化',
+              url: '/tools/languages',
+              isMenu: true,
+              icon: "el-icon-files"
+            }
+          },
+          {
             path: 'ocr',
             name: 'ocr',
             component: () => import(/* webpackChunkName: "ocr" */ '@/views/tools/ocr/Ocr.vue'),
