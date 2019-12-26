@@ -197,6 +197,19 @@ export default new Vuex.Store({
             }
           },
           {
+            path: 'ocr',
+            name: 'ocr',
+            component: () => import(/* webpackChunkName: "ocr" */ '@/views/tools/ocr/Ocr.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'ocr',
+              title: '文字识别',
+              url: '/tools/ocr',
+              isMenu: true,
+              icon: "el-icon-files"
+            }
+          },
+          {
             path: 'uploadAvatar',
             name: 'uploadAvatar',
             component: () => import(/* webpackChunkName: "uploadAvatar" */ '@/views/tools/uploadAvatar/UploadAvatar.vue'),
