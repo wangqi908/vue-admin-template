@@ -1,6 +1,6 @@
 <template>
-  <div class=''>
-    <i :class="['el-icon-right','flex-center','meun-icon',isCollapse?'isActive':'']" @click="toggleShowMeun"></i>
+  <div class='menu-trigger'>
+    <i :class="['el-icon-menu','flex-center','meun-icon',isCollapse?'isActive':'']" @click="toggleShowMeun"></i>
   </div>
 </template>
 
@@ -19,3 +19,20 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.menu-trigger {
+  .el-icon-menu {
+    font-size: 40px;
+    transform: rotate(0deg);
+    transition: all 0.28s;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .isActive {
+    font-size: 18px;
+    transform: rotate(180deg);
+  }
+}
+</style>

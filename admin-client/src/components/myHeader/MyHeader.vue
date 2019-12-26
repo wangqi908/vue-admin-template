@@ -2,9 +2,9 @@
   <div class="my-header">
     <div class="header-left flex-center">
       <my-menu-trigger />
-      <h1 class="flex-center">
-        <router-link to="/">LOGO</router-link>
-      </h1>
+      <div class="breadcrumb">
+        <my-breadcrumb />
+      </div>
     </div>
     <ul class="btn-box">
       <my-screenfull />
@@ -14,9 +14,10 @@
 </template>
 
 <script>
+import { MyBreadcrumb } from "@/components";
 import { MyScreenfull, MySignOut, MyMenuTrigger } from "./index.js";
 export default {
-  components: { MyScreenfull, MySignOut, MyMenuTrigger }
+  components: { MyScreenfull, MySignOut, MyMenuTrigger, MyBreadcrumb }
 };
 </script>
 
@@ -29,27 +30,6 @@ export default {
   padding: 10px;
   margin: 10px 10px 0 10px;
 
-  .el-icon-right {
-    font-size: 40px;
-    transform: rotate(0deg);
-    transition: all 0.28s;
-    &:hover {
-      cursor: pointer;
-    }
-  }
-  .isActive {
-    font-size: 18px;
-    transform: rotate(180deg);
-  }
-  .el-submenu__icon-arrow {
-    display: none;
-  }
-
-  h1 {
-    a {
-      color: #ccc;
-    }
-  }
   .btn-box {
     display: flex;
     align-items: center;
@@ -64,12 +44,15 @@ export default {
       display: block;
       text-align: center;
     }
+    .el-icon-user {
+      font-size: 20px;
+      color: #ccc;
+      vertical-align: middle;
+    }
   }
-  .el-icon-bell,
-  .el-icon-user {
-    font-size: 20px;
-    color: #ccc;
-    vertical-align: middle;
+
+  .breadcrumb {
+    margin-left: 10px;
   }
 }
 </style>

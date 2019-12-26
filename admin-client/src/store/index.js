@@ -296,7 +296,7 @@ export default new Vuex.Store({
                 }
               },
               {
-                path: 'menu1-1/info',
+                path: 'menu1-1/info/:id?',
                 name: 'menu1-1-info',
                 component: () => import(/* webpackChunkName: "menu1-1-Info" */ '@/views/nested/Info.vue'),
                 meta: {
@@ -304,6 +304,12 @@ export default new Vuex.Store({
                   name: 'menu1-1-info',
                   title: '二级菜单1-1-详情',
                   url: '/nested/menu1/menu1-1/info',
+                  breadcrumb: [
+                    { title: '菜单嵌套', hasSubMenu: true, go: -3 },
+                    { title: '一级菜单', hasSubMenu: true, go: -2 },
+                    { title: '二级菜单1-1', hasSubMenu: false, go: -1 },
+                    { title: '二级菜单1-1-详情', hasSubMenu: false, go: 0 }
+                  ] //面包屑
                 }
               },
               {

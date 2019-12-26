@@ -1,0 +1,65 @@
+<template>
+  <div class="breadcrumb">
+    <transition-group name="breadcrumb">
+      <div class="item flex-center" v-for="(item,index) in breadcrumbList" :key="item.title" @click="go(item)">
+        <p class="title">{{item.title}}</p>
+        <p class="cut" v-if="index!==breadcrumbList.length-1">/</p>
+      </div>
+    </transition-group>
+  </div>
+</template>
+
+<script>
+export default {
+  components: {},
+  data() {
+    return {
+      breadcrumbList: []
+    };
+  },
+  methods: {
+    go(item) {
+      if (item.hasSubMenu || item.go === 0) return;
+      this.$router.go(item.go);
+    },
+    initBreadcrumbList() {
+      let matched = this.$router.history.current.matched;
+      let breadcrumbList = this.$router.history.current.meta.breadcrumb;
+      // 整理面包屑
+      matched = matched.filter(ele => ele.meta.title);
+      let routerList = matched.map((ele, index) => {
+        let len = matched.length;
+        return {
+          title: ele.meta.title,
+          hasSubMenu: ele.meta.hasSubMenu ? true : false,
+          go: index + 1 - len
+        };
+      });
+      this.breadcrumbList = breadcrumbList || routerList;
+    }
+  },
+  watch: {
+    $route(to, from) {
+      this.initBreadcrumbList();
+    }
+  },
+  created() {
+    this.initBreadcrumbList();
+  }
+};
+</script>
+
+<style lang='scss'>
+.breadcrumb {
+  span {
+    display: flex;
+    .item {
+      color: rgb(99, 99, 99);
+      font-size: 14px;
+    }
+    .cut {
+      margin: 0 4px;
+    }
+  }
+}
+</style>
