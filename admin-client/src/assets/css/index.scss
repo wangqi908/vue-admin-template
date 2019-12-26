@@ -187,3 +187,8 @@
  .add-transition {
    transition: all .2s;
  }
+
+ // nprogress的进度条圆饼隐藏
+ #nprogress .spinner-icon {
+   display: none !important;
+ }

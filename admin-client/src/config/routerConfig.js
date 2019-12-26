@@ -1,7 +1,11 @@
-import router from '../router'
+import router from '../router';
 import store from '../store';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 const routerConfig = () => {
   router.beforeEach((to, from, next) => {
+    NProgress.start()
+    next()
     let historyList = store.state.historyList
     let title = to.meta.title || to.meta.routerName
     historyList.push({
@@ -23,6 +27,11 @@ const routerConfig = () => {
     } else {
       next();
     }
+  })
+
+  router.afterEach(() => {
+    NProgress.done()
+    NProgress.remove();
   })
 }
 export default routerConfig
