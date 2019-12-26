@@ -2,7 +2,7 @@
   <div class="my-header">
     <div class="header-left flex-center">
       <my-menu-trigger />
-      <div class="breadcrumb">
+      <div class="breadcrumb-box">
         <my-breadcrumb />
       </div>
     </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { MyBreadcrumb } from "@/components";
+import MyBreadcrumb from "@/components/MyBreadcrumb.vue";
 import { MyScreenfull, MySignOut, MyMenuTrigger } from "./index.js";
 export default {
   components: { MyScreenfull, MySignOut, MyMenuTrigger, MyBreadcrumb }
@@ -29,7 +29,6 @@ export default {
   border-radius: 4px;
   padding: 10px;
   margin: 10px 10px 0 10px;
-
   .btn-box {
     display: flex;
     align-items: center;
@@ -51,7 +50,7 @@ export default {
     }
   }
 
-  .breadcrumb {
+  .breadcrumb-box {
     margin-left: 10px;
   }
 }

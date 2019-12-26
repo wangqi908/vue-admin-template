@@ -1,5 +1,5 @@
 <template>
-  <div class="breadcrumb">
+  <div class="breadcrumb" ref="breadcrumb">
     <transition-group name="breadcrumb">
       <div class="item flex-center" v-for="(item,index) in breadcrumbList" :key="item.title" @click="go(item)">
         <p class="title">{{item.title}}</p>
@@ -11,7 +11,6 @@
 
 <script>
 export default {
-  components: {},
   data() {
     return {
       breadcrumbList: []

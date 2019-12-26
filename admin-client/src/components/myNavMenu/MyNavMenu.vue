@@ -82,7 +82,7 @@ export default {
     flex: 1;
   }
   .aside-active {
-    width: 180px;
+    width: 220px;
     transition: width 0.28s;
     background-color: #fff;
   }

@@ -278,8 +278,7 @@ export default new Vuex.Store({
               title: '一级菜单',
               url: '/nested/menu1',
               isMenu: true,
-              hasSubMenu: true,
-              icon: "el-icon-files"
+              hasSubMenu: true
             },
             children: [
               {
@@ -291,8 +290,7 @@ export default new Vuex.Store({
                   name: 'menu1-1',
                   title: '二级菜单1-1',
                   url: '/nested/menu1/menu1-1',
-                  isMenu: true,
-                  icon: "el-icon-files"
+                  isMenu: true
                 }
               },
               {
@@ -304,6 +302,7 @@ export default new Vuex.Store({
                   name: 'menu1-1-info',
                   title: '二级菜单1-1-详情',
                   url: '/nested/menu1/menu1-1/info',
+                  activeMenuPath: '/nested/menu1/menu1-1',
                   breadcrumb: [
                     { title: '菜单嵌套', hasSubMenu: true, go: -3 },
                     { title: '一级菜单', hasSubMenu: true, go: -2 },
@@ -321,8 +320,7 @@ export default new Vuex.Store({
                   name: 'menu1-2',
                   title: '二级菜单1-2',
                   url: '/nested/menu1/menu1-2',
-                  isMenu: true,
-                  icon: "el-icon-files"
+                  isMenu: true
                 }
               },
 

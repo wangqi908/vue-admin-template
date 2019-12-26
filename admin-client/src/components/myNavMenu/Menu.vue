@@ -50,8 +50,13 @@ export default {
   },
   created() {
     this.list = this.$store.state.menuList;
-    let activePath = this.$route.meta.modulePath || this.$route.path;
+    let matched = this.$route.matched;
+    let activePath =
+      matched[matched.length - 1].meta.activeMenuPath ||
+      this.$route.meta.modulePath ||
+      this.$route.path;
     this.activePath = activePath;
+
   },
   watch: {
     $route(to, from) {
