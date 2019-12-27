@@ -73,10 +73,10 @@ export default {
   data() {
     return {
       init: {
-        language_url: "/tinymce/langs/zh_CN.js",
+        language_url: "./tinymce/langs/zh_CN.js",
         language: "zh_CN",
-        skin_url: "/tinymce/skins/ui/oxide",
-        content_css: "/tinymce/skins/content/default/content.css",
+        skin_url: "./tinymce/skins/ui/oxide",
+        content_css: "./tinymce/skins/content/default/content.css",
         height: 800,
         plugins: this.plugins, // 父组件传入
         toolbar: this.toolbar, // 工具栏
