@@ -200,8 +200,4 @@ export const copyToClipboard = val => {
     else reject(res)
     input.remove();
   })
-
-
-
-
 }
