@@ -86,7 +86,7 @@ export default new Vuex.Store({
         children: [{
           path: '',
           name: 'echarts',
-          meta:{
+          meta: {
             routerName: 'echarts'
           },
           component: () => import(/* webpackChunkName: "echarts" */ '@/views/echarts.vue')
@@ -105,7 +105,7 @@ export default new Vuex.Store({
         children: [{
           path: '',
           name: 'echartsBar',
-          meta:{
+          meta: {
             routerName: 'echartsBar'
           },
           component: () => import(/* webpackChunkName: "echartsBar" */ '@/views/echartsBar.vue'),
@@ -124,7 +124,7 @@ export default new Vuex.Store({
         children: [{
           path: '',
           name: 'map',
-          meta:{
+          meta: {
             routerName: '地图'
           },
           component: () => import(/* webpackChunkName: "map" */ '@/views/map.vue'),
@@ -231,6 +231,19 @@ export default new Vuex.Store({
               name: 'uploadAvatar',
               title: '头像上传',
               url: '/tools/uploadAvatar',
+              isMenu: true,
+              icon: "el-icon-files"
+            }
+          },
+          {
+            path: 'canvas2pic',
+            name: 'canvas2pic',
+            component: () => import(/* webpackChunkName: "canvas2pic" */ '@/views/tools/canvas2pic/Canvas2pic.vue'),
+            meta: {
+              requireAuth: true,
+              name: 'canvas2pic',
+              title: '生成图片',
+              url: '/tools/canvas2pic',
               isMenu: true,
               icon: "el-icon-files"
             }
