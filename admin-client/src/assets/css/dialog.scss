@@ -1,0 +1,122 @@
+.dialog-pic {
+  height: 500px;
+  width: auto;
+}
+.my-dialog {
+  .el-dialog__body {
+    padding: 0;
+  }
+  .picBox {
+    width: 100px;
+    height: auto;
+  }
+  .img-box {
+    width: 100px;
+    height: auto;
+  }
+
+  .table-box {
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid rgb(241, 241, 241);
+    .table-title {
+      margin-bottom: 10px;
+    }
+  }
+  .footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  // 图片上传
+  .upload {
+    // padding-bottom: 40px;
+    .el-upload {
+      border: 1px dashed #ccc;
+      border-radius: 50%;
+      color: rgb(160, 160, 160);
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        cursor: pointer;
+      }
+      i {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .picBox {
+      // padding-left: 140px;
+      position: relative;
+      width: 80px;
+      height: 80px;
+      .imgPic {
+        display: block;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: dashed 1px #cfd3db;
+        &:hover {
+          border: dashed 1px rgb(129, 178, 219);
+          cursor: pointer;
+        }
+      }
+      .delBtn {
+        font-size: 10px;
+        background-color: #ccc;
+        color: #fff;
+        text-align: center;
+        line-height: 16px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        &:hover {
+          background-color: rgb(241, 0, 0);
+          cursor: pointer;
+        }
+      }
+    }
+    .imgCheck {
+      width: 100px;
+      border-radius: 2px;
+      border: dashed 1px #cfd3db;
+      &:hover {
+        border: dashed 1px rgb(129, 178, 219);
+        cursor: pointer;
+      }
+    }
+  }
+  .item-list-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    span {
+      margin: 0 6px 4px 0;
+    }
+  }
+  .price-box {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 10px;
+    width: 100%;
+    align-items: center;
+
+    .price {
+      margin-left: 10px;
+      font-size: 18px;
+      color: rgb(150, 150, 150);
+    }
+  }
+}

@@ -1,14 +1,14 @@
 <template>
-  <div class='login'>
+  <div class="login">
     <my-form />
   </div>
 </template>
 
 <script>
-import { MyForm } from "./components";
+import { MyForm } from './components'
 export default {
   components: { MyForm }
-};
+}
 </script>
 
 <style lang='scss'>

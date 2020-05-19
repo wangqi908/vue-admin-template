@@ -1,65 +1,68 @@
 'use strict'
+const isProduction = process.env.NODE_ENV === 'production'
+let BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const path = require('path')
-
 function resolve(dir) {
   return path.join(__dirname, dir)
-}
-const cdn = {
-  css: ['https://cdn.bootcss.com/element-ui/2.12.0/theme-chalk/index.css'],
-  js: [
-    'https://cdn.bootcss.com/vue/2.6.10/vue.js',
-    'https://cdn.bootcss.com/axios/0.19.0/axios.js',
-    'https://cdn.bootcss.com/vuex/3.1.1/vuex.js',
-    'https://cdn.bootcss.com/vue-router/3.1.3/vue-router.js',
-    'https://cdn.bootcss.com/element-ui/2.12.0/index.js'
-  ]
 }
 
 module.exports = {
   publicPath: './',
-  outputDir: 'app',
+  outputDir: 'admin',
   assetsDir: 'static',
   productionSourceMap: false,
   devServer: {
-    port: 8888,  // 端口
+    port: 8889, // 端口
     open: true,
     overlay: {
       warnings: false,
       errors: true
-    },
-  },
-  configureWebpack: config => {
-
-    config.resolve = {
-      // 设置别名
-      alias: {
-        '@': resolve('src'),
-        '@c': resolve('./src/components'),
-        '@apis': resolve('./src/apis/index.js')
-      }
     }
-
-    // 公用代码提取，使用cdn加载
-    // 用cdn方式引入
-    config.externals = {
-      'vue': 'Vue',
-      'vuex': 'Vuex',
-      'vue-router': 'VueRouter',
-      'axios': 'axios',
-      'element-ui': 'ELEMENT',
-    }
-
   },
   chainWebpack: config => {
-    config.plugins.delete('preload')  // 移除 prefetch 插件
-    config.plugins.delete('prefetch')  // 移除 preload 插件
+    config.plugin('html').tap(args => {
+      args[0].title = '售后管理系统'
+      return args
+    })
+    // 生产环境配置
+    if (isProduction) {
+      // 删除预加载
+      config.plugins.delete('preload')
+      config.plugins.delete('prefetch')
 
-    // 生产环境注入cdn
-    config.plugin('html')
-      .tap(args => {
-        args[0].cdn = cdn;
-        return args;
-      });
+      // 抽离
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          libs: {
+            name: 'chunk-libs',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial' // only package third parties that are initially dependent
+          },
+          elementUI: {
+            name: 'chunk-elementUI', // split elementUI into a single package
+            priority: 20, // the weight needs to be larger than libs and app or it will be packaged into libs or app
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/ // in order to adapt to cnpm
+          },
+          commons: {
+            name: 'chunk-commons',
+            test: resolve('src/components'), // can customize your rules
+            minChunks: 3, //  minimum common number
+            priority: 5,
+            reuseExistingChunk: true
+          }
+        }
+      })
+      config.optimization.runtimeChunk('single')
+    }
 
+    // config.when(process.env.NODE_ENV !== 'development', config => {
+
+    //   config.optimization.runtimeChunk('single')
+    // })
+  },
+  configureWebpack: {
+    plugins: [new BundleAnalyzerPlugin()]
   }
 }

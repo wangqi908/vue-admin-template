@@ -1,7 +1,7 @@
 <template>
   <div class="canvas2pic">
     <div class="img-box" ref="imgBox">
-      <img src="http://192.168.10.78:8088/0008I.jpg" />
+      <img src="../../../assets/imgs/touxiang.jpg" />
       <ul>
         <li>
           <span>姓名:</span>
@@ -13,9 +13,7 @@
         </li>
       </ul>
     </div>
-    <div class="print" @click="generatorImage">
-      <span>打印</span>
-    </div>
+    <el-button @click="generatorImage">打印</el-button>
     <img :src="bgurl" alt class="width100b" crossorigin="*" />
   </div>
 </template>
@@ -35,12 +33,6 @@ export default {
         useCORS: true,
         logging: false
       }).then(canvas => {
-        // this.$refs.addImage.append(canvas);//在下面添加canvas节点
-
-        // console.log(canvas.toDataURL('image/png'))
-        // this.$refs.imgBox.appendChild(canvas)
-        // this.bgurl = canvas.toDataURL('image/png')
-
         let link = document.createElement('a')
         link.href = canvas.toDataURL() //下载链接
         link.setAttribute('download', '人员卡.png')
@@ -49,8 +41,7 @@ export default {
         link.click()
       })
     }
-  },
-  created() {}
+  }
 }
 </script>
 

@@ -1,194 +1,195 @@
- @import './variables.scss';
- @import './transition.scss';
+@import './variables.scss';
+@import './transition.scss';
+@import './dialog.scss';
+@import './page.scss';
 
- body {
-   margin: 0;
-   padding: 0;
-   font-family: "微软雅黑";
-   overflow: hidden;
- }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: '微软雅黑';
+  overflow: hidden;
+}
 
- body,
- html {
-   -webkit-text-size-adjust: none;
-   width: 100%;
-   height: 100%;
- }
+body,
+html {
+  -webkit-text-size-adjust: none;
+  width: 100%;
+  height: 100%;
+}
 
- * {
-   text-decoration: none;
-   list-style: none;
- }
+* {
+  text-decoration: none;
+  list-style: none;
+}
 
- img {
-   border: 0px;
- }
+img {
+  border: 0px;
+}
 
- ul,
- li,
- dl,
- dd,
- dt,
- p,
- ol,
- h1,
- h2,
- h3,
- h4,
- h5 {
-   padding: 0;
-   margin: 0;
- }
+ul,
+li,
+dl,
+dd,
+dt,
+p,
+ol,
+h1,
+h2,
+h3,
+h4,
+h5 {
+  padding: 0;
+  margin: 0;
+}
 
- .wrap {
-   margin: 0 auto;
- }
+.wrap {
+  margin: 0 auto;
+}
 
- .fl {
-   float: left;
- }
+.fl {
+  float: left;
+}
 
- .fr {
-   float: right;
- }
+.fr {
+  float: right;
+}
 
- .index {
-   overflow: hidden;
- }
+.index {
+  overflow: hidden;
+}
 
- .clr {
-   clear: both;
-   height: 0px;
-   width: 100%;
-   font-size: 1px;
-   line-height: 0px;
-   visibility: hidden;
-   overflow: hidden;
- }
+.clr {
+  clear: both;
+  height: 0px;
+  width: 100%;
+  font-size: 1px;
+  line-height: 0px;
+  visibility: hidden;
+  overflow: hidden;
+}
 
- .pointer {
-   cursor: pointer;
- }
+.pointer {
+  cursor: pointer;
+}
 
- a,
- input,
- button {
-   outline: none;
- }
+a,
+input,
+button {
+  outline: none;
+}
 
- ::-moz-focus-inner {
-   border: 0px;
- }
+::-moz-focus-inner {
+  border: 0px;
+}
 
- /*a:link {color:#0f0;text-decoration:none;} 
+/*a:link {color:#0f0;text-decoration:none;} 
   a:visited {color: #FFFF00; text-decoration:none;} 
   a:hover {color: #00FF00; text-decoration:underline;} 
   a:active {color: #0000FF; text-decoration:underline;}*/
- a {
-   color: #000;
- }
+a {
+  color: #000;
+}
 
- .wrapper {
-   clear: both;
-   width: 100%;
- }
+.wrapper {
+  clear: both;
+  width: 100%;
+}
 
- table {
-   border-collapse: collapse;
- }
+table {
+  border-collapse: collapse;
+}
 
- word-break:break-all
- /*文字换行*/
- /*white-space:nowrap 文字不换行*/
+word-break:break-all
+/*文字换行*/
+/*white-space:nowrap 文字不换行*/
 
- /*默认滚动条样式修改ie9 google Firefox 等高版本浏览器有效*/
- /*::selection {background: #D03333;color: white;text-shadow: none;}
+/*默认滚动条样式修改ie9 google Firefox 等高版本浏览器有效*/
+/*::selection {background: #D03333;color: white;text-shadow: none;}
   ::-webkit-scrollbar-track-piece{width:10px;background-color:#f2f2f2}
   ::-webkit-scrollbar{width:10px;height:6px}
   ::-webkit-scrollbar-thumb{height:50px;background-color:rgba(0,0,0,.3);}
   ::-webkit-scrollbar-thumb:hover{background:#cc0000}*/
 
- * {
-   box-sizing: border-box;
- }
+* {
+  box-sizing: border-box;
+}
 
- body {
-   line-height: 1;
- }
+body {
+  line-height: 1;
+}
 
- ol,
- ul {
-   list-style: none;
- }
+ol,
+ul {
+  list-style: none;
+}
 
- blockquote,
- q {
-   quotes: none;
- }
+blockquote,
+q {
+  quotes: none;
+}
 
- blockquote:before,
- blockquote:after,
- q:before,
- q:after {
-   content: '';
-   content: none;
- }
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
 
- //  table {
- //    border-collapse: collapse;
- //    border-spacing: 0;
- //  }
+//  table {
+//    border-collapse: collapse;
+//    border-spacing: 0;
+//  }
 
- div {
-   box-sizing: border-box;
-   word-wrap: break-word;
-   word-break: break-all;
- }
+div {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  word-break: break-all;
+}
 
- html,
- body {
-   height: 100%;
- }
+html,
+body {
+  height: 100%;
+}
 
- #app {
-   font-family: "Avenir", Helvetica, Arial, sans-serif;
-   -webkit-font-smoothing: antialiased;
-   -moz-osx-font-smoothing: grayscale;
-   height: 100%;
- }
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+}
 
- .flex-center {
-   display: flex;
-   justify-content: center;
-   align-items: center;
- }
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+/* 百度地图去logo */
+.BMap_cpyCtrl {
+  display: none;
+}
 
- /* 百度地图去logo */
- .BMap_cpyCtrl {
-   display: none;
- }
+.anchorBL {
+  display: none;
+}
 
- .anchorBL {
-   display: none;
- }
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
 
- html,
- body {
-   width: 100%;
-   height: 100%;
- }
+.el-input,
+.el-select {
+  min-width: 100px;
+}
 
- .el-input,
- .el-select {
-   min-width: 100px;
- }
+.add-transition {
+  transition: all 0.4s;
+}
 
- .add-transition {
-   transition: all .4s;
- }
-
- // nprogress的进度条圆饼隐藏
- #nprogress .spinner-icon {
-   display: none !important;
- }
+// nprogress的进度条圆饼隐藏
+#nprogress .spinner-icon {
+  display: none !important;
+}

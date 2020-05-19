@@ -1,9 +1,14 @@
-export { default as MyNavMenu } from './myNavMenu/MyNavMenu.vue'
-export { default as MyHeader } from './myHeader/MyHeader.vue'
-export { default as MyUpload } from './MyUpload.vue'
-export { default as MyStep } from './myStep/MyStep.vue'
-export { default as MySteps } from './myStep/MySteps.vue'
-export { default as MyEditor } from './MyEditor.vue'
-export { default as MySticky } from './MySticky.vue'
-export { default as MyBreadcrumb } from './MyBreadcrumb.vue'
-export { default as MyRouterHistory } from './MyRouterHistory.vue'
+export { default as Head } from './Head'
+export { default as Menu } from './menu/Menu'
+export { default as MyEditor } from './MyEditor'
+export { default as MySticky } from './MySticky'
+
+import MyPagination from './MyPagination'
+import DelDialog from './DelDialog'
+import MyUpload from './MyUpload'
+
+export const components = Vue => {
+  Vue.component('MyPagination', MyPagination)
+  Vue.component('DelDialog', DelDialog)
+  Vue.component('MyUpload', MyUpload)
+}

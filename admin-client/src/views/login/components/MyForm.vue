@@ -1,83 +1,109 @@
 <template>
-  <div class="login-input-box">
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model="ruleForm.username" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-        <el-button @click="register">注册</el-button>
-      </el-form-item>
-    </el-form>
-  </div>
+  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="login-form">
+    <el-form-item prop="username">
+      <el-input
+        v-model.number="ruleForm.username"
+        placeholder="用户名"
+        @keyup.enter.native="submitForm('ruleForm')"
+      ></el-input>
+    </el-form-item>
+
+    <el-form-item prop="password">
+      <el-input
+        type="password"
+        v-model="ruleForm.password"
+        autocomplete="off"
+        placeholder="密码"
+        @keyup.enter.native="submitForm('ruleForm')"
+      ></el-input>
+    </el-form-item>
+
+    <el-form-item class="footer">
+      <el-button type="primary" @click="submitForm('ruleForm')" :loading="loading">登录</el-button>
+      <el-button @click="$router.push('/register')">注册</el-button>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
-import { loginReq, userInfoReq } from "@apis";
-import { permissionConfig } from "@/config";
+import { mapMutations, mapActions } from 'vuex'
+import { loginReq } from '@/apis'
+import { routesConfig } from '@/router/config'
 export default {
   data() {
     return {
+      loading: false,
       ruleForm: {
-        username: "",
-        password: ""
+        password: '',
+        username: ''
       },
       rules: {
-        username: [
-          { required: true, message: "请输入用户名", trigger: "change" }
-        ],
-        password: [{ required: true, message: "请输入密码", trigger: "change" }]
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
       }
-    };
+    }
   },
   methods: {
-    ...mapMutations(["setUserInfo", "setToken"]),
-
+    ...mapMutations(['setToken', 'setUserInfo', 'setPropList']),
+    ...mapActions(['getUserInfoAction']),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.login();
+          this.login()
         } else {
-          console.log("error submit!!");
-          return false;
+          return false
         }
-      });
-    },
-    register(formName) {
-      this.$router.push("/register");
+      })
     },
 
     async login() {
-      let { username, password } = this.ruleForm;
-      let sendData = { username, password };
-      const res = await loginReq(sendData);
+      let { username, password } = this.ruleForm
+      let sendData = { username, password }
+      this.loading = true
+
+      const res = await loginReq(sendData)
+      this.loading = false
       if (res.data.code === 200) {
-        let { token, info } = res.data.data;
-        this.setToken(token);
-        const userInfoRes = await userInfoReq();
-        if (userInfoRes.data.code === 200) {
-          let userInfo = res.data.data;
-          this.setUserInfo(userInfo);
-          permissionConfig();
-          this.$router.replace("/");
-        }
+        let token = res.data.data.token
+        this.setToken(token)
+
+        this.getUserInfoAction().then(() => {
+          routesConfig()
+          // 返回路径
+          let path = this.$route.query.re || '/'
+          this.$router.push(path)
+        })
       }
     }
+  },
+  created() {
+    this.setToken()
+    this.setUserInfo()
+    this.setPropList()
   }
-};
+}
 </script>
 
-<style lang='scss'>
-.login-input-box {
-  width: 400px;
-  height: fit-content;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: rgba(224, 224, 224, 0.3);
+<style lang="scss">
+.login-form {
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+.submit {
+  width: 100%;
+  color: #fff;
+  border: 0;
+  background: #7d7de8;
+  &:hover {
+    background: #9e9ef3;
+  }
+  &:focus {
+    background: #5454db;
+  }
+  &:active {
+    background: #5454db;
+  }
 }
 </style>

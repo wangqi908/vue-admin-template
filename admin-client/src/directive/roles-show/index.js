@@ -1,9 +1,12 @@
 import store from '@/store'
+const permissions = store.state.permissions
 
 const handleElementShow = (el, binding) => {
-  let { rolesNames } = store.state
-  let { value } = binding;
-  let isShow = value.filter(v => { return rolesNames.indexOf(v) > -1 }).length > 0;
+  let { value } = binding
+  let isShow =
+    value.filter(v => {
+      return permissions.indexOf(v) > -1
+    }).length > 0
   el.style.display = isShow ? 'block' : 'none'
 }
 

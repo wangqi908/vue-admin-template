@@ -1,22 +1,17 @@
 <template>
-  <div class=''>
-    sss
+  <div>
+    index
+    <MyMap />
+    <MyEcharts />
   </div>
 </template>
 
 <script>
+import { MyMap, MyEcharts } from './components'
 export default {
-  components: {},
-  data() {
-    return {};
-  },
-  methods: {},
-  created() {},
-  mounted() {},
-  computed: {},
-  watch: {}
-};
+  components: { MyMap, MyEcharts }
+}
 </script>
 
-<style lang='scss'>
+<style>
 </style>

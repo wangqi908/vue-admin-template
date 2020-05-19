@@ -7,7 +7,6 @@ const filterArray = (data, p_id) => {
   let tree = []
   let temp
 
-  console.log(data, p_id)
   for (let i = 0; i < data.length; i++) {
     if (data[i].p_id == p_id) {
       let obj = data[i]
@@ -71,8 +70,18 @@ const getRoleInfo = _id => {
   })
 }
 
+const uniqueArr = (arr, id = '_id') => {
+  if (arr.length === 0) return []
+  return arr.reduce((prev, cur) => {
+    let hasId = prev.some(ele => {
+      return ele[id] + '' === cur[id] + ''
+    })
+    return hasId ? prev : [...prev, cur]
+  }, [])
+}
 module.exports = {
   filterArray,
   getPermissionByPermissionIds,
-  getRoleInfo
+  getRoleInfo,
+  uniqueArr
 }
