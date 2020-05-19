@@ -1,10 +1,10 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 import { routesConfig } from '@/router/config'
 routesConfig()
 
-Vue.use(VueRouter)
+// Vue.use(VueRouter)
 // 多次点击相同路径报错处理
 const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
