@@ -21,7 +21,7 @@ module.exports = {
   },
   chainWebpack: config => {
     config.plugin('html').tap(args => {
-      args[0].title = '售后管理系统'
+      args[0].title = '后台管理系统'
       return args
     })
     // 生产环境配置

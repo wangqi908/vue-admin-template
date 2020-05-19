@@ -1,19 +1,18 @@
 <template>
-  <div class="globalHead">
+  <div class="global-head">
     <div class="logo">
-      <img src="@/assets/imgs/logo.png" />
       <p>
-        <router-link to="/index">售后管理系统</router-link>
+        <router-link to="/index">后台管理系统</router-link>
       </p>
     </div>
     <ul class="btnBox">
       <li class="liItem">
         <el-dropdown>
           <span class="el-dropdown-link touxiang">
-            <img src="@/assets/imgs/touxiang.jpg" alt />
+            <img :src="avatar" alt />
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="checkUserInfo">{{userInfo.name}}</el-dropdown-item>
+            <el-dropdown-item @click.native="checkUserInfo">{{userInfo.username}}</el-dropdown-item>
 
             <el-dropdown-item icon="el-icon-switch-button" @click.native="signOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
@@ -49,14 +48,24 @@ export default {
     }
   },
   computed: {
-    ...mapState(['userInfo'])
+    ...mapState(['userInfo']),
+    avatar() {
+      let userInfo = this.userInfo
+      let avatar = ''
+      if (userInfo.avatar) {
+        avatar = userInfo.http + userInfo.avatar
+      } else {
+        avatar = require('@/assets/imgs/touxiang.jpg')
+      }
+      return avatar
+    }
   },
   created() {}
 }
 </script>
 
 <style lang="scss">
-.globalHead {
+.global-head {
   height: 50px;
   background-color: #7d7de8;
   display: flex;
@@ -113,138 +122,6 @@ export default {
       width: 44px;
       text-align: center;
       height: 50px;
-    }
-  }
-  .el-icon-bell,
-  .el-icon-user {
-    font-size: 20px;
-    color: #fff;
-    vertical-align: middle;
-  }
-  .dot {
-    .el-badge__content {
-      border: 0;
-      &.is-fixed {
-        top: 20px;
-        &.is-dot {
-          right: 8px;
-        }
-      }
-    }
-  }
-
-  .menu {
-    line-height: normal;
-    position: absolute;
-    top: 50px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px 0px rgb(148, 148, 148);
-    background-color: rgb(255, 255, 255);
-    width: 90%;
-    color: rgb(110, 110, 110);
-    .item {
-      border-bottom: 1px solid rgb(219, 219, 219);
-      &:hover {
-        background-color: rgb(241, 241, 241);
-      }
-    }
-    .list {
-      display: flex;
-      justify-content: space-between;
-    }
-    .title {
-      margin: 10px;
-    }
-    .subMenu {
-      background-color: rgb(251, 251, 251);
-      text-align: left;
-      .subItem {
-        padding: 10px 10px 10px 20px;
-        &:hover {
-          background-color: rgb(241, 241, 241);
-        }
-      }
-    }
-  }
-  .active {
-    background-color: rgb(241, 241, 241);
-  }
-}
-.el-message {
-  min-width: 220px;
-}
-.el-popover {
-  padding: 0;
-  .el-tabs--top .el-tabs__item.is-top:last-child {
-    padding-right: 35px;
-  }
-  .el-tabs__item {
-    padding: 0 70px;
-  }
-  .el-tabs--top .el-tabs__item.is-top:nth-child(2) {
-    padding-left: 35px;
-    margin-left: 0;
-  }
-  .el-tabs__active-bar {
-    margin-left: 0;
-  }
-  .el-tab-pane {
-    height: 300px;
-    overflow: auto;
-  }
-  .section {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px 10px 30px;
-    &:hover {
-      background: #f2f2f2;
-      cursor: pointer;
-    }
-    .sectionTitle {
-      display: flex;
-      position: relative;
-      align-items: center;
-      .commonBtn {
-        padding: 2px 10px;
-        border-radius: 20px;
-        margin-left: 20px;
-        font-size: 12px;
-      }
-      .sectionIcon {
-        position: absolute;
-        left: -20px;
-      }
-    }
-    .orderInfo {
-      display: flex;
-      .orderNum {
-        margin-left: 20px;
-      }
-    }
-    .sectionRight {
-      font-size: 12px;
-    }
-  }
-  .el-checkbox {
-    display: block;
-    position: relative;
-    padding: 10px 20px 10px 10px;
-    border-top: 1px solid #ccc;
-    .el-checkbox__input {
-      position: absolute;
-      right: 20px;
-    }
-    .el-checkbox__inner {
-      height: 20px;
-      width: 20px;
-      border-radius: 50%;
-      border-width: 3px;
-    }
-    .el-checkbox__inner::after {
-      left: 5px;
-      top: 2px;
     }
   }
 }
