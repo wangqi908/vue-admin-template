@@ -170,11 +170,8 @@ const menuJson = [
             meta: {
               requireAuth: true,
               title: 'nested1-1-view',
-              breadcrumb: [
-                { title: 'nested1', go: -2 },
-                { title: 'nested1-1', go: -1 },
-                { title: 'nested1-1-view', go: 0 }
-              ] //面包屑
+              parentName: 'nested1-1',
+              breadcrumb: [{ title: 'nested1' }, { title: 'nested1-1' }, { title: 'nested1-1-view' }] //面包屑
             }
           },
           {
@@ -190,21 +187,21 @@ const menuJson = [
         title: 'nested2',
         path: 'nested2',
         name: 'nested2',
-        component: () => import(/* webpackChunkName: "nested1" */ '@/views/nested/nested2.vue'),
+        component: () => import(/* webpackChunkName: "nested2" */ '@/views/nested/nested2.vue'),
         meta: { requireAuth: true, title: 'nested2' },
         children: [
           {
             title: 'nested2-1',
             path: 'nested2-1',
             name: 'nested2-1',
-            component: () => import(/* webpackChunkName: "nested1-1" */ '@/views/nested/nested2-1'),
+            component: () => import(/* webpackChunkName: "nested2-1" */ '@/views/nested/nested2-1'),
             meta: { requireAuth: true, title: 'nested2-1' }
           },
           {
             title: 'nested2-2',
             path: 'nested2-2',
             name: 'nested2-2',
-            component: () => import(/* webpackChunkName: "nested1-2" */ '@/views/nested/nested2-2'),
+            component: () => import(/* webpackChunkName: "nested2-2" */ '@/views/nested/nested2-2'),
             meta: { requireAuth: true, title: 'nested2-2' }
           }
         ]
@@ -247,15 +244,14 @@ export const routesConfig = () => {
     // '/sys',
     // '/user',
     // '/role',
-    // '/nested-group',
-    'nested',
-    'nested1',
-    'nested1-1',
-    'nested1-2',
-    'nested2',
-    'nested2-1',
-    'nested2-2',
-    'nested1-1-view',
+    // 'nested',
+    // 'nested1',
+    // 'nested1-1',
+    // 'nested1-2',
+    // 'nested2',
+    // 'nested2-1',
+    // 'nested2-2',
+    // 'nested1-1-view',
     // '/tools',
     // '/clipboard',
     // '/editor',

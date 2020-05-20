@@ -59,7 +59,7 @@ export default {
     }
   },
   created() {
-    this.activeRouterName = this.$route.name
+    this.activeRouterName = this.$route.meta.parentName || this.$route.name
     this.setMeueCollapse(document.body.clientWidth)
   },
 
@@ -68,7 +68,7 @@ export default {
   },
   watch: {
     $route(to) {
-      this.activeRouterName = to.name
+      this.activeRouterName = to.meta.parentName || to.name
     },
     switchValue(val) {
       this.setCollapse(!val)

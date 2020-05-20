@@ -1,12 +1,7 @@
 <template>
   <div class="breadcrumb" ref="breadcrumb">
     <transition-group name="breadcrumb">
-      <div
-        class="item flex-center"
-        v-for="(item,index) in breadcrumbList"
-        :key="item.title"
-        @click="go(item)"
-      >
+      <div class="item flex-center" v-for="(item,index) in breadcrumbList" :key="item.title">
         <p class="title">{{item.title}}</p>
         <p class="cut" v-if="index!==breadcrumbList.length-1">/</p>
       </div>
@@ -22,21 +17,14 @@ export default {
     }
   },
   methods: {
-    go(item) {
-      let isFrist = this.breadcrumbList.length + item.go === 1
-      if (isFrist || item.go === 0) return
-      this.$router.go(item.go)
-    },
     initBreadcrumbList() {
       let matched = this.$router.history.current.matched
       let breadcrumbList = this.$router.history.current.meta.breadcrumb
       // 整理面包屑
       matched = matched.filter(ele => ele.meta.title)
-      let routerList = matched.map((ele, index) => {
-        let len = matched.length
+      let routerList = matched.map(ele => {
         return {
-          title: ele.meta.title,
-          go: index + 1 - len
+          title: ele.meta.title
         }
       })
       this.breadcrumbList = breadcrumbList || routerList
