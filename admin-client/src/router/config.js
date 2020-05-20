@@ -11,7 +11,8 @@ requireAuth: true //需求token验证
 const menuJson = [
   {
     path: '/',
-    redirect: '/index'
+    redirect: '/index',
+    type: 'redirect'
   },
   {
     title: '登录',

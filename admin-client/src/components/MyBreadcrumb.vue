@@ -23,7 +23,8 @@ export default {
   },
   methods: {
     go(item) {
-      if (item.hasSubMenu || item.go === 0) return
+      let isFrist = this.breadcrumbList.length + item.go === 1
+      if (isFrist || item.go === 0) return
       this.$router.go(item.go)
     },
     initBreadcrumbList() {
@@ -35,7 +36,6 @@ export default {
         let len = matched.length
         return {
           title: ele.meta.title,
-          hasSubMenu: ele.meta.hasSubMenu ? true : false,
           go: index + 1 - len
         }
       })

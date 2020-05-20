@@ -1,8 +1,6 @@
 <template>
   <div class="layout">
     <div class="head">
-      <!-- <span>head</span>
-      <button @click="logout">退出</button>-->
       <Head />
     </div>
 
