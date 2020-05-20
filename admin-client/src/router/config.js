@@ -55,7 +55,7 @@ const menuJson = [
     title: '工具',
     path: '/tools',
     name: 'tools',
-    icon: 'el-icon-menu',
+    icon: 'el-icon-suitcase',
     component: () => import(/* webpackChunkName: "tools" */ '@/views/tools/tools'),
     children: [
       {
@@ -119,7 +119,7 @@ const menuJson = [
   {
     title: 'Excel',
     path: '/excel',
-    icon: 'el-icon-menu',
+    icon: 'el-icon-files',
     name: 'excel',
     component: () => import(/* webpackChunkName: "excel" */ '@/views/excel/excel'),
     children: [
@@ -140,32 +140,9 @@ const menuJson = [
     ]
   },
   {
-    title: '系统',
-    path: '/sys',
-    name: 'sys',
-    icon: 'el-icon-menu',
-    component: () => import(/* webpackChunkName: "sys" */ '@/views/sys/sys'),
-    children: [
-      {
-        title: '用户',
-        path: 'user',
-        name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '@/views/sys/user/user'),
-        meta: { requireAuth: true, title: '用户管理' }
-      },
-      {
-        title: '权限',
-        path: 'role',
-        name: 'role',
-        component: () => import(/* webpackChunkName: "role" */ '@/views/sys/role/role'),
-        meta: { requireAuth: true, title: '权限管理' }
-      }
-    ]
-  },
-  {
     title: '嵌套',
     path: '/nested',
-    icon: 'el-icon-menu',
+    icon: 'el-icon-copy-document',
     name: 'nested',
     component: () => import(/* webpackChunkName: "nested" */ '@/views/nested/nested'),
     children: [
@@ -214,6 +191,29 @@ const menuJson = [
             meta: { requireAuth: true, title: 'nested2-2' }
           }
         ]
+      }
+    ]
+  },
+  {
+    title: '系统',
+    path: '/sys',
+    name: 'sys',
+    icon: 'el-icon-setting',
+    component: () => import(/* webpackChunkName: "sys" */ '@/views/sys/sys'),
+    children: [
+      {
+        title: '用户',
+        path: 'user',
+        name: 'user',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/sys/user/user'),
+        meta: { requireAuth: true, title: '用户管理' }
+      },
+      {
+        title: '权限',
+        path: 'role',
+        name: 'role',
+        component: () => import(/* webpackChunkName: "role" */ '@/views/sys/role/role'),
+        meta: { requireAuth: true, title: '权限管理' }
       }
     ]
   }
