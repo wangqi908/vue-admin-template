@@ -74,14 +74,17 @@ export const intersection = (arr1, arr2) => {
 }
 
 // 动态菜单
-export const filterMenu = (menuJson = [], roleArr = []) => {
+export const filterMenu = (menuJson = [], roleArr = [], forMenu = true) => {
   let routers = deepCopy(menuJson)
   let roles = deepCopy(roleArr)
   let res = intersection(routers, roles)
-  res = res.filter(ele => !ele.notMenu)
+  if (forMenu) {
+    res = res.filter(ele => !ele.notMenu)
+  }
+
   res.forEach(item => {
     if (item.children) {
-      item.children = filterMenu(item.children, roleArr)
+      item.children = filterMenu(item.children, roleArr, forMenu)
     }
   })
   return res

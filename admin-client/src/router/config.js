@@ -161,6 +161,22 @@ const menuJson = [
             meta: { requireAuth: true, title: 'nested1-1' }
           },
           {
+            title: 'nested1-1-view',
+            path: 'nested1-1/view',
+            name: 'nested1-1-view',
+            notMenu: true,
+            component: () => import(/* webpackChunkName: "nested1-1-view" */ '@/views/nested/nested1-1-view'),
+            meta: {
+              requireAuth: true,
+              title: 'nested1-1-view',
+              breadcrumb: [
+                { title: 'nested1', go: -2 },
+                { title: 'nested1-1', go: -1 },
+                { title: 'nested1-1-view', go: 0 }
+              ] //面包屑
+            }
+          },
+          {
             title: 'nested1-2',
             path: 'nested1-2',
             name: 'nested1-2',
@@ -238,6 +254,7 @@ export const routesConfig = () => {
     'nested2',
     'nested2-1',
     'nested2-2',
+    'nested1-1-view',
     // '/tools',
     // '/clipboard',
     // '/editor',
@@ -255,9 +272,9 @@ export const routesConfig = () => {
 
   roleArr = [...new Set(roleArr)]
 
-  let menu = filterMenu(menuJson, roleArr)
+  let menu = filterMenu(menuJson, roleArr, true)
 
-  let routers = filterRoutes(menuJson, menu)
+  let routers = filterRoutes(menuJson, filterMenu(menuJson, roleArr, false))
 
   store.commit('setMenu', menu)
   store.commit('setRoutes', routers)

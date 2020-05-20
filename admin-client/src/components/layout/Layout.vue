@@ -11,6 +11,7 @@
         <Menu />
       </div>
       <div class="main">
+        <MyBreadcrumb />
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
@@ -21,11 +22,12 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { Head, Menu } from '@/components'
+import { Head, Menu, MyBreadcrumb } from '@/components'
 export default {
   components: {
     Head,
-    Menu
+    Menu,
+    MyBreadcrumb
   },
   data() {
     return {
