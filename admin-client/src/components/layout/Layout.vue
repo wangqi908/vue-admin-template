@@ -66,6 +66,7 @@ body {
   display: flex;
   flex: 1;
   overflow: auto;
+  background-color: rgb(243, 243, 243);
 }
 .aside {
   overflow: auto;
@@ -76,5 +77,7 @@ body {
   overflow: auto;
   flex: 1;
   background-color: #f8f8f8;
+  margin: 10px;
+  box-sizing: border-box;
 }
 </style>
