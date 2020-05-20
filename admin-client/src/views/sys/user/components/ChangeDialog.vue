@@ -26,6 +26,7 @@ import { routesConfig } from '@/router/config'
 import { userEditReq, userViewReq } from '@/apis'
 import toggleDialogMixin from '@/mixin/toggleDialogMixin'
 import MyRoleTable from './MyRoleTable.vue'
+import { usernameValidator } from '@/utils/validator'
 export default {
   mixins: [toggleDialogMixin],
   components: { MyRoleTable },
@@ -48,15 +49,7 @@ export default {
         roleIds: []
       },
       rules: {
-        username: [
-          { required: true, message: '请输入用户名', trigger: 'change' },
-          {
-            min: 3,
-            max: 15,
-            message: '长度在 3 到 15 个字符',
-            trigger: 'change'
-          }
-        ]
+        username: usernameValidator
       }
     }
   },

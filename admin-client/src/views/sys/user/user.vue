@@ -22,7 +22,7 @@
         <el-table-column type="selection" width="50"></el-table-column>
         <el-table-column width="70">
           <template slot-scope="scope">
-            <img :src="scope.row.http+scope.row.avatar" alt class="avatar" />
+            <img :src="scope.row.http+scope.row.avatar" alt class="avatar" v-if="scope.row.avatar" />
           </template>
         </el-table-column>
         <el-table-column prop="username" label="用户名" show-overflow-tooltip></el-table-column>

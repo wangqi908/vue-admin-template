@@ -30,6 +30,7 @@
 <script>
 import { permissionTreeReq, roleAddReq } from '@/apis'
 import toggleDialogMixin from '@/mixin/toggleDialogMixin'
+import { roleNameValidator } from '@/utils/validator'
 export default {
   mixins: [toggleDialogMixin],
   data() {
@@ -39,15 +40,7 @@ export default {
         remark: ''
       },
       rules: {
-        name: [
-          { required: true, message: '请输入角色名', trigger: 'change' },
-          {
-            min: 1,
-            max: 15,
-            message: '长度在 1 到 15 个字符',
-            trigger: 'change'
-          }
-        ]
+        name: roleNameValidator
       },
       tree: [], //权限树
       roleIds: [], //权限ids

@@ -7,7 +7,7 @@ import axios from 'axios'
 import store from '@/store'
 import router from '@/router'
 import { showFullScreenLoading, tryHideFullScreenLoading, endLoading } from './loading'
-export const baseURL = 'http://localhost:3000' //测试
+export const baseURL = 'http://192.168.10.106/api/' //测试
 
 export const timeout = 20000 // 设置超时时间
 

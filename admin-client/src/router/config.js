@@ -37,6 +37,12 @@ const menuJson = [
     meta: { requireAuth: true, title: '管理系统' }
   },
   {
+    path: '/test',
+    name: 'test',
+    component: () => import(/* webpackChunkName: "test" */ '@/views/test'),
+    meta: { requireAuth: true, title: 'test' }
+  },
+  {
     component: () => import(/* webpackChunkName: "layout" */ '@/components/layout/Layout'),
     type: 'layout',
     path: '/',

@@ -29,6 +29,7 @@
 import { mapMutations, mapActions } from 'vuex'
 import { loginReq } from '@/apis'
 import { routesConfig } from '@/router/config'
+import { usernameValidator, passwordValidator } from '@/utils/validator'
 export default {
   data() {
     return {
@@ -38,8 +39,8 @@ export default {
         username: ''
       },
       rules: {
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }]
+        username: usernameValidator,
+        password: passwordValidator
       }
     }
   },
