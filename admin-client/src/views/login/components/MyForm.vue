@@ -67,18 +67,22 @@ export default {
       let sendData = { username, password }
       this.loading = true
 
-      const res = await loginReq(sendData)
-      this.loading = false
-      if (res.data.code === 200) {
-        let token = res.data.data.token
-        this.setToken(token)
+      try {
+        const res = await loginReq(sendData)
+        this.loading = false
+        if (res.data.code === 200) {
+          let token = res.data.data.token
+          this.setToken(token)
 
-        this.getUserInfoAction().then(() => {
-          routesConfig()
-          // 返回路径
-          let path = this.$route.query.re || '/'
-          this.$router.push(path)
-        })
+          this.getUserInfoAction().then(() => {
+            routesConfig()
+            // 返回路径
+            let path = this.$route.query.re || '/'
+            this.$router.push(path)
+          })
+        }
+      } catch (err) {
+        this.loading = false
       }
     }
   },

@@ -97,7 +97,6 @@ export const filterRoutes = (menuJson = [], menu = []) => {
   let layout = routes.find(ele => ele.type === 'layout')
   let redirect = routes.find(ele => ele.type === 'redirect')
   arr.unshift(redirect)
-  // console.log(redirect)
   layout.children = menu
   routes.forEach(item => {
     if (item.out) {

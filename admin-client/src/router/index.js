@@ -22,7 +22,7 @@ router.beforeEach((to, from, next) => {
       let historyList = store.state.historyList
       let title = to.meta.title || to.meta.routerName
       let name = to.name
-      console.log(name)
+
       let withoutRouters = ['login', 'register']
       if (withoutRouters.indexOf(name) === -1) {
         historyList.push({
