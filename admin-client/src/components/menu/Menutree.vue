@@ -1,7 +1,7 @@
 <template>
   <div class="menutree">
     <label v-for="(menu,index) in data" :key="menu.path+index">
-      <el-submenu :index="menu.path" v-if="menu.children">
+      <el-submenu :index="menu.name" v-if="menu.children">
         <template slot="title">
           <i :class="menu.icon"></i>
           <span :class="[isCollapse?'hiden':'']">{{menu.title}}</span>
@@ -10,7 +10,7 @@
           <menutree :data="menu.children"></menutree>
         </label>
       </el-submenu>
-      <el-menu-item v-else :index="menu.path">
+      <el-menu-item v-else :index="menu.name">
         <i :class="menu.icon"></i>
         <span slot="title">{{menu.title}}</span>
       </el-menu-item>

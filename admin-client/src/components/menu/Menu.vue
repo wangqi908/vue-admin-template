@@ -5,7 +5,7 @@
       <el-menu
         :class="['el-menu',isCollapse?'no-arrow':'']"
         :collapse="isCollapse"
-        :default-active="activePath"
+        :default-active="activeRouterName"
         @select="handleSelect"
       >
         <menutree :data="menu"></menutree>
@@ -30,23 +30,15 @@ export default {
   },
   data() {
     return {
-      activePath: '',
+      activeRouterName: '',
       switchValue: ''
     }
   },
   methods: {
     ...mapMutations(['setCollapse']),
-    handleSelect(path) {
-      this.$router.push(path)
-      this.activePath = path
-    },
-    getActivePath() {
-      let matched = this.$route.matched
-      let activePath =
-        matched[matched.length - 1].meta.activeMenuPath ||
-        this.$route.meta.modulePath ||
-        this.$route.path
-      return activePath
+    handleSelect(routerName) {
+      this.$router.push({ name: routerName })
+      this.activeRouterName = routerName
     },
 
     setMeueCollapse(clientWidth) {
@@ -67,8 +59,7 @@ export default {
     }
   },
   created() {
-    let activePath = this.getActivePath()
-    this.activePath = activePath
+    this.activeRouterName = this.$route.name
     this.setMeueCollapse(document.body.clientWidth)
   },
 
@@ -77,10 +68,7 @@ export default {
   },
   watch: {
     $route(to) {
-      let path = this.$route.meta.modulePath
-      let activePath = this.getActivePath()
-
-      this.activePath = path || activePath || to.path
+      this.activeRouterName = to.name
     },
     switchValue(val) {
       this.setCollapse(!val)

@@ -1,4 +1,5 @@
-import { filterRoutes, filterMenu } from '@/utils'
+// import { filterRoutes, filterMenu } from '@/utils'
+import { filterMenu, filterRoutes } from '@/utils'
 import store from '@/store'
 
 /* 
@@ -39,6 +40,7 @@ const menuJson = [
   {
     path: '/test',
     name: 'test',
+    notMenu: true,
     component: () => import(/* webpackChunkName: "test" */ '@/views/test'),
     meta: { requireAuth: true, title: 'test' }
   },
@@ -46,6 +48,7 @@ const menuJson = [
     component: () => import(/* webpackChunkName: "layout" */ '@/components/layout/Layout'),
     type: 'layout',
     path: '/',
+    notMenu: true,
     children: []
   },
   {
@@ -53,59 +56,60 @@ const menuJson = [
     path: '/tools',
     name: 'tools',
     icon: 'el-icon-menu',
+    component: () => import(/* webpackChunkName: "tools" */ '@/views/tools/tools'),
     children: [
       {
         title: '编辑器',
-        path: '/editor',
+        path: 'editor',
         name: 'editor',
         component: () => import(/* webpackChunkName: "editor" */ '@/views/tools/editor/editor'),
         meta: { requireAuth: true, title: '编辑器' }
       },
       {
         title: '粘贴板',
-        path: '/clipboard',
+        path: 'clipboard',
         name: 'clipboard',
         component: () => import(/* webpackChunkName: "clipboard" */ '@/views/tools/clipboard/clipboard'),
         meta: { requireAuth: true, title: '粘贴板' }
       },
       {
         title: '生成图片',
-        path: '/canvas2pic',
+        path: 'canvas2pic',
         name: 'canvas2pic',
         component: () => import(/* webpackChunkName: "canvas2pic" */ '@/views/tools/canvas2pic/canvas2pic'),
         meta: { requireAuth: true, title: '生成图片' }
       },
       {
         title: '悬浮固定',
-        path: '/sticky',
+        path: 'sticky',
         name: 'sticky',
         component: () => import(/* webpackChunkName: "sticky" */ '@/views/tools/sticky/sticky'),
         meta: { requireAuth: true, title: '悬浮固定' }
       },
       {
         title: '国际化',
-        path: '/languages',
+        path: 'languages',
         name: 'languages',
         component: () => import(/* webpackChunkName: "languages" */ '@/views/tools/languages/languages'),
         meta: { requireAuth: true, title: '国际化' }
       },
       {
         title: '文字识别',
-        path: '/ocr',
+        path: 'ocr',
         name: 'ocr',
         component: () => import(/* webpackChunkName: "ocr" */ '@/views/tools/ocr/ocr'),
         meta: { requireAuth: true, title: '文字识别' }
       },
       {
         title: '头像上传',
-        path: '/upload',
+        path: 'upload',
         name: 'upload',
         component: () => import(/* webpackChunkName: "upload" */ '@/views/tools/upload/upload'),
         meta: { requireAuth: true, title: '头像上传' }
       },
       {
         title: '权限测试',
-        path: '/permission',
+        path: 'permission',
         name: 'permission',
         component: () => import(/* webpackChunkName: "permission" */ '@/views/tools/permission/permission'),
         meta: { requireAuth: true, title: '权限测试' }
@@ -117,17 +121,18 @@ const menuJson = [
     path: '/excel',
     icon: 'el-icon-menu',
     name: 'excel',
+    component: () => import(/* webpackChunkName: "excel" */ '@/views/excel/excel'),
     children: [
       {
         title: '导出',
-        path: '/out',
+        path: 'out',
         name: 'out',
         component: () => import(/* webpackChunkName: "out" */ '@/views/excel/out'),
         meta: { requireAuth: true, title: 'Excel导出' }
       },
       {
         title: '导入',
-        path: '/in',
+        path: 'in',
         name: 'in',
         component: () => import(/* webpackChunkName: "in" */ '@/views/excel/in'),
         meta: { requireAuth: true, title: 'Excel导入' }
@@ -139,17 +144,18 @@ const menuJson = [
     path: '/sys',
     name: 'sys',
     icon: 'el-icon-menu',
+    component: () => import(/* webpackChunkName: "sys" */ '@/views/sys/sys'),
     children: [
       {
         title: '用户',
-        path: '/user',
+        path: 'user',
         name: 'user',
         component: () => import(/* webpackChunkName: "user" */ '@/views/sys/user/user'),
         meta: { requireAuth: true, title: '用户管理' }
       },
       {
         title: '权限',
-        path: '/role',
+        path: 'role',
         name: 'role',
         component: () => import(/* webpackChunkName: "role" */ '@/views/sys/role/role'),
         meta: { requireAuth: true, title: '权限管理' }
@@ -158,30 +164,54 @@ const menuJson = [
   },
   {
     title: '嵌套',
-    path: '/nested-group',
+    path: '/nested',
     icon: 'el-icon-menu',
-    name: 'nested-group',
+    name: 'nested',
+    component: () => import(/* webpackChunkName: "nested" */ '@/views/nested/nested'),
     children: [
       {
-        title: 'nested',
-        path: '/nested',
-        name: 'nested',
-        component: () => import(/* webpackChunkName: "nested" */ '@/views/nested/nested.vue'),
-        meta: { requireAuth: true, title: 'nested' },
+        title: 'nested1',
+        path: 'nested1',
+        name: 'nested1',
+        component: () => import(/* webpackChunkName: "nested1" */ '@/views/nested/nested1.vue'),
+        meta: { requireAuth: true, title: 'nested1' },
         children: [
           {
             title: 'nested1-1',
-            path: '/nested1-1',
+            path: 'nested1-1',
             name: 'nested1-1',
             component: () => import(/* webpackChunkName: "nested1-1" */ '@/views/nested/nested1-1'),
             meta: { requireAuth: true, title: 'nested1-1' }
           },
           {
             title: 'nested1-2',
-            path: '/nested1-2',
+            path: 'nested1-2',
             name: 'nested1-2',
             component: () => import(/* webpackChunkName: "nested1-2" */ '@/views/nested/nested1-2'),
             meta: { requireAuth: true, title: 'nested1-2' }
+          }
+        ]
+      },
+      {
+        title: 'nested2',
+        path: 'nested2',
+        name: 'nested2',
+        component: () => import(/* webpackChunkName: "nested1" */ '@/views/nested/nested2.vue'),
+        meta: { requireAuth: true, title: 'nested2' },
+        children: [
+          {
+            title: 'nested2-1',
+            path: 'nested2-1',
+            name: 'nested2-1',
+            component: () => import(/* webpackChunkName: "nested1-1" */ '@/views/nested/nested2-1'),
+            meta: { requireAuth: true, title: 'nested2-1' }
+          },
+          {
+            title: 'nested2-2',
+            path: 'nested2-2',
+            name: 'nested2-2',
+            component: () => import(/* webpackChunkName: "nested1-2" */ '@/views/nested/nested2-2'),
+            meta: { requireAuth: true, title: 'nested2-2' }
           }
         ]
       }
@@ -195,14 +225,19 @@ export const routesConfig = () => {
   const roleNames = permissions.map(ele => ele.role_name)
 
   let roleArr = [
-    // '/index',
+    'test',
+    'index',
     // '/sys',
     // '/user',
     // '/role',
     // '/nested-group',
-    // '/nested',
-    // '/nested1-1',
-    // '/nested1-2',
+    'nested',
+    'nested1',
+    'nested1-1',
+    'nested1-2',
+    'nested2',
+    'nested2-1',
+    'nested2-2',
     // '/tools',
     // '/clipboard',
     // '/editor',
@@ -212,15 +247,19 @@ export const routesConfig = () => {
     // '/ocr',
     // '/upload',
     // '/permission',
-    // '/excel',
-    // '/in',
-    // '/out',
+    // 'excel',
+    // 'in',
+    // 'out',
     ...roleNames
   ]
 
   roleArr = [...new Set(roleArr)]
 
-  store.commit('setMenu', filterMenu(menuJson, roleArr))
-  store.commit('setRoutes', filterRoutes(menuJson))
+  let menu = filterMenu(menuJson, roleArr)
+
+  let routers = filterRoutes(menuJson, menu)
+
+  store.commit('setMenu', menu)
+  store.commit('setRoutes', routers)
   store.commit('setPermissions', roleArr)
 }
