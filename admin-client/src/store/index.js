@@ -2,6 +2,7 @@
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { userInfoReq } from '@/apis'
+import { duplicateRemoval } from '@/utils'
 // Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -13,7 +14,8 @@ export default new Vuex.Store({
     propList: [],
     menu: [],
     routes: [],
-    permissions: []
+    permissions: [],
+    historyList: []
   },
   mutations: {
     // 侧边导航收缩控制
@@ -43,6 +45,10 @@ export default new Vuex.Store({
     // 设置setPermissions
     setPermissions(state, payload = []) {
       state.permissions = payload
+    },
+    // 设置路由历史
+    setHistoryList(state, payload = []) {
+      state.historyList = duplicateRemoval(payload, 'name')
     }
   },
   actions: {

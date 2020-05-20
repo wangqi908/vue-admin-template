@@ -1,9 +1,17 @@
 <template>
-  <div class='router-history'>
-    <div :class="['item','flex-center','add-transition',acitveName===item.name?'active':'']" v-for="(item, index) in list" :key="index"
-      @click="go(item)">
+  <div class="router-history">
+    <div
+      :class="['item','flex-center','add-transition',acitveName===item.name?'active':'']"
+      v-for="(item, index) in list"
+      :key="index"
+      @click="go(item)"
+    >
       <span>{{item.routerName}}</span>
-      <div class="del add-transition flex-center" v-if="list.length>1" @click.stop="del(item,index)">x</div>
+      <div
+        class="del add-transition flex-center"
+        v-if="list.length>1"
+        @click.stop="del(item,index)"
+      >x</div>
     </div>
   </div>
 </template>
@@ -13,47 +21,47 @@ export default {
   components: {},
   data() {
     return {
-      acitveName: "",
+      acitveName: '',
       list: []
-    };
+    }
   },
   methods: {
     go(item) {
-      this.$router.push({ name: item.name });
+      this.$router.push({ name: item.name })
     },
     del(item, index) {
-      let { list, acitveName } = this;
-      if (list.length === 1) return;
-      list.splice(index, 1);
+      let { list, acitveName } = this
+      if (list.length === 1) return
+      list.splice(index, 1)
 
-      this.$store.commit("setHistoryList", list);
+      this.$store.commit('setHistoryList', list)
       if (item.name === acitveName) {
-        let lastName = list[list.length - 1].name;
-        this.$router.push({ name: lastName });
+        let lastName = list[list.length - 1].name
+        this.$router.push({ name: lastName })
       }
     },
     initAcitveName() {
-      this.acitveName = this.$router.history.current.name;
+      this.acitveName = this.$router.history.current.name
     }
   },
   created() {
-    this.initAcitveName();
-    this.list = this.$store.state.historyList;
+    this.initAcitveName()
+    this.list = this.$store.state.historyList
   },
   computed: {
     historyList() {
-      return this.$store.state.historyList;
+      return this.$store.state.historyList
     }
   },
   watch: {
     historyList(val) {
-      this.list = val;
+      this.list = val
     },
-    $route(to) {
-      this.initAcitveName();
+    $route() {
+      this.initAcitveName()
     }
   }
-};
+}
 </script>
 
 <style lang='scss'>

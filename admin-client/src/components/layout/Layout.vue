@@ -10,6 +10,7 @@
       </div>
       <div class="main">
         <MyBreadcrumb />
+        <MyRouterHistory />
         <transition name="fade" mode="out-in">
           <router-view />
         </transition>
@@ -20,12 +21,13 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { Head, Menu, MyBreadcrumb } from '@/components'
+import { Head, Menu, MyBreadcrumb, MyRouterHistory } from '@/components'
 export default {
   components: {
     Head,
     Menu,
-    MyBreadcrumb
+    MyBreadcrumb,
+    MyRouterHistory
   },
   data() {
     return {
@@ -33,10 +35,11 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setUserInfo', 'setToken']),
+    ...mapMutations(['setUserInfo', 'setToken', 'setHistoryList']),
     logout() {
       this.setToken()
       this.setUserInfo()
+      this.setHistoryList()
       this.$router.push('/login')
     }
   },
