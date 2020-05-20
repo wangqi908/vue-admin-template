@@ -99,7 +99,7 @@ export default {
     .menutree {
       .el-submenu__title,
       .el-menu-item {
-        color: #fff;
+        color: rgb(201, 201, 201);
       }
 
       .is-active {
@@ -114,15 +114,6 @@ export default {
     .el-submenu__title:active,
     .el-submenu__title:hover {
       background-color: rgba(125, 125, 232, 0.2);
-    }
-
-    .menutree .is-active {
-      .el-submenu__title {
-        color: #409eff;
-      }
-      i {
-        color: #409eff;
-      }
     }
   }
   .el-menu:not(.el-menu--collapse) {
