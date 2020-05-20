@@ -1,22 +1,23 @@
 <template>
   <div class>
-    <div v-role-show="['index']">
+    <div v-role="['index']">
       <p>index 权限可见</p>
     </div>
 
-    <div v-role-show="['clipboard']">
+    <div v-role="['clipboard']">
       <p>clipboard 权限可见</p>
     </div>
 
-    <div v-role-show="['user','role']">
+    <div v-role="['user','role']">
       <p>user role 权限可见</p>
+    </div>
+
+    <div v-role="['user-add']">
+      <p>user添加</p>
     </div>
   </div>
 </template>
 
 <script>
-import roleShow from '@/directive/roles-show'
-export default {
-  directives: { roleShow }
-}
+export default {}
 </script>

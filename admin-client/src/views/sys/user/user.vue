@@ -8,7 +8,7 @@
           <i class="el-icon-close"></i>
           <span>删除</span>
         </el-button>
-        <el-button type="text" @click="add">
+        <el-button type="text" @click="add" v-role="['user-add']">
           <i class="el-icon-plus"></i>
           <span>添加用户</span>
         </el-button>

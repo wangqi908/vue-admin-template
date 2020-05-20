@@ -8,7 +8,7 @@
         <el-input type="password" v-model="ruleForm.password" autocomplete="off" show-password></el-input>
       </el-form-item>
       <el-form-item label="确认密码" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
+        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off" show-password></el-input>
       </el-form-item>
       <el-form-item label="上传头像">
         <my-upload v-model="fileList"></my-upload>

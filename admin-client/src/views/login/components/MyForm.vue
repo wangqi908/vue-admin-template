@@ -14,6 +14,7 @@
         v-model="ruleForm.password"
         autocomplete="off"
         placeholder="密码"
+        show-password
         @keyup.enter.native="submitForm('ruleForm')"
       ></el-input>
     </el-form-item>

@@ -5,7 +5,8 @@ import store from './store'
 import '@/assets/css/index.scss'
 // import './element-variables.scss'
 import filters from '@/utils/filters'
-import i18n from '@/i18n'
+import directives from '@/utils/directives'
+import i18n from '@/utils/i18n'
 import BaiduMap from 'vue-baidu-map'
 import { components } from '@/components'
 
@@ -18,6 +19,7 @@ Vue.use(BaiduMap, {
 })
 
 Vue.use(filters)
+Vue.use(directives)
 
 new Vue({
   router,
