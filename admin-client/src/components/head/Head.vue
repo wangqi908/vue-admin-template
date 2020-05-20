@@ -6,7 +6,10 @@
       </p>
     </div>
     <ul class="btnBox">
-      <li class="liItem">
+      <li class="liItem add-transition">
+        <MyScreenfull />
+      </li>
+      <li class="liItem add-transition">
         <el-dropdown>
           <span class="el-dropdown-link touxiang">
             <img :src="avatar" alt />
@@ -24,10 +27,9 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex'
+import MyScreenfull from './MyScreenfull'
 export default {
-  data() {
-    return {}
-  },
+  components: { MyScreenfull },
   methods: {
     ...mapMutations(['setUserInfo', 'setToken']),
     signOut() {

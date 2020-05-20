@@ -1,4 +1,4 @@
-export { default as Head } from './Head'
+export { default as Head } from './head/Head'
 export { default as Menu } from './menu/Menu'
 export { default as MyEditor } from './MyEditor'
 export { default as MySticky } from './MySticky'
