@@ -7,7 +7,7 @@ const handleElementShow = (el, binding) => {
     value.filter(v => {
       return permissions.indexOf(v) > -1
     }).length > 0
-  el.style.display = isShow ? 'block' : 'none'
+  el.style.display = isShow ? '' : 'none'
 }
 
 let directives = {

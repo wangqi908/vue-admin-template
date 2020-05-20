@@ -1,10 +1,10 @@
 <template>
   <div class="page-box">
     <!-- 表格 -->
-    <div class="table">
+    <div class="table" v-role="['user-page']">
       <!-- 操作按钮 -->
       <div class="table-btn">
-        <el-button type="text" @click="del">
+        <el-button type="text" @click="del" v-role="['user-remove']">
           <i class="el-icon-close"></i>
           <span>删除</span>
         </el-button>
@@ -30,10 +30,10 @@
         <el-table-column label="注册时间" show-overflow-tooltip>
           <template slot-scope="scope">{{scope.row.createTime|allTimeFilter}}</template>
         </el-table-column>
-        <el-table-column fixed="right" label="操作" min-width="50">
+        <el-table-column fixed="right" label="操作" min-width="50" class="test">
           <template slot-scope="scope">
-            <el-button @click="check(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="change(scope.row)" type="text" size="small">修改</el-button>
+            <el-button @click="check(scope.row)" type="text" size="small" v-role="['user-view']">查看</el-button>
+            <el-button @click="change(scope.row)" type="text" size="small" v-role="['user-edit']">修改</el-button>
           </template>
         </el-table-column>
       </el-table>
