@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { userInfoReq } from '@/apis'
 import { duplicateRemoval } from '@/utils'
-// Vue.use(Vuex)
+import charts from './charts'
 
 export default new Vuex.Store({
   state: {
@@ -64,7 +64,7 @@ export default new Vuex.Store({
       })
     }
   },
-  modules: {},
+  modules: { charts },
   plugins: [
     createPersistedState({
       reducer(val) {

@@ -11,9 +11,11 @@
       <div class="main">
         <MyBreadcrumb />
         <MyRouterHistory />
-        <transition name="fade" mode="out-in">
-          <router-view />
-        </transition>
+        <div class="content">
+          <transition name="fade" mode="out-in">
+            <router-view />
+          </transition>
+        </div>
       </div>
     </div>
   </div>
@@ -47,7 +49,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang='scss'>
 html,
 body {
   width: 100%;
@@ -77,7 +79,9 @@ body {
   overflow: auto;
   flex: 1;
   background-color: #f8f8f8;
-  margin: 10px;
   box-sizing: border-box;
+  .content {
+    margin: 10px;
+  }
 }
 </style>

@@ -1,17 +1,19 @@
 <template>
-  <div>
-    index
-    <MyMap />
-    <MyEcharts />
+  <div class="index">
+    <CardGroup />
+    <ChartGroup />
   </div>
 </template>
 
 <script>
-import { MyMap, MyEcharts } from './components'
+import { CardGroup, ChartGroup } from './components'
 export default {
-  components: { MyMap, MyEcharts }
+  components: { CardGroup, ChartGroup }
 }
 </script>
 
-<style>
+<style lang="scss" >
+.index {
+  border: 1px solid #000;
+}
 </style>

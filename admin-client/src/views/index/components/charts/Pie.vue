@@ -1,15 +1,18 @@
 <template>
-  <div id="main" style="width: 100%;height:400px;"></div>
+  <div id="pie" style="width: 100%;height:300px;"></div>
 </template>
 
 <script>
-import echarts from '@/lib/echarts'
-
+let echarts = require('echarts/lib/echarts')
+require('echarts/lib/chart/pie')
+// // 引入提示框和标题组件
+require('echarts/lib/component/tooltip')
+require('echarts/lib/component/title')
+require('echarts/lib/component/legend')
 export default {
   methods: {
     initData() {
-      let myChart = echarts.init(document.getElementById('main'), 'macarons')
-      // 指定图表的配置项和数据
+      let myChart = echarts.init(document.getElementById('pie'), 'macarons')
       let option = {
         tooltip: {
           trigger: 'item',
@@ -17,7 +20,7 @@ export default {
         },
         legend: {
           orient: 'vertical',
-          x: 'left',
+          left: 10,
           data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
         },
         series: [
@@ -27,22 +30,18 @@ export default {
             radius: ['50%', '70%'],
             avoidLabelOverlap: false,
             label: {
-              normal: {
-                show: false,
-                position: 'center'
-              },
-              emphasis: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
                 show: true,
-                textStyle: {
-                  fontSize: '30',
-                  fontWeight: 'bold'
-                }
+                fontSize: '30',
+                fontWeight: 'bold'
               }
             },
             labelLine: {
-              normal: {
-                show: false
-              }
+              show: false
             },
             data: [
               { value: 335, name: '直接访问' },
