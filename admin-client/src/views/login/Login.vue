@@ -11,12 +11,10 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style scoped>
 .login {
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #454466;
 }
 </style>

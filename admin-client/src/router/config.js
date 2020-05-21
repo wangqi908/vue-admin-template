@@ -265,7 +265,7 @@ export const routesConfig = () => {
   let menu = filterMenu(menuJson, roleArr, true)
 
   let routers = filterRoutes(menuJson, filterMenu(menuJson, roleArr, false))
-  console.log(routers)
+
   if (router) {
     resetRouter()
     router.addRoutes(routers)

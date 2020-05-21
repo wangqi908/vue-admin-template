@@ -1,5 +1,5 @@
 <template>
-  <div class="login-input-box">
+  <div class="login-form">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="ruleForm.username" autocomplete="off"></el-input>
@@ -86,12 +86,43 @@ export default {
 </script>
 
 <style lang='scss'>
-.login-input-box {
-  width: 400px;
-  height: fit-content;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: rgba(224, 224, 224, 0.3);
+.login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding-top: 160px;
+  .el-form-item__label {
+    color: rgb(226, 226, 226);
+  }
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgb(226, 226, 226);
+  }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .submit {
+    width: 100%;
+    color: #fff;
+    border: 0;
+    background: #7d7de8;
+    &:hover {
+      background: #9e9ef3;
+    }
+    &:focus {
+      background: #5454db;
+    }
+    &:active {
+      background: #5454db;
+    }
+  }
+  .tip {
+    color: rgb(226, 226, 226);
+    font-size: 14px;
+    span {
+      margin-right: 10px;
+    }
+  }
 }
 </style>

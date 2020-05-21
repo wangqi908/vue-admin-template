@@ -1,29 +1,36 @@
 <template>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" class="login-form">
-    <el-form-item prop="username">
-      <el-input
-        v-model.number="ruleForm.username"
-        placeholder="用户名"
-        @keyup.enter.native="submitForm('ruleForm')"
-      ></el-input>
-    </el-form-item>
+  <div class="login-form">
+    <h2 class="title">系统登录</h2>
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm">
+      <el-form-item prop="username">
+        <el-input
+          v-model.number="ruleForm.username"
+          placeholder="用户名"
+          @keyup.enter.native="submitForm('ruleForm')"
+        ></el-input>
+      </el-form-item>
 
-    <el-form-item prop="password">
-      <el-input
-        type="password"
-        v-model="ruleForm.password"
-        autocomplete="off"
-        placeholder="密码"
-        show-password
-        @keyup.enter.native="submitForm('ruleForm')"
-      ></el-input>
-    </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          type="password"
+          v-model="ruleForm.password"
+          autocomplete="off"
+          placeholder="密码"
+          show-password
+          @keyup.enter.native="submitForm('ruleForm')"
+        ></el-input>
+      </el-form-item>
 
-    <el-form-item class="footer">
-      <el-button type="primary" @click="submitForm('ruleForm')" :loading="loading">登录</el-button>
-      <el-button @click="$router.push('/register')">注册</el-button>
-    </el-form-item>
-  </el-form>
+      <el-form-item class="footer">
+        <el-button type="primary" @click="submitForm('ruleForm')" :loading="loading">登录</el-button>
+        <el-button @click="$router.push('/register')">注册</el-button>
+      </el-form-item>
+    </el-form>
+    <div class="tip">
+      <span>账户:admin</span>
+      <span>密码:admin</span>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -98,24 +105,39 @@ export default {
 
 <style lang="scss">
 .login-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding-top: 160px;
+  .title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: rgb(226, 226, 226);
+  }
   .footer {
     display: flex;
     justify-content: space-between;
   }
-}
-.submit {
-  width: 100%;
-  color: #fff;
-  border: 0;
-  background: #7d7de8;
-  &:hover {
-    background: #9e9ef3;
+  .submit {
+    width: 100%;
+    color: #fff;
+    border: 0;
+    background: #7d7de8;
+    &:hover {
+      background: #9e9ef3;
+    }
+    &:focus {
+      background: #5454db;
+    }
+    &:active {
+      background: #5454db;
+    }
   }
-  &:focus {
-    background: #5454db;
-  }
-  &:active {
-    background: #5454db;
+  .tip {
+    color: rgb(226, 226, 226);
+    font-size: 14px;
+    span {
+      margin-right: 10px;
+    }
   }
 }
 </style>
