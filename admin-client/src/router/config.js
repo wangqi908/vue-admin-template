@@ -1,6 +1,9 @@
 // import { filterRoutes, filterMenu } from '@/utils'
 import { filterMenu, filterRoutes } from '@/utils'
 import store from '@/store'
+// import { Promise } from 'core-js'
+import router from './index.js'
+import { resetRouter } from '@/router'
 
 /* 
 notMenu: true //不是菜单
@@ -281,6 +284,10 @@ export const routesConfig = () => {
 
   let routers = filterRoutes(menuJson, filterMenu(menuJson, roleArr, false))
 
+  if (router) {
+    resetRouter()
+    router.addRoutes(routers)
+  }
   store.commit('setMenu', menu)
   store.commit('setRoutes', routers)
   store.commit('setPermissions', roleArr)

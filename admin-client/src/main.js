@@ -9,9 +9,10 @@ import directives from '@/utils/directives'
 import i18n from '@/utils/i18n'
 import BaiduMap from 'vue-baidu-map'
 import { components } from '@/components'
+import { routesConfig } from '@/router/config'
 
 Vue.config.productionTip = false
-
+routesConfig()
 Vue.use(components)
 
 Vue.use(BaiduMap, {

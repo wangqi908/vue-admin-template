@@ -1,8 +1,6 @@
 // import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
-import { routesConfig } from '@/router/config'
-routesConfig()
 
 // Vue.use(VueRouter)
 // 多次点击相同路径报错处理
@@ -10,9 +8,18 @@ const routerPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error => error)
 }
-const router = new VueRouter({
-  routes: store.state.routes
-})
+
+const createRouter = () =>
+  new VueRouter({
+    routes: []
+  })
+
+const router = createRouter()
+
+export function resetRouter() {
+  const newRouter = createRouter()
+  router.matcher = newRouter.matcher // the relevant part
+}
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || '管理中心'
