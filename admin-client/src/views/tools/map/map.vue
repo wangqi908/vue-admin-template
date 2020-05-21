@@ -1,6 +1,5 @@
 <template>
   <div class="my-map">
-    <!-- <baidu-map class="map" :center="center" :zoom="zoom" @ready="handler"></baidu-map> -->
     <baidu-map class="map" :center="center" :zoom="zoom" @ready="handler" :scroll-wheel-zoom="true"></baidu-map>
   </div>
 </template>
@@ -38,8 +37,7 @@ export default {
 
 <style lang='scss'>
 .my-map {
-  height: 400px;
-  border: 1px solid #000;
+  height: 100%;
   .map {
     width: 100%;
     height: 100%;

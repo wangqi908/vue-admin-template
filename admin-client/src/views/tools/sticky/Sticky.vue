@@ -1,10 +1,10 @@
 <template>
-  <div class='sticky'>
+  <div class="sticky">
     <p>Test</p>
     <p>Test</p>
     <p>Test</p>
     <p>Test</p>
-    <my-sticky :top='120'>
+    <my-sticky :top="120">
       <el-button>固定</el-button>
     </my-sticky>
     <p>Test</p>
@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import { MySticky } from "@/components";
+import { MySticky } from '@/components'
 export default {
   components: { MySticky }
-};
+}
 </script>
 
 <style lang="scss">

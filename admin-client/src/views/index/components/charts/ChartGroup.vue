@@ -26,10 +26,10 @@
 </template>
 
 <script>
-import Area from './charts/Area.vue'
-import Pie from './charts/Pie.vue'
-import AnimationBar from './charts/AnimationBar.vue'
-import Scatter from './charts/Scatter.vue'
+import Area from './Area.vue'
+import Pie from './Pie.vue'
+import AnimationBar from './AnimationBar.vue'
+import Scatter from './Scatter.vue'
 export default {
   components: { Area, Pie, AnimationBar, Scatter }
 }

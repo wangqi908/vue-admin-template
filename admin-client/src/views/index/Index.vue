@@ -11,9 +11,3 @@ export default {
   components: { CardGroup, ChartGroup }
 }
 </script>
-
-<style lang="scss" >
-.index {
-  border: 1px solid #000;
-}
-</style>

@@ -80,8 +80,11 @@ body {
   flex: 1;
   background-color: #f8f8f8;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
   .content {
     margin: 10px;
+    flex: 1;
   }
 }
 </style>

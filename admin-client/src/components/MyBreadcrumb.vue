@@ -45,6 +45,7 @@ export default {
 .breadcrumb {
   padding: 10px;
   background-color: #fff;
+  flex-shrink: 0;
   span {
     display: flex;
     .item {

@@ -64,13 +64,14 @@ export default {
 }
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 .router-history {
   display: flex;
   background-color: #fff;
   padding: 4px 10px;
   overflow: auto;
   font-size: 12px;
+  flex-shrink: 0;
   .item {
     flex-shrink: 0;
     padding: 4px 6px;

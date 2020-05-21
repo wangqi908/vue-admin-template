@@ -109,6 +109,13 @@ const menuJson = [
         meta: { requireAuth: true, title: '头像上传' }
       },
       {
+        title: '地图',
+        path: 'map',
+        name: 'map',
+        component: () => import(/* webpackChunkName: "map" */ '@/views/tools/map/map'),
+        meta: { requireAuth: true, title: '地图' }
+      },
+      {
         title: '权限测试',
         path: 'permission',
         name: 'permission',
@@ -241,6 +248,7 @@ export const routesConfig = () => {
   let roleArr = [
     'test',
     'index',
+    'map',
     // '/sys',
     // '/user',
     // '/role',
