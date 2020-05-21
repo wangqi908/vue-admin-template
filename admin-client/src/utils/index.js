@@ -78,8 +78,9 @@ export const filterMenu = (menuJson = [], roleArr = [], forMenu = true) => {
   let routers = deepCopy(menuJson)
   let roles = deepCopy(roleArr)
   let res = intersection(routers, roles)
+
   if (forMenu) {
-    res = res.filter(ele => !ele.notMenu)
+    res = res.filter(ele => !ele.notMenu && !ele.out)
   }
 
   res.forEach(item => {
@@ -87,6 +88,7 @@ export const filterMenu = (menuJson = [], roleArr = [], forMenu = true) => {
       item.children = filterMenu(item.children, roleArr, forMenu)
     }
   })
+
   return res
 }
 
@@ -96,14 +98,15 @@ export const filterRoutes = (menuJson = [], menu = []) => {
   let arr = []
   let layout = routes.find(ele => ele.type === 'layout')
   let redirect = routes.find(ele => ele.type === 'redirect')
+  let notFound = routes.find(ele => ele.type === 'notFound')
   arr.unshift(redirect)
   layout.children = menu
   routes.forEach(item => {
-    if (item.out) {
-      arr.push(item)
-    }
+    // if (item.out && !item.type === 'notFound') {
+    if (item.out && item.type !== 'notFound') arr.push(item)
   })
   arr = arr.concat(layout)
+  arr.push(notFound)
   return arr
 }
 

@@ -23,21 +23,25 @@ export function resetRouter() {
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || '管理中心'
+  let title = to.meta.title || to.meta.routerName
+  let name = to.name
+
   if (to.meta.requireAuth) {
     let token = store.state.token
-    if (token) {
-      let historyList = store.state.historyList
-      let title = to.meta.title || to.meta.routerName
-      let name = to.name
 
-      let withoutRouters = ['login', 'register']
-      if (withoutRouters.indexOf(name) === -1) {
-        historyList.push({
-          name,
-          routerName: title
-        })
-        store.commit('setHistoryList', historyList)
-      }
+    // 记录路由历史
+    let historyList = store.state.historyList
+
+    let withoutRouters = ['login', 'register', 'notFound']
+    if (withoutRouters.indexOf(name) === -1) {
+      historyList.push({
+        name,
+        routerName: title
+      })
+      store.commit('setHistoryList', historyList)
+    }
+
+    if (token) {
       next()
     } else {
       next({ path: `/login?re=${decodeURIComponent(to.fullPath)}` })

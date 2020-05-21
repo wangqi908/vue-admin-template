@@ -1,8 +1,5 @@
-// import { filterRoutes, filterMenu } from '@/utils'
 import { filterMenu, filterRoutes } from '@/utils'
 import store from '@/store'
-// import { Promise } from 'core-js'
-// import router from './index.js'
 import router, { resetRouter } from '@/router'
 
 /* 
@@ -24,6 +21,19 @@ const menuJson = [
     component: () => import(/* webpackChunkName: "login" */ '@/views/login/login'),
     out: true, //布局以外的页面
     meta: { title: '管理系统登录' }
+  },
+  {
+    path: '*',
+    redirect: '/404',
+    type: 'notFound'
+  },
+  {
+    title: 'notFound',
+    path: '/404',
+    name: 'notFound',
+    component: () => import(/* webpackChunkName: "notFound" */ '@/views/error/notFound'),
+    out: true,
+    meta: { title: 'notFound' }
   },
   {
     title: '注册',
@@ -173,7 +183,7 @@ const menuJson = [
           },
           {
             title: 'nested1-1-view',
-            path: 'nested1-1/view',
+            path: 'nested1-1/view/:id?/:type?',
             name: 'nested1-1-view',
             notMenu: true,
             component: () => import(/* webpackChunkName: "nested1-1-view" */ '@/views/nested/nested1-1-view'),
@@ -248,42 +258,14 @@ export const routesConfig = () => {
 
   const roleNames = permissions.map(ele => ele.role_name)
 
-  let roleArr = [
-    'test',
-    'index',
-    'map',
-    // '/sys',
-    // '/user',
-    // '/role',
-    // 'nested',
-    // 'nested1',
-    // 'nested1-1',
-    // 'nested1-2',
-    // 'nested2',
-    // 'nested2-1',
-    // 'nested2-2',
-    // 'nested1-1-view',
-    // '/tools',
-    // '/clipboard',
-    // '/editor',
-    // '/canvas2pic',
-    // '/sticky',
-    // '/languages',
-    // '/ocr',
-    // '/upload',
-    // '/permission',
-    // 'excel',
-    // 'in',
-    // 'out',
-    ...roleNames
-  ]
+  let roleArr = ['test', 'index', 'map', ...roleNames]
 
   roleArr = [...new Set(roleArr)]
 
   let menu = filterMenu(menuJson, roleArr, true)
 
   let routers = filterRoutes(menuJson, filterMenu(menuJson, roleArr, false))
-
+  console.log(routers)
   if (router) {
     resetRouter()
     router.addRoutes(routers)
