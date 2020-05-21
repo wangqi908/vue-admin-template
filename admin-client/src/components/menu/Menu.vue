@@ -94,7 +94,7 @@ export default {
   height: 100%;
   justify-content: space-between;
   .el-menu {
-    background-color: #2d2c41;
+    background-color: #273952;
     border: 0;
     .menutree {
       .el-submenu__title,
@@ -113,7 +113,7 @@ export default {
     .el-submenu__title:focus,
     .el-submenu__title:active,
     .el-submenu__title:hover {
-      background-color: rgba(125, 125, 232, 0.2);
+      background-color: #38556a;
     }
   }
   .el-menu:not(.el-menu--collapse) {
@@ -132,7 +132,7 @@ export default {
     transition: all 0.5s;
     &:hover {
       cursor: pointer;
-      background-color: rgba(172, 172, 172, 0.4);
+      background-color: #38556a;
       color: rgb(141, 141, 141);
     }
     &:active {

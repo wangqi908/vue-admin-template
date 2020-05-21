@@ -69,7 +69,7 @@ export default {
 <style lang="scss">
 .global-head {
   height: 50px;
-  background-color: #7d7de8;
+  background-color: #496081;
   display: flex;
   align-items: center;
   /* padding: 0 20px; */
@@ -106,7 +106,7 @@ export default {
         color: #fff;
       }
       &:hover {
-        background-color: #adacec;
+        background-color: #38556a;
         cursor: pointer;
       }
       .touxiang {

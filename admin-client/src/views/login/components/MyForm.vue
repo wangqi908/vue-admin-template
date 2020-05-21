@@ -37,7 +37,7 @@
 import { mapMutations, mapActions } from 'vuex'
 import { loginReq } from '@/apis'
 import { routesConfig } from '@/router/config'
-import { usernameValidator, passwordValidator } from '@/utils/validator'
+import { usernameValidator, loginPasswordValidator } from '@/utils/validator'
 export default {
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
       },
       rules: {
         username: usernameValidator,
-        password: passwordValidator
+        password: loginPasswordValidator
       }
     }
   },

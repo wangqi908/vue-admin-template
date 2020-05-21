@@ -15,6 +15,6 @@ export default {
 .login {
   width: 100%;
   height: 100%;
-  background-color: #454466;
+  background-color: #4c6983;
 }
 </style>

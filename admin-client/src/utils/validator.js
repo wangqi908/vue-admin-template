@@ -22,6 +22,7 @@ export const usernameValidator = [
   }
 ]
 export const passwordValidator = [{ required: true, validator: validatePass, trigger: 'change' }]
+export const loginPasswordValidator = [{ required: true, message: '请输入密码', trigger: 'change' }]
 export const roleNameValidator = [
   { required: true, message: '请输入角色名', trigger: 'change' },
   {

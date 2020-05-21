@@ -72,7 +72,7 @@ body {
 }
 .aside {
   overflow: auto;
-  background-color: #2d2c41;
+  background-color: #273952;
   padding-top: 10px;
 }
 .main {
