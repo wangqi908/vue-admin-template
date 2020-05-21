@@ -13,7 +13,7 @@ import echarts from 'echarts'
 export default {
   methods: {
     initData() {
-      let myChart = echarts.init(document.getElementById('pie'), 'macarons')
+      let pieChart = echarts.init(document.getElementById('pie'), 'macarons')
       let option = {
         tooltip: {
           trigger: 'item',
@@ -55,9 +55,9 @@ export default {
         ]
       }
 
-      myChart.setOption(option)
+      pieChart.setOption(option)
       window.addEventListener('resize', () => {
-        myChart.resize()
+        pieChart.resize()
       })
     }
   },

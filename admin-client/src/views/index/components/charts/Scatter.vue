@@ -1,5 +1,5 @@
 <template>
-  <div id="echarts" style="width: 100%;height:300px;"></div>
+  <div id="scatter" style="width: 100%;height:300px;"></div>
 </template>
 
 <script>
@@ -9,8 +9,11 @@ import echarts from 'echarts'
 export default {
   methods: {
     initData() {
-      let myChart = echarts.init(document.getElementById('echarts'), 'macarons')
-      let option = (option = {
+      let scatterChart = echarts.init(
+        document.getElementById('scatter'),
+        'macarons'
+      )
+      let option = {
         xAxis: {},
         yAxis: {},
         series: [
@@ -32,11 +35,11 @@ export default {
             type: 'scatter'
           }
         ]
-      })
+      }
 
-      myChart.setOption(option)
+      scatterChart.setOption(option)
       window.addEventListener('resize', () => {
-        myChart.resize()
+        scatterChart.resize()
       })
     }
   },

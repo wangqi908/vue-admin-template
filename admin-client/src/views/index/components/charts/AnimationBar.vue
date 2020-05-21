@@ -1,36 +1,35 @@
 <template>
   <div>
-    <div id="animation-bar" style="width: 100%;height:300px;"></div>
+    <div id="animation" style="width: 100%;height:300px;"></div>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 import echarts from 'echarts'
-// let echarts = require('echarts/lib/echarts')
-// require('echarts/lib/chart/bar')
-// // // 引入提示框和标题组件
-// require('echarts/lib/component/tooltip')
-// require('echarts/lib/component/title')
-// require('echarts/lib/component/legend')
-// require('echarts/lib/component/toolbox')
+
 export default {
   data() {
     return {
       myBarData1: [],
       myBarData2: [],
-      myXAxisData: []
+      myXAxisData: [],
+      barChart: null
     }
   },
   methods: {
     ...mapMutations('charts', ['setBarData']),
-    initData() {
-      let myChart = echarts.init(
-        document.getElementById('animation-bar'),
+    initChart() {
+      let barChart = echarts.init(
+        document.getElementById('animation'),
         'macarons'
       )
-      let { barData1, barData2, xAxisData } = this
-      myChart.clear()
+      this.barChart = barChart
+      this.initData()
+    },
+    initData() {
+      let { barData1, barData2, xAxisData, barChart } = this
+      barChart.clear()
       let option = {
         title: {
           text: '柱状图动画延迟'
@@ -82,9 +81,9 @@ export default {
         }
       }
 
-      myChart.setOption(option)
+      barChart.setOption(option)
       window.addEventListener('resize', () => {
-        myChart.resize()
+        barChart.resize()
       })
     }
   },
@@ -92,7 +91,7 @@ export default {
     this.setBarData()
   },
   mounted() {
-    this.initData()
+    this.initChart()
   },
   computed: {
     ...mapState('charts', ['barData1', 'barData2', 'xAxisData'])

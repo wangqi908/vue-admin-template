@@ -12,7 +12,7 @@ import echarts from 'echarts'
 export default {
   methods: {
     initData() {
-      let myChart = echarts.init(document.getElementById('area'), 'macarons')
+      let areaChart = echarts.init(document.getElementById('area'), 'macarons')
       let option = {
         tooltip: {
           trigger: 'axis',
@@ -93,9 +93,9 @@ export default {
           }
         ]
       }
-      myChart.setOption(option)
+      areaChart.setOption(option)
       window.addEventListener('resize', () => {
-        myChart.resize()
+        areaChart.resize()
       })
     }
   },

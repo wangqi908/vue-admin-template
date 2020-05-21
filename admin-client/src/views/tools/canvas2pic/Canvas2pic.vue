@@ -13,7 +13,7 @@
         </li>
       </ul>
     </div>
-    <el-button @click="generatorImage">打印</el-button>
+    <el-button @click="generatorImage">生成</el-button>
     <img :src="bgurl" alt class="width100b" crossorigin="*" />
   </div>
 </template>
@@ -49,10 +49,12 @@ export default {
 .canvas2pic {
   .img-box {
     border: 1px solid rgb(39, 24, 245);
+    padding: 10px;
+    box-sizing: border-box;
     width: 200px;
     background-color: #fff;
     img {
-      width: 200px;
+      width: 100%;
       height: 200px;
     }
   }
