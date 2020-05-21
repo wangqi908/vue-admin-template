@@ -9,7 +9,8 @@ const cdn = {
     'https://cdn.bootcss.com/vuex/3.1.1/vuex.js',
     'https://cdn.bootcss.com/vue-router/3.1.3/vue-router.js',
     'https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js',
-    'https://cdn.bootcdn.net/ajax/libs/tinymce/5.2.2/tinymce.min.js'
+    'https://cdn.bootcdn.net/ajax/libs/tinymce/5.2.2/tinymce.min.js',
+    'https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts-en.common.js'
   ]
 }
 
@@ -31,7 +32,8 @@ module.exports = {
       'vue-router': 'VueRouter',
       axios: 'axios',
       'element-ui': 'ELEMENT',
-      tinymce: 'tinymce'
+      tinymce: 'tinymce',
+      echarts: 'echarts'
     },
 
     plugins: [new BundleAnalyzerPlugin()]

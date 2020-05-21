@@ -3,8 +3,9 @@
 </template>
 
 <script>
-let echarts = require('echarts/lib/echarts')
-require('echarts/lib/chart/scatter')
+import echarts from 'echarts'
+// let echarts = require('echarts/lib/echarts')
+// require('echarts/lib/chart/scatter')
 export default {
   methods: {
     initData() {

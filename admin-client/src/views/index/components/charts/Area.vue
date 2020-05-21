@@ -3,10 +3,12 @@
 </template>
 
 <script>
-let echarts = require('echarts/lib/echarts')
-require('echarts/lib/chart/line')
-// // 引入提示框和标题组件
-require('echarts/lib/component/tooltip')
+// let echarts = require('echarts/lib/echarts')
+// require('echarts/lib/chart/line')
+// // // 引入提示框和标题组件
+// require('echarts/lib/component/tooltip')
+
+import echarts from 'echarts'
 export default {
   methods: {
     initData() {
