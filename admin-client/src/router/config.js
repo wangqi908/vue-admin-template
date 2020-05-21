@@ -2,8 +2,8 @@
 import { filterMenu, filterRoutes } from '@/utils'
 import store from '@/store'
 // import { Promise } from 'core-js'
-import router from './index.js'
-import { resetRouter } from '@/router'
+// import router from './index.js'
+import router, { resetRouter } from '@/router'
 
 /* 
 notMenu: true //不是菜单
