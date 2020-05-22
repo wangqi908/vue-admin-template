@@ -1,6 +1,11 @@
 <template>
   <div class="captcha-box">
-    <el-input v-model="captcha" autocomplete="off" placeholder="请输入验证码"></el-input>
+    <el-input
+      v-model="captcha"
+      autocomplete="off"
+      placeholder="请输入验证码"
+      @keyup.enter.native="keyEnter"
+    ></el-input>
     <div v-html="pic" class="captcha" @click="getCaptchaPic"></div>
   </div>
 </template>
@@ -19,6 +24,9 @@ export default {
       const res = await captcha()
       if (res.data.code !== 200) return
       this.pic = res.data.data
+    },
+    keyEnter() {
+      this.$emit('keyenter')
     }
   },
   created() {

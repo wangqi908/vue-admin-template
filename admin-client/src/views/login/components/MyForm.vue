@@ -22,7 +22,7 @@
       </el-form-item>
 
       <el-form-item prop="captcha">
-        <MyCaptcha :captcha.sync="ruleForm.captcha" />
+        <MyCaptcha :captcha.sync="ruleForm.captcha" @keyenter="submitForm('ruleForm')" />
       </el-form-item>
 
       <el-form-item class="footer">
@@ -76,7 +76,6 @@ export default {
         }
       })
     },
-
     async login() {
       let { username, password, captcha } = this.ruleForm
       let sendData = { username, password, captcha }
