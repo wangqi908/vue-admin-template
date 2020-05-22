@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import menutree from '@/components/menu/Menutree'
 import config from '../../../package'
 export default {
@@ -32,8 +32,11 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('menuStore', ['setDrawer']),
     handleSelect(routerName) {
+      if (this.isShowDrawer) this.setDrawer(false)
       this.$router.push({ name: routerName })
+
       this.activeRouterName = routerName
     }
   },
@@ -47,7 +50,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('menuStore', ['isCollapse', 'menu']),
+    ...mapState('menuStore', ['isCollapse', 'menu', 'isShowDrawer']),
     version() {
       return config.version
     }
@@ -86,7 +89,7 @@ export default {
     }
   }
   .el-menu:not(.el-menu--collapse) {
-    width: 200px;
+    width: 210px;
     border-right: 0;
   }
   .no-arrow {

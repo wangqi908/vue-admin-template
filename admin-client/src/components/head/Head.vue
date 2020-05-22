@@ -1,10 +1,10 @@
 <template>
   <div class="global-head">
     <div class="logo">
-      <CollapseMenuBtn v-if="clientWidth>middle" />
+      <CollapseMenuBtn v-if="isBigClient" />
       <DrawerMenuBtn v-else />
       <p>
-        <router-link to="/index">后台管理系统</router-link>
+        <router-link to="/index" v-if="$store.state.menuStore.isBigClient">后台管理系统</router-link>
       </p>
     </div>
     <ul class="btnBox">
@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     ...mapState(['userInfo']),
-    ...mapState('menuStore', ['clientWidth', 'middle']),
+    ...mapState('menuStore', ['isBigClient']),
     avatar() {
       let userInfo = this.userInfo
       let avatar = ''
@@ -66,8 +66,7 @@ export default {
       }
       return avatar
     }
-  },
-  created() {}
+  }
 }
 </script>
 

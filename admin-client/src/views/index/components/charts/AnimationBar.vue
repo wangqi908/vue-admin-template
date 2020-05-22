@@ -80,6 +80,13 @@ export default {
           return idx * 5
         }
       }
+      if (this.isBigClient) {
+        option.title = {
+          text: '柱状图动画延迟'
+        }
+      } else {
+        option.title = {}
+      }
 
       barChart.setOption(option)
       window.addEventListener('resize', () => {
@@ -94,7 +101,8 @@ export default {
     this.initChart()
   },
   computed: {
-    ...mapState('chartStore', ['barData1', 'barData2', 'xAxisData'])
+    ...mapState('chartStore', ['barData1', 'barData2', 'xAxisData']),
+    ...mapState('menuStore', ['isBigClient'])
   },
   watch: {
     xAxisData: {

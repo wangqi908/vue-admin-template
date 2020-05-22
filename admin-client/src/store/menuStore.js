@@ -3,8 +3,9 @@ export default {
   state: {
     isCollapse: '', //折叠菜单
     isShowDrawer: false, //抽屉
+    isBigClient: false, //是否是小屏幕
     big: 1000, //大于1000显示展开菜单
-    middle: 600, //1000-600折叠菜单,低于600菜单放入抽屉
+    small: 600, //1000-600折叠菜单,低于600菜单放入抽屉
     menu: [],
     clientWidth: '' //窗口宽度
   },
@@ -20,6 +21,10 @@ export default {
     // 设置窗口宽度
     setClientWidth(state, payload) {
       state.clientWidth = payload
+    },
+    // 设置是否是小屏幕
+    setSmClient(state, payload) {
+      state.isBigClient = payload
     },
     // 设置menu
     setMenu(state, payload = []) {

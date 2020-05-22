@@ -1,13 +1,13 @@
 <template>
   <div class="menu-wrap">
-    <Menu v-if="clientWidth>middle" />
+    <Menu v-if="isBigClient" />
 
     <el-drawer
       :visible.sync="show"
       :with-header="false"
       direction="ltr"
       class="menu-drawer"
-      size="220px"
+      size="210px"
       v-else
     >
       <Menu />
@@ -30,13 +30,15 @@ export default {
     ...mapMutations('menuStore', [
       'setCollapse',
       'setClientWidth',
-      'setDrawer'
+      'setDrawer',
+      'setSmClient'
     ]),
 
     setMeueCollapse(clientWidth) {
-      let { big, middle } = this
-      this.setCollapse(clientWidth < big && clientWidth > middle)
+      let { big, small } = this
+      this.setCollapse(clientWidth < big && clientWidth > small)
       this.setClientWidth(clientWidth)
+      this.setSmClient(clientWidth > small)
     },
 
     getClientWidth() {
@@ -50,6 +52,7 @@ export default {
   },
   created() {
     this.setMeueCollapse(document.body.clientWidth)
+    this.setSmClient(this.clientWidth > this.small)
   },
 
   mounted() {
@@ -68,8 +71,9 @@ export default {
       'isCollapse',
       'clientWidth',
       'big',
-      'middle',
-      'isShowDrawer'
+      'small',
+      'isShowDrawer',
+      'isBigClient'
     ])
   }
 }
