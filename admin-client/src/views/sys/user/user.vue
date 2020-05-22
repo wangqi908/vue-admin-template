@@ -19,7 +19,7 @@
         ref="multipleTable"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="50"></el-table-column>
+        <el-table-column type="selection" width="50" :selectable="isDisabled"></el-table-column>
         <el-table-column width="70">
           <template slot-scope="scope">
             <img :src="scope.row.http+scope.row.avatar" alt class="avatar" v-if="scope.row.avatar" />
@@ -33,7 +33,13 @@
         <el-table-column fixed="right" label="操作" min-width="50" class="test">
           <template slot-scope="scope">
             <el-button @click="check(scope.row)" type="text" size="small" v-role="['user-view']">查看</el-button>
-            <el-button @click="change(scope.row)" type="text" size="small" v-role="['user-edit']">修改</el-button>
+            <el-button
+              @click="change(scope.row)"
+              type="text"
+              size="small"
+              v-role="['user-edit']"
+              v-if="scope.row.username!=='admin'"
+            >修改</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -82,6 +88,9 @@ export default {
     }
   },
   methods: {
+    isDisabled(row) {
+      return row.username !== 'admin'
+    },
     //添加
     add() {
       this.showDialog = true

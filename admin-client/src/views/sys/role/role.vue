@@ -19,7 +19,7 @@
         ref="multipleTable"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="50"></el-table-column>
+        <el-table-column type="selection" width="50" :selectable="isDisabled"></el-table-column>
 
         <el-table-column prop="name" label="角色" show-overflow-tooltip></el-table-column>
         <el-table-column prop="remark" label="备注" show-overflow-tooltip></el-table-column>
@@ -27,7 +27,12 @@
         <el-table-column fixed="right" label="操作" min-width="50">
           <template slot-scope="scope">
             <el-button @click="check(scope.row)" type="text" size="small">查看</el-button>
-            <el-button @click="change(scope.row)" type="text" size="small">修改</el-button>
+            <el-button
+              @click="change(scope.row)"
+              type="text"
+              size="small"
+              v-if="scope.row.name!=='super'"
+            >修改</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -76,6 +81,9 @@ export default {
     }
   },
   methods: {
+    isDisabled(row) {
+      return row.name !== 'super'
+    },
     //添加
     add() {
       this.showDialog = true
