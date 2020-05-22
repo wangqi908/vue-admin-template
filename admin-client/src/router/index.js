@@ -11,7 +11,10 @@ VueRouter.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error => error)
 }
 
-const base = process.env.NODE_ENV === 'production' ? '/app' : '/'
+const { BASE_DIR } = require('../../config')
+
+const base = process.env.NODE_ENV === 'production' ? `/${BASE_DIR}` : '/'
+
 const createRouter = () =>
   new VueRouter({
     base,

@@ -12,10 +12,12 @@ const cdn = {
     'https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts-en.common.js'
   ]
 }
-const BASE_URL = process.env.NODE_ENV === 'production' ? '/app' : '/'
+const { BASE_DIR, PROD_URL } = require('./config')
+const publicPath = process.env.NODE_ENV === 'production' ? `/${BASE_DIR}` : '/'
+
 module.exports = {
-  publicPath: BASE_URL,
-  outputDir: 'app',
+  publicPath,
+  outputDir: BASE_DIR,
   assetsDir: 'static',
   productionSourceMap: false,
   devServer: {
@@ -23,7 +25,7 @@ module.exports = {
     open: true,
     proxy: {
       '/api': {
-        target: 'http://192.168.10.106/',
+        target: PROD_URL,
         changeOrigin: true
       }
     }
