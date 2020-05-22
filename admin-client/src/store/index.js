@@ -11,7 +11,6 @@ export default new Vuex.Store({
     pageSize: 8,
     token: '',
     userInfo: {},
-    propList: [],
     menu: [],
     routes: [],
     permissions: [],
@@ -30,10 +29,7 @@ export default new Vuex.Store({
     setUserInfo(state, payload = {}) {
       state.userInfo = payload
     },
-    // 设置propList
-    setPropList(state, payload = {}) {
-      state.propList = payload
-    },
+
     // 设置menu
     setMenu(state, payload = []) {
       state.menu = payload
@@ -71,8 +67,7 @@ export default new Vuex.Store({
         return {
           // 储存state
           token: val.token,
-          userInfo: val.userInfo,
-          propList: val.propList
+          userInfo: val.userInfo
         }
       }
     })

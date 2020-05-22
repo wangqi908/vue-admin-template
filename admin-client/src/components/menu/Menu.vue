@@ -19,9 +19,8 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState } from 'vuex'
 import menutree from '@/components/menu/Menutree'
-import { throttle } from '@/utils'
 import config from '../../../package'
 export default {
   components: {
@@ -33,33 +32,15 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setCollapse']),
     handleSelect(routerName) {
       this.$router.push({ name: routerName })
       this.activeRouterName = routerName
-    },
-
-    setMeueCollapse(clientWidth) {
-      this.setCollapse(clientWidth < 1000)
-    },
-
-    getClientWidth() {
-      window.addEventListener(
-        'resize',
-        throttle(() => {
-          this.setMeueCollapse(document.body.clientWidth)
-        }, 100)
-      )
     }
   },
   created() {
     this.activeRouterName = this.$route.meta.parentName || this.$route.name
-    this.setMeueCollapse(document.body.clientWidth)
   },
 
-  mounted() {
-    this.getClientWidth()
-  },
   watch: {
     $route(to) {
       this.activeRouterName = to.meta.parentName || to.name

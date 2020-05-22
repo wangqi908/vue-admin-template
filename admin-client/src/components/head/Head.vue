@@ -29,7 +29,7 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import MyScreenfull from './MyScreenfull'
-import CollapseMenuBtn from '@/components/menu/CollapseMenuBtn'
+import CollapseMenuBtn from './CollapseMenuBtn'
 export default {
   components: { MyScreenfull, CollapseMenuBtn },
   methods: {

@@ -6,7 +6,7 @@
 
     <div class="container">
       <div class="aside">
-        <Menu />
+        <MenuWrap />
       </div>
       <div class="main">
         <MyBreadcrumb />
@@ -23,11 +23,11 @@
 
 <script>
 import { mapMutations } from 'vuex'
-import { Head, Menu, MyBreadcrumb, MyRouterHistory } from '@/components'
+import { Head, MenuWrap, MyBreadcrumb, MyRouterHistory } from '@/components'
 export default {
   components: {
     Head,
-    Menu,
+    MenuWrap,
     MyBreadcrumb,
     MyRouterHistory
   },

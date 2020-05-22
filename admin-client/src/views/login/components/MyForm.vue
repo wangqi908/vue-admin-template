@@ -53,12 +53,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations([
-      'setToken',
-      'setUserInfo',
-      'setPropList',
-      'setHistoryList'
-    ]),
+    ...mapMutations(['setToken', 'setUserInfo', 'setHistoryList']),
     ...mapActions(['getUserInfoAction']),
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
@@ -97,7 +92,6 @@ export default {
   created() {
     this.setToken()
     this.setUserInfo()
-    this.setPropList()
     this.setHistoryList()
   }
 }
