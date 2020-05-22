@@ -13,8 +13,7 @@ const getRoleInfo = require('../utils').getRoleInfo // 角色详情
 const tokenTool = require('../utils/token.js')
 
 router.post('/', (req, res) => {
-  const { username, password } = req.body
-  console.log(req.session.captchaValue)
+  const { username, password, captcha } = req.body
 
   if (!username) {
     res.send({ code: 0, msg: '请输入用户名' })
@@ -22,6 +21,14 @@ router.post('/', (req, res) => {
   }
   if (!password) {
     res.send({ code: 0, msg: '请输入密码' })
+    return
+  }
+  if (!captcha) {
+    res.send({ code: 0, msg: '请输入验证码' })
+    return
+  }
+  if (captcha.toLowerCase() !== req.session.captchaValue) {
+    res.send({ code: 0, msg: '验证码有误' })
     return
   }
   // 2. 处理数据: 根据username 和password 去数据库查询得到user

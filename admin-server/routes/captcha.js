@@ -6,7 +6,7 @@ const router = express.Router()
 router.get('/', (req, res, next) => {
   const captcha = svgCaptcha.create({
     width: 90,
-    height: 30,
+    height: 35,
     ignoreChars: false,
     color: true
   })
