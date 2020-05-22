@@ -52,7 +52,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('charts', ['setBarData'])
+    ...mapMutations('chartStore', ['setBarData'])
   }
 }
 </script>

@@ -3,24 +3,19 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 import { userInfoReq } from '@/apis'
 import { duplicateRemoval } from '@/utils'
-import charts from './charts'
+import chartStore from './chartStore'
+import menuStore from './menuStore'
 
 export default new Vuex.Store({
   state: {
-    isCollapse: '',
     pageSize: 8,
     token: '',
     userInfo: {},
-    menu: [],
     routes: [],
     permissions: [],
     historyList: []
   },
   mutations: {
-    // 侧边导航收缩控制
-    setCollapse(state, payload) {
-      state.isCollapse = payload
-    },
     // 设置token
     setToken(state, payload = '') {
       state.token = payload
@@ -28,11 +23,6 @@ export default new Vuex.Store({
     // 设置用户信息
     setUserInfo(state, payload = {}) {
       state.userInfo = payload
-    },
-
-    // 设置menu
-    setMenu(state, payload = []) {
-      state.menu = payload
     },
     // 设置Routes
     setRoutes(state, payload = []) {
@@ -60,7 +50,7 @@ export default new Vuex.Store({
       })
     }
   },
-  modules: { charts },
+  modules: { chartStore, menuStore },
   plugins: [
     createPersistedState({
       reducer(val) {

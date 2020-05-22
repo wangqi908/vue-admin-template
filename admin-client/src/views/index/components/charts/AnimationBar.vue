@@ -18,7 +18,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('charts', ['setBarData']),
+    ...mapMutations('chartStore', ['setBarData']),
     initChart() {
       let barChart = echarts.init(
         document.getElementById('animation'),
@@ -94,7 +94,7 @@ export default {
     this.initChart()
   },
   computed: {
-    ...mapState('charts', ['barData1', 'barData2', 'xAxisData'])
+    ...mapState('chartStore', ['barData1', 'barData2', 'xAxisData'])
   },
   watch: {
     xAxisData: {

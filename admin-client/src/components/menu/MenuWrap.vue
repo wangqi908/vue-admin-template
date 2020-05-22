@@ -11,7 +11,7 @@ import Menu from './Menu'
 export default {
   components: { Menu },
   methods: {
-    ...mapMutations(['setCollapse']),
+    ...mapMutations('menuStore', ['setCollapse']),
 
     setMeueCollapse(clientWidth) {
       this.setCollapse(clientWidth < 1000)

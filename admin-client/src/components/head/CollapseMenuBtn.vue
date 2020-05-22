@@ -11,7 +11,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['setCollapse']),
+    ...mapMutations('menuStore', ['setCollapse']),
 
     setMeueCollapseByBtn() {
       this.setCollapse(!this.isCollapse)
@@ -27,7 +27,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isCollapse'])
+    ...mapState('menuStore', ['isCollapse'])
   }
 }
 </script>

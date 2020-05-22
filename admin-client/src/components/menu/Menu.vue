@@ -47,7 +47,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isCollapse', 'menu']),
+    ...mapState('menuStore', ['isCollapse', 'menu']),
     version() {
       return config.version
     }

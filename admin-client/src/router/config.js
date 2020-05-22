@@ -270,7 +270,7 @@ export const routesConfig = () => {
     resetRouter()
     router.addRoutes(routers)
   }
-  store.commit('setMenu', menu)
+  store.commit('menuStore/setMenu', menu)
   store.commit('setRoutes', routers)
   store.commit('setPermissions', roleArr)
 }
