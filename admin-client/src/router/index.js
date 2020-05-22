@@ -11,8 +11,11 @@ VueRouter.prototype.push = function push(location) {
   return routerPush.call(this, location).catch(error => error)
 }
 
+const base = process.env.NODE_ENV === 'production' ? '/app' : '/'
 const createRouter = () =>
   new VueRouter({
+    base,
+    mode: 'history',
     routes: []
   })
 

@@ -12,9 +12,9 @@ const cdn = {
     'https://cdn.bootcdn.net/ajax/libs/echarts/4.7.0/echarts-en.common.js'
   ]
 }
-
+const BASE_URL = process.env.NODE_ENV === 'production' ? '/app' : '/'
 module.exports = {
-  publicPath: './',
+  publicPath: BASE_URL,
   outputDir: 'app',
   assetsDir: 'static',
   productionSourceMap: false,
@@ -22,8 +22,8 @@ module.exports = {
     port: 8889, // 端口
     open: true,
     proxy: {
-      '/*': {
-        target: 'http://192.168.10.106/api/',
+      '/api': {
+        target: 'http://192.168.10.106/',
         changeOrigin: true
       }
     }
