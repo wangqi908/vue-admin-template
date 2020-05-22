@@ -1,6 +1,7 @@
 <template>
   <div class="global-head">
     <div class="logo">
+      <CollapseMenuBtn />
       <p>
         <router-link to="/index">后台管理系统</router-link>
       </p>
@@ -28,8 +29,9 @@
 <script>
 import { mapMutations, mapState } from 'vuex'
 import MyScreenfull from './MyScreenfull'
+import CollapseMenuBtn from '@/components/menu/CollapseMenuBtn'
 export default {
-  components: { MyScreenfull },
+  components: { MyScreenfull, CollapseMenuBtn },
   methods: {
     ...mapMutations(['setUserInfo', 'setToken']),
     signOut() {

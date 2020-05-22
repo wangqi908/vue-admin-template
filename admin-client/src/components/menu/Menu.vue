@@ -1,7 +1,6 @@
 <template>
   <div class="menu-box">
     <div>
-      <i :class="['el-icon-s-unfold',isCollapse?'add-rotate':'']" @click="setMeueCollapseByBtn"></i>
       <el-menu
         :class="['el-menu',isCollapse?'no-arrow':'']"
         :collapse="isCollapse"
@@ -30,8 +29,7 @@ export default {
   },
   data() {
     return {
-      activeRouterName: '',
-      switchValue: ''
+      activeRouterName: ''
     }
   },
   methods: {
@@ -43,10 +41,6 @@ export default {
 
     setMeueCollapse(clientWidth) {
       this.setCollapse(clientWidth < 1000)
-    },
-
-    setMeueCollapseByBtn() {
-      this.setCollapse(!this.isCollapse)
     },
 
     getClientWidth() {
@@ -69,12 +63,6 @@ export default {
   watch: {
     $route(to) {
       this.activeRouterName = to.meta.parentName || to.name
-    },
-    switchValue(val) {
-      this.setCollapse(!val)
-    },
-    isCollapse(val) {
-      this.switchValue = !val
     }
   },
   computed: {
@@ -124,25 +112,6 @@ export default {
     .el-icon-arrow-right {
       display: none;
     }
-  }
-  .el-icon-s-unfold {
-    color: rgb(112, 112, 112);
-    margin: 0 0 20px 20px;
-    padding: 4px;
-    transition: all 0.5s;
-    &:hover {
-      cursor: pointer;
-      background-color: #38556a;
-      color: rgb(141, 141, 141);
-    }
-    &:active {
-      background-color: rgb(122, 122, 122);
-      color: #fff;
-    }
-  }
-  .add-rotate {
-    transform: rotate(180deg);
-    transition: all 0.5s;
   }
   .version {
     font-size: 12px;
