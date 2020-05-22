@@ -5,6 +5,7 @@ export { default as MyEditor } from './MyEditor'
 export { default as MySticky } from './MySticky'
 export { default as MyBreadcrumb } from './MyBreadcrumb'
 export { default as MyRouterHistory } from './MyRouterHistory'
+export { default as MyCaptcha } from './MyCaptcha'
 
 import MyPagination from './MyPagination'
 import DelDialog from './DelDialog'

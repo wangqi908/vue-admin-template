@@ -32,4 +32,13 @@ export const roleNameValidator = [
     trigger: 'change'
   }
 ]
+export const captchaValidator = [
+  { required: true, message: '请输入验证码', trigger: 'change' },
+  {
+    min: 4,
+    max: 4,
+    message: '长度在 4 个字符',
+    trigger: 'change'
+  }
+]
 // import { emailReg ,mobilePhoneReg,pswReg,regNull} from '@/utils/validator'

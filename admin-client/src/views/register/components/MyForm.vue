@@ -13,6 +13,9 @@
       <el-form-item label="上传头像">
         <my-upload v-model="fileList"></my-upload>
       </el-form-item>
+      <el-form-item prop="captcha">
+        <MyCaptcha :captcha.sync="ruleForm.captcha" />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="submitForm('ruleForm')">注册</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
@@ -23,8 +26,14 @@
 
 <script>
 import { registerReq } from '@/apis'
-import { usernameValidator, passwordValidator } from '@/utils/validator'
+import {
+  usernameValidator,
+  passwordValidator,
+  captchaValidator
+} from '@/utils/validator'
+import { MyCaptcha } from '@/components'
 export default {
+  components: { MyCaptcha },
   data() {
     let validateCheckPass = (rule, value, callback) => {
       if (value === '') {
@@ -40,14 +49,16 @@ export default {
       ruleForm: {
         username: '',
         password: '',
-        checkPass: ''
+        checkPass: '',
+        captcha: ''
       },
       rules: {
         username: usernameValidator,
         password: passwordValidator,
         checkPass: [
           { required: true, validator: validateCheckPass, trigger: 'change' }
-        ]
+        ],
+        captcha: captchaValidator
       }
     }
   },
@@ -68,9 +79,9 @@ export default {
     },
     async register() {
       let { fileList } = this
-      let { username, password } = this.ruleForm
+      let { username, password, captcha } = this.ruleForm
 
-      let sendData = { username, password }
+      let sendData = { username, password, captcha }
 
       if (fileList.length) {
         sendData.avatar = fileList[0].url

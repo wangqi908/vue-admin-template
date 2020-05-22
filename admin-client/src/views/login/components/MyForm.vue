@@ -21,6 +21,10 @@
         ></el-input>
       </el-form-item>
 
+      <el-form-item prop="captcha">
+        <MyCaptcha :captcha.sync="ruleForm.captcha" />
+      </el-form-item>
+
       <el-form-item class="footer">
         <el-button type="primary" @click="submitForm('ruleForm')" :loading="loading">登录</el-button>
         <el-button @click="$router.push('/register')">注册</el-button>
@@ -36,19 +40,27 @@
 <script>
 import { mapMutations, mapActions } from 'vuex'
 import { loginReq } from '@/apis'
+import { MyCaptcha } from '@/components'
 import { routesConfig } from '@/router/config'
-import { usernameValidator, loginPasswordValidator } from '@/utils/validator'
+import {
+  usernameValidator,
+  loginPasswordValidator,
+  captchaValidator
+} from '@/utils/validator'
 export default {
+  components: { MyCaptcha },
   data() {
     return {
       loading: false,
       ruleForm: {
         password: '',
-        username: ''
+        username: '',
+        captcha: ''
       },
       rules: {
         username: usernameValidator,
-        password: loginPasswordValidator
+        password: loginPasswordValidator,
+        captcha: captchaValidator
       }
     }
   },
@@ -66,8 +78,8 @@ export default {
     },
 
     async login() {
-      let { username, password } = this.ruleForm
-      let sendData = { username, password }
+      let { username, password, captcha } = this.ruleForm
+      let sendData = { username, password, captcha }
       this.loading = true
 
       try {

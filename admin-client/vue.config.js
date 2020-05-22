@@ -20,7 +20,13 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     port: 8889, // 端口
-    open: true
+    open: true,
+    proxy: {
+      '/*': {
+        target: 'http://192.168.10.106/api/',
+        changeOrigin: true
+      }
+    }
   },
   configureWebpack: {
     // 公用代码提取，使用cdn加载
