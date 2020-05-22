@@ -1,6 +1,6 @@
-import { filterMenu, filterRoutes } from '@/utils'
 import store from '@/store'
 import router, { resetRouter } from '@/router'
+import { filterMenu, filterRoutes } from '@/utils'
 
 /* 
 notMenu: true //不是菜单

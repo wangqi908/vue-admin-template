@@ -1,6 +1,8 @@
 // import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 // Vue.use(VueRouter)
 // 多次点击相同路径报错处理
@@ -23,6 +25,7 @@ export function resetRouter() {
 
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title || '管理中心'
+  NProgress.start()
   let title = to.meta.title || to.meta.routerName
   let name = to.name
 
@@ -49,6 +52,11 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.afterEach(() => {
+  NProgress.done()
+  NProgress.remove()
 })
 
 export default router
