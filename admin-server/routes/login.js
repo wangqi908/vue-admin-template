@@ -14,7 +14,7 @@ const tokenTool = require('../utils/token.js')
 
 router.post('/', (req, res) => {
   const { username, password, captcha } = req.body
-
+  // console.log(req.session.captchaValue)
   if (!username) {
     res.send({ code: 0, msg: '请输入用户名' })
     return
@@ -27,6 +27,7 @@ router.post('/', (req, res) => {
     res.send({ code: 0, msg: '请输入验证码' })
     return
   }
+
   if (captcha.toLowerCase() !== req.session.captchaValue) {
     res.send({ code: 0, msg: '验证码有误' })
     return
