@@ -1,6 +1,17 @@
 <template>
   <div class="menu-wrap">
-    <Menu />
+    <Menu v-if="clientWidth>middle" />
+
+    <el-drawer
+      :visible.sync="show"
+      :with-header="false"
+      direction="ltr"
+      class="menu-drawer"
+      size="220px"
+      v-else
+    >
+      <Menu />
+    </el-drawer>
   </div>
 </template>
 
@@ -10,11 +21,22 @@ import { throttle } from '@/utils'
 import Menu from './Menu'
 export default {
   components: { Menu },
+  data() {
+    return {
+      show: false
+    }
+  },
   methods: {
-    ...mapMutations('menuStore', ['setCollapse']),
+    ...mapMutations('menuStore', [
+      'setCollapse',
+      'setClientWidth',
+      'setDrawer'
+    ]),
 
     setMeueCollapse(clientWidth) {
-      this.setCollapse(clientWidth < 1000)
+      let { big, middle } = this
+      this.setCollapse(clientWidth < big && clientWidth > middle)
+      this.setClientWidth(clientWidth)
     },
 
     getClientWidth() {
@@ -33,15 +55,35 @@ export default {
   mounted() {
     this.getClientWidth()
   },
-  watch: {},
+  watch: {
+    show(val) {
+      this.setDrawer(val)
+    },
+    isShowDrawer(val) {
+      this.show = val
+    }
+  },
   computed: {
-    ...mapState(['isCollapse'])
+    ...mapState('menuStore', [
+      'isCollapse',
+      'clientWidth',
+      'big',
+      'middle',
+      'isShowDrawer'
+    ])
   }
 }
 </script>
 
-<style scoped>
+<style lang='scss' >
 .menu-wrap {
   height: 100%;
+  .menu-drawer {
+    .el-drawer {
+      background-color: #273952;
+      padding-top: 20px;
+      overflow: auto;
+    }
+  }
 }
 </style>

@@ -28,7 +28,7 @@ export default {
   },
   props: ['data'],
   computed: {
-    ...mapState(['isCollapse'])
+    ...mapState('menuStore', ['isCollapse'])
   }
 }
 </script>

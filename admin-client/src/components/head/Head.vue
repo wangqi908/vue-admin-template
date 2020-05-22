@@ -1,7 +1,8 @@
 <template>
   <div class="global-head">
     <div class="logo">
-      <CollapseMenuBtn />
+      <CollapseMenuBtn v-if="clientWidth>middle" />
+      <DrawerMenuBtn v-else />
       <p>
         <router-link to="/index">后台管理系统</router-link>
       </p>
@@ -30,8 +31,9 @@
 import { mapMutations, mapState } from 'vuex'
 import MyScreenfull from './MyScreenfull'
 import CollapseMenuBtn from './CollapseMenuBtn'
+import DrawerMenuBtn from './DrawerMenuBtn'
 export default {
-  components: { MyScreenfull, CollapseMenuBtn },
+  components: { MyScreenfull, CollapseMenuBtn, DrawerMenuBtn },
   methods: {
     ...mapMutations(['setUserInfo', 'setToken']),
     signOut() {
@@ -53,6 +55,7 @@ export default {
   },
   computed: {
     ...mapState(['userInfo']),
+    ...mapState('menuStore', ['clientWidth', 'middle']),
     avatar() {
       let userInfo = this.userInfo
       let avatar = ''
