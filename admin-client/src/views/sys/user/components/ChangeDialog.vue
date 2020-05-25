@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="用户修改" :visible.sync="myShow">
+  <el-dialog title="用户修改" :visible.sync="myShow" :fullscreen="isFullscreen">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="用户名" prop="username">
         <el-input v-model="ruleForm.username" autocomplete="off"></el-input>

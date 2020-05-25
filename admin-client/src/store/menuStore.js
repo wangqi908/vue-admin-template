@@ -3,7 +3,7 @@ export default {
   state: {
     isCollapse: '', //折叠菜单
     isShowDrawer: false, //抽屉
-    isBigClient: false, //是否是小屏幕
+    isBigClient: false, //是否是大屏幕
     big: 1000, //大于1000显示展开菜单
     small: 600, //1000-600折叠菜单,低于600菜单放入抽屉
     menu: [],

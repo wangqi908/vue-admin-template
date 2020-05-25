@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="角色添加" :visible.sync="myShow">
+  <el-dialog title="角色添加" :visible.sync="myShow" :fullscreen="isFullscreen">
     <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px">
       <el-form-item label="角色名" prop="name">
         <el-input v-model="ruleForm.name" autocomplete="off"></el-input>

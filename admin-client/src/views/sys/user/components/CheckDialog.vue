@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="用户查看" :visible.sync="myShow">
+  <el-dialog title="用户查看" :visible.sync="myShow" :fullscreen="isFullscreen">
     <el-form :model="ruleForm" status-icon label-width="100px">
       <el-form-item label="用户名" prop="username">{{ruleForm.username}}</el-form-item>
       <el-form-item label="备注">{{ruleForm.remark}}</el-form-item>

@@ -2,6 +2,7 @@
 @import './transition.scss';
 @import './dialog.scss';
 @import './page.scss';
+@import './element.scss';
 
 body,
 html {
@@ -167,11 +168,6 @@ body {
 
 .anchorBL {
   display: none;
-}
-
-.el-input,
-.el-select {
-  min-width: 100px;
 }
 
 .add-transition {

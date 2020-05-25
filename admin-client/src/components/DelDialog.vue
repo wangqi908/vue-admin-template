@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="删除" :visible.sync="myShow" width="30%" top="10vh">
+  <el-dialog title="删除" :visible.sync="myShow" width="30%" top="10vh" :fullscreen="isFullscreen">
     <div class="del-content">
       <span>确认删除!</span>
       <div class="footer">
