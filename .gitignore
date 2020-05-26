@@ -1,5 +1,6 @@
 /admin-client/node_modules
 /admin-client/app
+/admin-client/admin
 /admin-client/package-lock.json
 /admin-server/node_modules
 /admin-server/public/temp_files
