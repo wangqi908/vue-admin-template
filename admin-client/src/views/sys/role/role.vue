@@ -31,7 +31,7 @@
               @click="change(scope.row)"
               type="text"
               size="small"
-              v-if="scope.row.name!=='super'"
+              v-if="scope.row.name!=='super'&&scope.row.name!=='权限测试'"
             >修改</el-button>
           </template>
         </el-table-column>
@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     isDisabled(row) {
-      return row.name !== 'super'
+      return row.name !== 'super' && row.name !== '权限测试'
     },
     //添加
     add() {

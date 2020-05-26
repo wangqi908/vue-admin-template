@@ -1,23 +1,49 @@
 <template>
-  <div class>
-    <div v-role="['index']">
-      <p>index 权限可见</p>
-    </div>
-
-    <div v-role="['clipboard']">
-      <p>clipboard 权限可见</p>
-    </div>
-
-    <div v-role="['user','role']">
-      <p>user role 权限可见</p>
-    </div>
-
-    <div v-role="['user-add']">
-      <p>user添加</p>
+  <div>
+    <el-button-group>
+      <el-button type="primary" @click="changeRole('super')">超级管理员</el-button>
+      <el-button type="primary" @click="changeRole('test')">路人甲</el-button>
+    </el-button-group>
+    <div>
+      <el-button type="text" size="small" v-role="['user-view']">查看</el-button>
+      <el-button type="text" size="small" v-role="['user-remove']">删除</el-button>
+      <el-button type="text" size="small" v-role="['user-add']">添加</el-button>
+      <el-button type="text" size="small" v-role="['user-edit']">修改</el-button>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+import { mapActions, mapState } from 'vuex'
+import { routesConfig } from '@/router/config'
+import { userEditReq } from '@/apis'
+export default {
+  data() {
+    return {}
+  },
+  methods: {
+    ...mapActions(['getUserInfoAction']),
+    async changeRole(val) {
+      let role =
+        val === 'super'
+          ? '5ec249d21358c41ea85be7cf'
+          : '5ec3314fe25b6c25f84afd18'
+      let sendData = {
+        _id: this.userInfo._id,
+        roleIds: [role]
+      }
+
+      const res = await userEditReq(sendData)
+      if (res.data.code === 200) {
+        this.$message.success('修改成功')
+        this.getUserInfoAction().then(() => {
+          routesConfig()
+        })
+      }
+    }
+  },
+  computed: {
+    ...mapState(['userInfo'])
+  }
+}
 </script>
