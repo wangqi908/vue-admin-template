@@ -7,14 +7,9 @@ import filters from '@/utils/filters'
 import directives from '@/utils/directives'
 import { components } from '@/components'
 import i18n from '@/utils/i18n'
-import BaiduMap from 'vue-baidu-map'
 import { routesConfig } from '@/router/config'
 Vue.config.productionTip = false
 routesConfig()
-
-Vue.use(BaiduMap, {
-  ak: 'QyBoyPZx0VZfYo7WuZjhCQpBc7IO2fLr'
-})
 
 Vue.use(filters)
 Vue.use(directives)

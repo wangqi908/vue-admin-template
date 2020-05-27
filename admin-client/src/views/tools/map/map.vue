@@ -1,11 +1,22 @@
 <template>
   <div class="my-map">
-    <baidu-map class="map" :center="center" :zoom="zoom" @ready="handler" :scroll-wheel-zoom="true"></baidu-map>
+    <baidu-map
+      class="map"
+      :center="center"
+      :zoom="zoom"
+      @ready="handler"
+      :scroll-wheel-zoom="true"
+      ak="QyBoyPZx0VZfYo7WuZjhCQpBc7IO2fLr"
+    ></baidu-map>
   </div>
 </template>
 
 <script>
+import BaiduMap from 'vue-baidu-map/components/map/Map.vue'
 export default {
+  components: {
+    BaiduMap
+  },
   data() {
     return {
       center: { lng: 116.404, lat: 39.915 },

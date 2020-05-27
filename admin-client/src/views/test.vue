@@ -1,43 +1,167 @@
 <template>
   <div>
-    <el-button-group>
-      <el-button type="primary" @click="changeRole('super')">超级管理员</el-button>
-      <el-button type="primary" @click="changeRole('test')">路人甲</el-button>
-    </el-button-group>
+    <el-tooltip effect="dark" content="theme" placement="bottom">
+      <el-color-picker
+        v-model="theme"
+        :predefine="['#409EFF', '#1890ff', '#304156','#212121','#11a983', '#13c2c2', '#6959CD', '#f5222d', ]"
+        class="theme-picker"
+        size="small"
+        popper-class="theme-picker-dropdown"
+      />
+    </el-tooltip>
+    <el-button>默认按钮</el-button>
+    <el-button type="primary">主要按钮</el-button>
+    <h3 class="test" :style="{color:theme}">test</h3>
   </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import { routesConfig } from '@/router/config'
-import { userEditReq } from '@/apis'
+// https://github.com/PanJiaChen/vue-element-admin/blob/master/src/components/ThemePicker/index.vue
+const version = require('element-ui/package.json').version // element-ui version from node_modules
+const ORIGINAL_THEME = '#409EFF' // default color
+
 export default {
   data() {
-    return {}
-  },
-  methods: {
-    ...mapActions(['getUserInfoAction']),
-    async changeRole(val) {
-      let role =
-        val === 'super'
-          ? '5ec249d21358c41ea85be7cf'
-          : '5ec3314fe25b6c25f84afd18'
-      let sendData = {
-        _id: this.userInfo._id,
-        roleIds: [role]
-      }
-
-      const res = await userEditReq(sendData)
-      if (res.data.code === 200) {
-        this.$message.success('修改成功')
-        this.getUserInfoAction().then(() => {
-          routesConfig()
-        })
-      }
+    return {
+      chalk: '', // content of theme-chalk css
+      theme: ORIGINAL_THEME
     }
   },
-  computed: {
-    ...mapState(['userInfo'])
+  watch: {
+    theme(val, oldVal) {
+      if (typeof val !== 'string') return
+      const themeCluster = this.getThemeCluster(val.replace('#', ''))
+      const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
+
+      const getHandler = (variable, id) => {
+        return () => {
+          const originalCluster = this.getThemeCluster(
+            ORIGINAL_THEME.replace('#', '')
+          )
+
+          const newStyle = this.updateStyle(
+            this[variable],
+            originalCluster,
+            themeCluster
+          )
+
+          let styleTag = document.getElementById(id)
+          if (!styleTag) {
+            styleTag = document.createElement('style')
+            styleTag.setAttribute('id', id)
+            document.head.appendChild(styleTag)
+          }
+
+          styleTag.innerText = newStyle
+        }
+      }
+
+      const chalkHandler = getHandler('chalk', 'chalk-style')
+
+      if (!this.chalk) {
+        const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
+        this.getCSSString(url, chalkHandler, 'chalk')
+      } else {
+        chalkHandler()
+      }
+
+      const styles = [].slice
+        .call(document.querySelectorAll('style'))
+        .filter(style => {
+          const text = style.innerText
+          return (
+            new RegExp(oldVal, 'i').test(text) && !/Chalk Variables/.test(text)
+          )
+        })
+      styles.forEach(style => {
+        const { innerText } = style
+        if (typeof innerText !== 'string') return
+
+        style.innerText = this.updateStyle(
+          innerText,
+          originalCluster,
+          themeCluster
+        )
+      })
+      this.$message({
+        message: '换肤成功',
+        type: 'success'
+      })
+    }
+  },
+
+  methods: {
+    updateStyle(style, oldCluster, newCluster) {
+      let newStyle = style
+      oldCluster.forEach((color, index) => {
+        newStyle = newStyle.replace(new RegExp(color, 'ig'), newCluster[index])
+      })
+      return newStyle
+    },
+
+    getCSSString(url, callback, variable) {
+      const xhr = new XMLHttpRequest()
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          this[variable] = xhr.responseText.replace(/@font-face{[^}]+}/, '')
+          callback()
+        }
+      }
+      xhr.open('GET', url)
+      xhr.send()
+    },
+
+    getThemeCluster(theme) {
+      const tintColor = (color, tint) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        if (tint === 0) {
+          // when primary color is in its rgb space
+          return [red, green, blue].join(',')
+        } else {
+          red += Math.round(tint * (255 - red))
+          green += Math.round(tint * (255 - green))
+          blue += Math.round(tint * (255 - blue))
+
+          red = red.toString(16)
+          green = green.toString(16)
+          blue = blue.toString(16)
+
+          return `#${red}${green}${blue}`
+        }
+      }
+
+      const shadeColor = (color, shade) => {
+        let red = parseInt(color.slice(0, 2), 16)
+        let green = parseInt(color.slice(2, 4), 16)
+        let blue = parseInt(color.slice(4, 6), 16)
+
+        red = Math.round((1 - shade) * red)
+        green = Math.round((1 - shade) * green)
+        blue = Math.round((1 - shade) * blue)
+
+        red = red.toString(16)
+        green = green.toString(16)
+        blue = blue.toString(16)
+
+        return `#${red}${green}${blue}`
+      }
+
+      const clusters = [theme]
+      for (let i = 0; i <= 9; i++) {
+        clusters.push(tintColor(theme, Number((i / 10).toFixed(2))))
+      }
+      clusters.push(shadeColor(theme, 0.1))
+      return clusters
+    }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.test {
+  color: #ccc;
+}
+</style>
