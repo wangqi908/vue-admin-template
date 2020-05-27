@@ -55,5 +55,12 @@ module.exports = {
       args[0].title = '后台管理系统'
       return args
     })
+  },
+  css: {
+    loaderOptions: {
+      scss: {
+        prependData: `@import "~@/assets/css/variables.scss";`
+      }
+    }
   }
 }

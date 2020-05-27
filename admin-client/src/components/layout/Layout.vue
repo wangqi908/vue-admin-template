@@ -72,13 +72,13 @@ body {
 }
 .aside {
   overflow: auto;
-  background-color: #273952;
+  background-color: $menuBgc;
   padding-top: 10px;
 }
 .main {
   overflow: auto;
   flex: 1;
-  background-color: #f8f8f8;
+  background-color: $mainBgc;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

@@ -84,7 +84,7 @@ export default {
   height: 100%;
   .menu-drawer {
     .el-drawer {
-      background-color: #273952;
+      background-color: $menuBgc;
       padding-top: 20px;
       overflow: auto;
     }

@@ -40,7 +40,7 @@ export default {
   transition: all 0.5s;
   &:hover {
     cursor: pointer;
-    background-color: #38556a;
+    background-color: $menuHoverBgc;
     color: rgb(141, 141, 141);
   }
   &:active {

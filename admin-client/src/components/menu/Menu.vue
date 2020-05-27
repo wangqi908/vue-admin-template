@@ -66,7 +66,7 @@ export default {
   height: 100%;
   justify-content: space-between;
   .el-menu {
-    background-color: #273952;
+    background-color: $menuBgc;
     border: 0;
     .menutree {
       .el-submenu__title,
@@ -85,7 +85,7 @@ export default {
     .el-submenu__title:focus,
     .el-submenu__title:active,
     .el-submenu__title:hover {
-      background-color: #38556a;
+      background-color: $menuHoverBgc;
     }
   }
   .el-menu:not(.el-menu--collapse) {
@@ -100,7 +100,7 @@ export default {
   .version {
     font-size: 12px;
     margin-bottom: 20px;
-    color: rgb(122, 122, 122);
+    color: $info;
   }
 }
 </style>
