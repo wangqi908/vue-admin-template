@@ -72,14 +72,23 @@ const PermissionSchema = mongoose.model('permission', permissionSchema)
 
 // 角色相关内容
 const roleSchema = mongoose.Schema({
-  name: { type: String, required: true },//角色名
+  name: { type: String, required: true }, //角色名
   remark: { type: String }, // 备注
   ids: {
     type: Array,
     default: []
-  }, // 权限id数组
+  } // 权限id数组
 })
 const RoleSchema = mongoose.model('role', roleSchema)
+
+// 文章
+const postSchema = mongoose.Schema({
+  title: { type: String, required: true }, //文章名称
+  type: { type: String, required: true }, // 文章类型
+  content: { type: String, required: true } // 文章内容
+})
+
+const PostSchema = mongoose.model('post', postSchema)
 
 // 向外暴露Model
 module.exports = {
@@ -87,4 +96,5 @@ module.exports = {
   AccessSchema,
   PermissionSchema,
   RoleSchema,
+  PostSchema
 }

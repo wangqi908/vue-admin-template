@@ -14,6 +14,7 @@ const registerRouter = require('./routes/register')
 const testRouter = require('./routes/test')
 const uploadRouter = require('./routes/upload')
 const permissionRouter = require('./routes/permission')
+const postRouter = require('./routes/post')
 const bdAiRouter = require('./routes/bdAi') //百度ai
 const tokenTool = require('./utils/token.js')
 
@@ -55,7 +56,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use((req, res, next) => {
   let { authorization } = req.headers
   let { pathname } = req._parsedUrl
-  let freeUrls = ['/', '/api', '/api/', '/api/login', '/api/captcha', '/api/register', '/api/upload', '/api/test', '/api/bdAi/ocr'] //不需要验证token的接口地址
+  let freeUrls = ['/', '/api', '/api/', '/api/login', '/api/captcha', '/api/register', '/api/upload', '/api/test', '/api/bdAi/ocr', '/api/post/page'] //不需要验证token的接口地址
   let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
   if (isVerifyToken) {
     let verifyToken = tokenTool.verifyToken(authorization)
@@ -79,6 +80,7 @@ app.use('/api/test', testRouter)
 app.use('/api/upload', uploadRouter)
 app.use('/api/bdAi', bdAiRouter)
 app.use('/api/permission', permissionRouter)
+app.use('/api/post', postRouter)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

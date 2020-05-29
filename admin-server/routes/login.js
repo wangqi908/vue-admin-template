@@ -23,15 +23,15 @@ router.post('/', (req, res) => {
     res.send({ code: 0, msg: '请输入密码' })
     return
   }
-  if (!captcha) {
-    res.send({ code: 0, msg: '请输入验证码' })
-    return
-  }
+  // if (!captcha) {
+  //   res.send({ code: 0, msg: '请输入验证码' })
+  //   return
+  // }
 
-  if (captcha.toLowerCase() !== req.session.captchaValue) {
-    res.send({ code: 0, msg: '验证码有误' })
-    return
-  }
+  // if (captcha.toLowerCase() !== req.session.captchaValue) {
+  //   res.send({ code: 0, msg: '验证码有误' })
+  //   return
+  // }
   // 2. 处理数据: 根据username 和password 去数据库查询得到user
   UserModel.findOne({ username, password: md5(password) }, filter, async (err, user) => {
     if (err) {
