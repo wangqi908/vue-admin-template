@@ -85,10 +85,22 @@ const RoleSchema = mongoose.model('role', roleSchema)
 const postSchema = mongoose.Schema({
   title: { type: String, required: true }, //文章名称
   type: { type: String, required: true }, // 文章类型
-  content: { type: String, required: true } // 文章内容
+  content: { type: String, required: true }, // 文章内容
+  createTime: {
+    type: Number,
+    default: +new Date()
+  }
+})
+const PostSchema = mongoose.model('post', postSchema)
+
+// 属性表
+const propSchema = mongoose.Schema({
+  title: { type: String, required: true }, //描述
+  type: { type: String, required: true }, // 类型
+  value: { type: String, required: true }
 })
 
-const PostSchema = mongoose.model('post', postSchema)
+const PropSchema = mongoose.model('prop', propSchema)
 
 // 向外暴露Model
 module.exports = {
@@ -96,5 +108,6 @@ module.exports = {
   AccessSchema,
   PermissionSchema,
   RoleSchema,
-  PostSchema
+  PostSchema,
+  PropSchema
 }
