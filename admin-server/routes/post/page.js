@@ -9,9 +9,9 @@ const page = async (req, res) => {
       pageNum,
       pageSize
     }
-    let filterArr = ['__v']
+    let filterArr = ['__v', 'content']
     // 分页
-    const pageRes = await setPage(PostSchema, data, pageData, filterArr)
+    const pageRes = await setPage(PostSchema, data, pageData, filterArr, (ipWithPort = true))
     res.send({ code: 200, data: pageRes })
   } catch (err) {
     res.send({ code: 0, err })

@@ -86,6 +86,8 @@ const postSchema = mongoose.Schema({
   title: { type: String, required: true }, //文章名称
   type: { type: String, required: true }, // 文章类型
   content: { type: String, required: true }, // 文章内容
+  intro: { type: String }, // 摘要
+  banner: { type: String }, // 摘要图
   createTime: {
     type: Number,
     default: +new Date()

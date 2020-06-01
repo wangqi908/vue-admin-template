@@ -1,5 +1,6 @@
 // 详情
 const PostSchema = require('../../db/models').PostSchema
+const ipWithPort = require('../../utils/getIp.js').ipWithPort
 const filter = { __v: 0 }
 const view = (req, res) => {
   let { _id } = req.body
@@ -14,7 +15,7 @@ const view = (req, res) => {
       return
     }
     let data = JSON.parse(JSON.stringify(info))
-
+    data.http = ipWithPort
     res.send({ code: 200, data })
   })
 }
