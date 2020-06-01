@@ -68,7 +68,8 @@ app.use((req, res, next) => {
     '/api/test',
     '/api/bdAi/ocr',
     '/api/post/page',
-    '/api/sys/prop/list'
+    '/api/sys/prop/list',
+    '/api/sys/prop/view'
   ] //不需要验证token的接口地址
   let isVerifyToken = freeUrls.indexOf(pathname) === -1 //是否需要验证token
   if (isVerifyToken) {
